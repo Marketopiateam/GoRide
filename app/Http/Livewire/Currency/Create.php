@@ -39,18 +39,18 @@ class Create extends Component
             ],
             'currency.decimal_digits' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.enable' => [
                 'boolean',
             ],
             'currency.name' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.symbol' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.symbol_at_right' => [
                 'boolean',

@@ -11,6 +11,7 @@ class Edit extends Component
 
     public function mount(Currency $currency)
     {
+    dd('sss'); 
         $this->currency = $currency;
     }
 
@@ -37,18 +38,18 @@ class Edit extends Component
             ],
             'currency.decimal_digits' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.enable' => [
                 'boolean',
             ],
             'currency.name' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.symbol' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'currency.symbol_at_right' => [
                 'boolean',
