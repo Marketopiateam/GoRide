@@ -11,7 +11,7 @@ class Edit extends Component
 
     public function mount(Currency $currency)
     {
-        dd('sss');
+        dd('ssdddddddddds');
         $this->currency = $currency;
     }
 
