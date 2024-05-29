@@ -24,19 +24,20 @@ class User extends Authenticatable implements HasLocalePreference
         'password',
     ];
 
+    protected $dates = [
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'locale',
         'useri',
-    ];
-
-    protected $dates = [
-        'email_verified_at',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'sasas',
     ];
 
     public $orderable = [
@@ -46,6 +47,7 @@ class User extends Authenticatable implements HasLocalePreference
         'email_verified_at',
         'locale',
         'useri',
+        'sasas',
     ];
 
     public $filterable = [
@@ -56,6 +58,7 @@ class User extends Authenticatable implements HasLocalePreference
         'roles.title',
         'locale',
         'useri',
+        'sasas',
     ];
 
     public function getIsAdminAttribute()

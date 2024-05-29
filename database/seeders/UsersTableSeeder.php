@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => null,
                 'locale'         => '',
                 'useri'          => '',
+                'sasas'          => '',
             ],
         ];
 

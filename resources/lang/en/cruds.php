@@ -67,6 +67,8 @@ return [
             'deleted_at_helper'        => ' ',
             'useri'                    => 'Useri',
             'useri_helper'             => ' ',
+            'sasas'                    => 'Sasas',
+            'sasas_helper'             => ' ',
         ],
     ],
 

@@ -73,10 +73,10 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.user.fields.useri') }}
+                                {{ trans('cruds.user.fields.sasas') }}
                             </th>
                             <td>
-                                {{ $user->useri }}
+                                {{ $user->sasas }}
                             </td>
                         </tr>
                     </tbody>
