@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class Edit extends Component
 {
+    
+    public User2 $user2;
     public User $user;
 
     public array $roles = [];
