@@ -31,18 +31,18 @@ class StoreCurrencyRequest extends FormRequest
             ],
             'decimal_digits' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'enable' => [
                 'boolean',
             ],
             'name' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'symbol' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'symbol_at_right' => [
                 'boolean',
