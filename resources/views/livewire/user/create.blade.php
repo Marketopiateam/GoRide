@@ -70,6 +70,16 @@
             {{ trans('cruds.user.fields.sasas_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('user.cccccc') ? 'invalid' : '' }}">
+        <label class="form-label" for="cccccc">{{ trans('cruds.user.fields.cccccc') }}</label>
+        <input class="form-control" type="text" name="cccccc" id="cccccc" wire:model.defer="user.cccccc">
+        <div class="validation-message">
+            {{ $errors->first('user.cccccc') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.user.fields.cccccc_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

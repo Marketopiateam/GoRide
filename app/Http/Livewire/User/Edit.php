@@ -9,7 +9,6 @@ use Livewire\Component;
 class Edit extends Component
 {
     public User $user;
-    public User $user2222222222;
 
     public array $roles = [];
 
@@ -67,6 +66,10 @@ class Edit extends Component
                 'nullable',
             ],
             'user.sasas' => [
+                'string',
+                'nullable',
+            ],
+            'user.cccccc' => [
                 'string',
                 'nullable',
             ],

@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
                 'locale'         => '',
                 'useri'          => '',
                 'sasas'          => '',
+                'cccccc'         => '',
             ],
         ];
 

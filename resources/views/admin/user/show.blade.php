@@ -79,6 +79,14 @@
                                 {{ $user->sasas }}
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.cccccc') }}
+                            </th>
+                            <td>
+                                {{ $user->cccccc }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
