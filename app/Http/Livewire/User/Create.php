@@ -65,6 +65,10 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
+            'user.useri' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 

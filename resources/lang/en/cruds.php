@@ -65,6 +65,8 @@ return [
             'updated_at_helper'        => ' ',
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => ' ',
+            'useri'                    => 'Useri',
+            'useri_helper'             => ' ',
         ],
     ],
 

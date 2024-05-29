@@ -71,6 +71,14 @@
                                 {{ $user->locale }}
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.useri') }}
+                            </th>
+                            <td>
+                                {{ $user->useri }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
