@@ -21,8 +21,8 @@
         </div>
     </div>
     <div class="form-group {{ $errors->has('currency.enable') ? 'invalid' : '' }}">
-        <input class="form-control" type="checkbox" name="enable" id="enable" required wire:model.defer="currency.enable">
-        <label class="form-label inline ml-1 required" for="enable">{{ trans('cruds.currency.fields.enable') }}</label>
+        <input class="form-control" type="checkbox" name="enable" id="enable" wire:model.defer="currency.enable">
+        <label class="form-label inline ml-1" for="enable">{{ trans('cruds.currency.fields.enable') }}</label>
         <div class="validation-message">
             {{ $errors->first('currency.enable') }}
         </div>

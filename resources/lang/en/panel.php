@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'shakshak',
+    'site_title' => 'uber',
 
 ];
