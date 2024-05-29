@@ -18,7 +18,8 @@ class Create extends Component
 
     public function mount(User $user)
     {
-        $this->user = $user;
+        $this->user            = $user;
+        $this->user->is_active = false;
         $this->initListsForFields();
     }
 
@@ -65,15 +66,38 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            'user.useri' => [
+            'user.country_code' => [
                 'string',
                 'nullable',
             ],
-            'user.sasas' => [
+            'user.fcm_token' => [
                 'string',
                 'nullable',
             ],
-            'user.cccccc' => [
+            'user.is_active' => [
+                'boolean',
+            ],
+            'user.login_type' => [
+                'string',
+                'nullable',
+            ],
+            'user.phone_number' => [
+                'string',
+                'nullable',
+            ],
+            'user.profile_pic' => [
+                'string',
+                'nullable',
+            ],
+            'user.reviews_count' => [
+                'string',
+                'nullable',
+            ],
+            'user.reviews_sum' => [
+                'string',
+                'nullable',
+            ],
+            'user.wallet_amount' => [
                 'string',
                 'nullable',
             ],

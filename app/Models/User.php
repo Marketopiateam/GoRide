@@ -19,6 +19,10 @@ class User extends Authenticatable implements HasLocalePreference
 
     public $table = 'users';
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     protected $hidden = [
         'remember_token',
         'password',
@@ -36,9 +40,15 @@ class User extends Authenticatable implements HasLocalePreference
         'email',
         'password',
         'locale',
-        'useri',
-        'sasas',
-        'cccccc',
+        'country_code',
+        'fcm_token',
+        'is_active',
+        'login_type',
+        'phone_number',
+        'profile_pic',
+        'reviews_count',
+        'reviews_sum',
+        'wallet_amount',
     ];
 
     public $orderable = [
@@ -47,9 +57,15 @@ class User extends Authenticatable implements HasLocalePreference
         'email',
         'email_verified_at',
         'locale',
-        'useri',
-        'sasas',
-        'cccccc',
+        'country_code',
+        'fcm_token',
+        'is_active',
+        'login_type',
+        'phone_number',
+        'profile_pic',
+        'reviews_count',
+        'reviews_sum',
+        'wallet_amount',
     ];
 
     public $filterable = [
@@ -59,9 +75,14 @@ class User extends Authenticatable implements HasLocalePreference
         'email_verified_at',
         'roles.title',
         'locale',
-        'useri',
-        'sasas',
-        'cccccc',
+        'country_code',
+        'fcm_token',
+        'login_type',
+        'phone_number',
+        'profile_pic',
+        'reviews_count',
+        'reviews_sum',
+        'wallet_amount',
     ];
 
     public function getIsAdminAttribute()

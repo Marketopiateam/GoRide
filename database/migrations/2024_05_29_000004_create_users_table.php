@@ -16,9 +16,15 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('remember_token')->nullable();
             $table->string('locale')->nullable();
-            $table->string('useri')->nullable();
-            $table->string('sasas')->nullable();
-            $table->string('cccccc')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('fcm_token')->nullable();
+            $table->boolean('is_active')->default(0)->nullable();
+            $table->string('login_type')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('profile_pic')->nullable();
+            $table->string('reviews_count')->nullable();
+            $table->string('reviews_sum')->nullable();
+            $table->string('wallet_amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

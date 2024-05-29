@@ -64,16 +64,40 @@
                             @include('components.table.sort', ['field' => 'locale'])
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.useri') }}
-                            @include('components.table.sort', ['field' => 'useri'])
+                            {{ trans('cruds.user.fields.country_code') }}
+                            @include('components.table.sort', ['field' => 'country_code'])
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.sasas') }}
-                            @include('components.table.sort', ['field' => 'sasas'])
+                            {{ trans('cruds.user.fields.fcm_token') }}
+                            @include('components.table.sort', ['field' => 'fcm_token'])
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.cccccc') }}
-                            @include('components.table.sort', ['field' => 'cccccc'])
+                            {{ trans('cruds.user.fields.is_active') }}
+                            @include('components.table.sort', ['field' => 'is_active'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.login_type') }}
+                            @include('components.table.sort', ['field' => 'login_type'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.phone_number') }}
+                            @include('components.table.sort', ['field' => 'phone_number'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.profile_pic') }}
+                            @include('components.table.sort', ['field' => 'profile_pic'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.reviews_count') }}
+                            @include('components.table.sort', ['field' => 'reviews_count'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.reviews_sum') }}
+                            @include('components.table.sort', ['field' => 'reviews_sum'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.wallet_amount') }}
+                            @include('components.table.sort', ['field' => 'wallet_amount'])
                         </th>
                         <th>
                         </th>
@@ -110,13 +134,31 @@
                                 {{ $user->locale }}
                             </td>
                             <td>
-                                {{ $user->useri }}
+                                {{ $user->country_code }}
                             </td>
                             <td>
-                                {{ $user->sasas }}
+                                {{ $user->fcm_token }}
                             </td>
                             <td>
-                                {{ $user->cccccc }}
+                                <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $user->is_active ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                {{ $user->login_type }}
+                            </td>
+                            <td>
+                                {{ $user->phone_number }}
+                            </td>
+                            <td>
+                                {{ $user->profile_pic }}
+                            </td>
+                            <td>
+                                {{ $user->reviews_count }}
+                            </td>
+                            <td>
+                                {{ $user->reviews_sum }}
+                            </td>
+                            <td>
+                                {{ $user->wallet_amount }}
                             </td>
                             <td>
                                 <div class="flex justify-end">

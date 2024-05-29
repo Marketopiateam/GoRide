@@ -73,18 +73,74 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.user.fields.sasas') }}
+                                {{ trans('cruds.user.fields.country_code') }}
                             </th>
                             <td>
-                                {{ $user->sasas }}
+                                {{ $user->country_code }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.user.fields.cccccc') }}
+                                {{ trans('cruds.user.fields.fcm_token') }}
                             </th>
                             <td>
-                                {{ $user->cccccc }}
+                                {{ $user->fcm_token }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.is_active') }}
+                            </th>
+                            <td>
+                                <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $user->is_active ? 'checked' : '' }}>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.login_type') }}
+                            </th>
+                            <td>
+                                {{ $user->login_type }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.phone_number') }}
+                            </th>
+                            <td>
+                                {{ $user->phone_number }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.profile_pic') }}
+                            </th>
+                            <td>
+                                {{ $user->profile_pic }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.reviews_count') }}
+                            </th>
+                            <td>
+                                {{ $user->reviews_count }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.reviews_sum') }}
+                            </th>
+                            <td>
+                                {{ $user->reviews_sum }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.wallet_amount') }}
+                            </th>
+                            <td>
+                                {{ $user->wallet_amount }}
                             </td>
                         </tr>
                     </tbody>
