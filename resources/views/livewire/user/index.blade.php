@@ -68,6 +68,10 @@
                             @include('components.table.sort', ['field' => 'useri'])
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.sasas') }}
+                            @include('components.table.sort', ['field' => 'sasas'])
+                        </th>
+                        <th>
                         </th>
                     </tr>
                 </thead>
@@ -103,6 +107,9 @@
                             </td>
                             <td>
                                 {{ $user->useri }}
+                            </td>
+                            <td>
+                                {{ $user->sasas }}
                             </td>
                             <td>
                                 <div class="flex justify-end">

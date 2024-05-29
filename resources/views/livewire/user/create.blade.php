@@ -60,6 +60,16 @@
             {{ trans('cruds.user.fields.useri_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('user.sasas') ? 'invalid' : '' }}">
+        <label class="form-label" for="sasas">{{ trans('cruds.user.fields.sasas') }}</label>
+        <input class="form-control" type="text" name="sasas" id="sasas" wire:model.defer="user.sasas">
+        <div class="validation-message">
+            {{ $errors->first('user.sasas') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.user.fields.sasas_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

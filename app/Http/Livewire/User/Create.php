@@ -69,6 +69,10 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
+            'user.sasas' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 
