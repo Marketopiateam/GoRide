@@ -11,11 +11,11 @@ class CreateCurrenciesTable extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code')->nullable();
-            $table->string('decimal_digits')->nullable();
+            $table->string('decimal_digits');
             $table->boolean('enable')->default(0)->nullable();
-            $table->string('name')->nullable();
-            $table->string('symbol')->nullable();
-            $table->boolean('symbol_at_right')->default(0)->nullable();
+            $table->string('name');
+            $table->string('symbol');
+            $table->boolean('symbol_at_right')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

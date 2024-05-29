@@ -11,8 +11,8 @@
         </div>
     </div>
     <div class="form-group {{ $errors->has('currency.decimal_digits') ? 'invalid' : '' }}">
-        <label class="form-label" for="decimal_digits">{{ trans('cruds.currency.fields.decimal_digits') }}</label>
-        <input class="form-control" type="text" name="decimal_digits" id="decimal_digits" wire:model.defer="currency.decimal_digits">
+        <label class="form-label required" for="decimal_digits">{{ trans('cruds.currency.fields.decimal_digits') }}</label>
+        <input class="form-control" type="text" name="decimal_digits" id="decimal_digits" required wire:model.defer="currency.decimal_digits">
         <div class="validation-message">
             {{ $errors->first('currency.decimal_digits') }}
         </div>
@@ -31,8 +31,8 @@
         </div>
     </div>
     <div class="form-group {{ $errors->has('currency.name') ? 'invalid' : '' }}">
-        <label class="form-label" for="name">{{ trans('cruds.currency.fields.name') }}</label>
-        <input class="form-control" type="text" name="name" id="name" wire:model.defer="currency.name">
+        <label class="form-label required" for="name">{{ trans('cruds.currency.fields.name') }}</label>
+        <input class="form-control" type="text" name="name" id="name" required wire:model.defer="currency.name">
         <div class="validation-message">
             {{ $errors->first('currency.name') }}
         </div>
@@ -41,8 +41,8 @@
         </div>
     </div>
     <div class="form-group {{ $errors->has('currency.symbol') ? 'invalid' : '' }}">
-        <label class="form-label" for="symbol">{{ trans('cruds.currency.fields.symbol') }}</label>
-        <input class="form-control" type="text" name="symbol" id="symbol" wire:model.defer="currency.symbol">
+        <label class="form-label required" for="symbol">{{ trans('cruds.currency.fields.symbol') }}</label>
+        <input class="form-control" type="text" name="symbol" id="symbol" required wire:model.defer="currency.symbol">
         <div class="validation-message">
             {{ $errors->first('currency.symbol') }}
         </div>
@@ -51,8 +51,8 @@
         </div>
     </div>
     <div class="form-group {{ $errors->has('currency.symbol_at_right') ? 'invalid' : '' }}">
-        <input class="form-control" type="checkbox" name="symbol_at_right" id="symbol_at_right" wire:model.defer="currency.symbol_at_right">
-        <label class="form-label inline ml-1" for="symbol_at_right">{{ trans('cruds.currency.fields.symbol_at_right') }}</label>
+        <input class="form-control" type="checkbox" name="symbol_at_right" id="symbol_at_right" required wire:model.defer="currency.symbol_at_right">
+        <label class="form-label inline ml-1 required" for="symbol_at_right">{{ trans('cruds.currency.fields.symbol_at_right') }}</label>
         <div class="validation-message">
             {{ $errors->first('currency.symbol_at_right') }}
         </div>
