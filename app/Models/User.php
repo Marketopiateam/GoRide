@@ -38,6 +38,7 @@ class User extends Authenticatable implements HasLocalePreference
         'locale',
         'useri',
         'sasas',
+        'cccccc',
     ];
 
     public $orderable = [
@@ -48,6 +49,7 @@ class User extends Authenticatable implements HasLocalePreference
         'locale',
         'useri',
         'sasas',
+        'cccccc',
     ];
 
     public $filterable = [
@@ -59,6 +61,7 @@ class User extends Authenticatable implements HasLocalePreference
         'locale',
         'useri',
         'sasas',
+        'cccccc',
     ];
 
     public function getIsAdminAttribute()

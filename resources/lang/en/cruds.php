@@ -69,6 +69,8 @@ return [
             'useri_helper'             => ' ',
             'sasas'                    => 'Sasas',
             'sasas_helper'             => ' ',
+            'cccccc'                   => 'Cccccc',
+            'cccccc_helper'            => ' ',
         ],
     ],
 
