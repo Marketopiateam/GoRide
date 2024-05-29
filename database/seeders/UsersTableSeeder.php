@@ -17,14 +17,6 @@ class UsersTableSeeder extends Seeder
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
                 'locale'         => '',
-                'country_code'   => '',
-                'fcm_token'      => '',
-                'login_type'     => '',
-                'phone_number'   => '',
-                'profile_pic'    => '',
-                'reviews_count'  => '',
-                'reviews_sum'    => '',
-                'wallet_amount'  => '',
             ],
         ];
 

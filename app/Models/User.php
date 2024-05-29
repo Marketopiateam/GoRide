@@ -19,13 +19,24 @@ class User extends Authenticatable implements HasLocalePreference
 
     public $table = 'users';
 
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
-
     protected $hidden = [
         'remember_token',
         'password',
+    ];
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'locale',
+    ];
+
+    public $orderable = [
+        'id',
+        'name',
+        'email',
+        'email_verified_at',
+        'locale',
     ];
 
     protected $dates = [
@@ -35,39 +46,6 @@ class User extends Authenticatable implements HasLocalePreference
         'deleted_at',
     ];
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'locale',
-        'country_code',
-        'fcm_token',
-        'is_active',
-        'login_type',
-        'phone_number',
-        'profile_pic',
-        'reviews_count',
-        'reviews_sum',
-        'wallet_amount',
-    ];
-
-    public $orderable = [
-        'id',
-        'name',
-        'email',
-        'email_verified_at',
-        'locale',
-        'country_code',
-        'fcm_token',
-        'is_active',
-        'login_type',
-        'phone_number',
-        'profile_pic',
-        'reviews_count',
-        'reviews_sum',
-        'wallet_amount',
-    ];
-
     public $filterable = [
         'id',
         'name',
@@ -75,14 +53,6 @@ class User extends Authenticatable implements HasLocalePreference
         'email_verified_at',
         'roles.title',
         'locale',
-        'country_code',
-        'fcm_token',
-        'login_type',
-        'phone_number',
-        'profile_pic',
-        'reviews_count',
-        'reviews_sum',
-        'wallet_amount',
     ];
 
     public function getIsAdminAttribute()

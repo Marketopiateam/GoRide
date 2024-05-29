@@ -65,41 +65,6 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            'user.country_code' => [
-                'string',
-                'nullable',
-            ],
-            'user.fcm_token' => [
-                'string',
-                'nullable',
-            ],
-            'user.is_active' => [
-                'boolean',
-            ],
-            'user.login_type' => [
-                'string',
-                'nullable',
-            ],
-            'user.phone_number' => [
-                'string',
-                'nullable',
-            ],
-            'user.profile_pic' => [
-                'string',
-                'nullable',
-            ],
-            'user.reviews_count' => [
-                'string',
-                'nullable',
-            ],
-            'user.reviews_sum' => [
-                'string',
-                'nullable',
-            ],
-            'user.wallet_amount' => [
-                'string',
-                'nullable',
-            ],
         ];
     }
 
