@@ -50,6 +50,16 @@
             {{ trans('cruds.user.fields.locale_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('user.useri') ? 'invalid' : '' }}">
+        <label class="form-label" for="useri">{{ trans('cruds.user.fields.useri') }}</label>
+        <input class="form-control" type="text" name="useri" id="useri" wire:model.defer="user.useri">
+        <div class="validation-message">
+            {{ $errors->first('user.useri') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.user.fields.useri_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

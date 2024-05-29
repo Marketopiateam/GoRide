@@ -8,8 +8,6 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-    
-    public User2 $user2;
     public User $user;
 
     public array $roles = [];
@@ -64,6 +62,10 @@ class Edit extends Component
                 'exists:roles,id',
             ],
             'user.locale' => [
+                'string',
+                'nullable',
+            ],
+            'user.useri' => [
                 'string',
                 'nullable',
             ],
