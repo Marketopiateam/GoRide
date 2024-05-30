@@ -13,7 +13,6 @@ class CreateUsersTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('password')->nullable();
             $table->string('email')->nullable();
-            $table->string('locale')->nullable();
             $table->string('country_code')->nullable();
             $table->string('fcm_token')->nullable();
             $table->boolean('is_active')->default(0)->nullable();

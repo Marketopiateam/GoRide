@@ -11,7 +11,7 @@ use App\Traits\ImageProcessing;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
- 
+
 use App\Http\Resources\AddressResource;
 
 use Illuminate\Database\Eloquent\Model;
@@ -81,13 +81,12 @@ class DBUsersRepository implements UsersRepositoryinterface
         DB::beginTransaction();
         try {
             $data = [
-                'name'          => $this->request->name,
+                'name'          => $this->request->full_name,
                 'email'         => $this->request->email ?? null,
-                'phone_number'         => $this->request->phone,
-                'country_code'         => $this->request->phone,
-                'fcm_token'         => $this->request->phone,
-                'fcm_token'         => $this->request->phone,
-                'accept_rules'  => $this->request->accept_rule,
+                'phone'         => $this->request->phone_number,
+                'country_code'  => $this->request->country_code,
+                'fcm_token'     => $this->request->fcm_token,
+
             ];
             $user =  User::create($data);
             if ($this->request->image) {
