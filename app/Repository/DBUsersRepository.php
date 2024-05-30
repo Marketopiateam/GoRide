@@ -94,7 +94,7 @@ class DBUsersRepository implements UsersRepositoryinterface
                 $user->image =  $dataX['profile_pic'];
                 $user->save();
             }
-            $user->token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
+            $user->token = $user->createToken($user->full_name . '-AuthToken')->plainTextToken;
             if ($user != null) {
                 DB::commit();
                 return Resp(new UserResource($user), __('messages.success_signup'), 200, true);
