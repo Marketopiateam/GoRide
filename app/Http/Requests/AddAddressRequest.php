@@ -22,7 +22,7 @@ class AddAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'  => 'required',
+            'full_name'  => 'required',
             'address' => 'required',
             'lat' => 'required',
             'long' => 'required',

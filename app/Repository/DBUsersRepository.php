@@ -20,7 +20,7 @@ use App\Repositoryinterface\UsersRepositoryinterface;
 
 class DBUsersRepository implements UsersRepositoryinterface
 {
-    use ImageProcessing,MapsProcessing;
+    use ImageProcessing, MapsProcessing;
 
     protected Model $model;
     protected $request;
@@ -78,13 +78,13 @@ class DBUsersRepository implements UsersRepositoryinterface
 
     public function signup()
     {
+
         DB::beginTransaction();
         try {
             $data = [
-                'name'          => $this->request->full_name,
+                'full_name'          => $this->request->name,
                 'email'         => $this->request->email ?? null,
-                'phone'         => $this->request->phone_number,
-                'country_code'  => $this->request->country_code,
+                'phone_number'         => $this->request->phone,
                 'fcm_token'     => $this->request->fcm_token,
 
             ];
@@ -99,10 +99,9 @@ class DBUsersRepository implements UsersRepositoryinterface
                 DB::commit();
                 return Resp(new UserResource($user), __('messages.success_signup'), 200, true);
             }
-
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e->getMessage());
+            return($e->getMessage());
             // return Resp('', $e->getMessage(), 404, true);
             // return false;
         }

@@ -18,7 +18,7 @@ class AuthenticationController extends Controller
     {
         $this->userRepositry = $userRepositry;
     }
-    public function signup(SignUp $request) {
+    public function signup() {
        return $this->userRepositry->signup();
     }
     public function send_otp() {
@@ -33,7 +33,7 @@ class AuthenticationController extends Controller
     public function profile_update() {
        return $this->userRepositry->profile_update();
     }
-    public function address_new(AddAddressRequest $request) {
+    public function address_new( ) {
        return $this->userRepositry->address_new();
     }
     public function address() {
