@@ -1,33 +1,39 @@
 <?php
-
-use App\Http\Controllers\Api\V1\Admin\AirportApiController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\Admin\SoApiController;
+use App\Http\Controllers\Api\V1\Admin\FaqApiController;
+use App\Http\Controllers\Api\V1\Admin\TaxApiController;
 use App\Http\Controllers\Api\V1\Admin\ChatApiController;
-use App\Http\Controllers\Api\V1\Admin\CmsPageApiController;
+use App\Http\Controllers\Api\V1\Admin\RoleApiController;
+use App\Http\Controllers\Api\V1\Admin\UserApiController;
+use App\Http\Controllers\Api\V1\Admin\OrderApiController;
+use App\Http\Controllers\Api\V1\Admin\AuthenticationController;
 use App\Http\Controllers\Api\V1\Admin\CouponApiController;
+use App\Http\Controllers\Api\V1\Admin\ThreadApiController;
+use App\Http\Controllers\Api\V1\Admin\AirportApiController;
+use App\Http\Controllers\Api\V1\Admin\CmsPageApiController;
+use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\CurrencyApiController;
 use App\Http\Controllers\Api\V1\Admin\DocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
-use App\Http\Controllers\Api\V1\Admin\FaqApiController;
-use App\Http\Controllers\Api\V1\Admin\FreightVehicleApiController;
-use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\LanguageApiController;
-use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
-use App\Http\Controllers\Api\V1\Admin\OrderApiController;
-use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
-use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\ReferralApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
-use App\Http\Controllers\Api\V1\Admin\RoleApiController;
-use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
-use App\Http\Controllers\Api\V1\Admin\SoApiController;
-use App\Http\Controllers\Api\V1\Admin\TaxApiController;
-use App\Http\Controllers\Api\V1\Admin\ThreadApiController;
-use App\Http\Controllers\Api\V1\Admin\UserApiController;
+use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
+use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
+use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\VehicleTypeApiController;
+use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
+use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
+use App\Http\Controllers\Api\V1\Admin\FreightVehicleApiController;
+use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
+use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
+use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
 
+Route::prefix('v1/auth')->group(function () {
+    Route::post('signup', [AuthenticationController::class, 'signup']);
+    Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
+    Route::get('send_otp', [AuthenticationController::class, 'send_otp']);
+});
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
     Route::apiResource('permissions', PermissionApiController::class);

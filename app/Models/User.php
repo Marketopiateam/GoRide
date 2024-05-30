@@ -37,7 +37,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     protected $fillable = [
         'name',
-        'email',
+        'phone',
         'password',
         'locale',
         'country_code',
