@@ -1,33 +1,48 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Admin\AirportApiController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\Admin\SoApiController;
+use App\Http\Controllers\Api\V1\Admin\FaqApiController;
+use App\Http\Controllers\Api\V1\Admin\TaxApiController;
 use App\Http\Controllers\Api\V1\Admin\ChatApiController;
-use App\Http\Controllers\Api\V1\Admin\CmsPageApiController;
+use App\Http\Controllers\Api\V1\Admin\RoleApiController;
+use App\Http\Controllers\Api\V1\Admin\UserApiController;
+use App\Http\Controllers\Api\V1\Admin\OrderApiController;
+use App\Http\Controllers\Api\V1\Admin\AuthenticationController;
 use App\Http\Controllers\Api\V1\Admin\CouponApiController;
+use App\Http\Controllers\Api\V1\Admin\ThreadApiController;
+use App\Http\Controllers\Api\V1\Admin\AirportApiController;
+use App\Http\Controllers\Api\V1\Admin\CmsPageApiController;
+use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\CurrencyApiController;
 use App\Http\Controllers\Api\V1\Admin\DocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
-use App\Http\Controllers\Api\V1\Admin\FaqApiController;
-use App\Http\Controllers\Api\V1\Admin\FreightVehicleApiController;
-use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\LanguageApiController;
-use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
-use App\Http\Controllers\Api\V1\Admin\OrderApiController;
-use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
-use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\ReferralApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
-use App\Http\Controllers\Api\V1\Admin\RoleApiController;
-use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
-use App\Http\Controllers\Api\V1\Admin\SoApiController;
-use App\Http\Controllers\Api\V1\Admin\TaxApiController;
-use App\Http\Controllers\Api\V1\Admin\ThreadApiController;
-use App\Http\Controllers\Api\V1\Admin\UserApiController;
+use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
+use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
+use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\VehicleTypeApiController;
+use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
+use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
+use App\Http\Controllers\Api\V1\Admin\FreightVehicleApiController;
+use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
+use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
+use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
+use App\Models\User;
 
+Route::prefix('v1/auth')->group(function () {
+
+    Route::post('signup', [AuthenticationController::class, 'signup']);
+    Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
+    Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
+});
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('v1/user')->group(function () {
+        Route::get('profile', [AuthenticationController::class, 'profile']);
+        Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
+    });
+});
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
     Route::apiResource('permissions', PermissionApiController::class);
@@ -57,7 +72,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::apiResource('driver-documents', DriverDocumentApiController::class);
 
     // Driver Rules
-    Route::post('driver-rules/media', [DriverRuleApiController::class, 'storeMedia'])->name('driver_rules.store_media');
     Route::apiResource('driver-rules', DriverRuleApiController::class);
 
     // Faq
@@ -67,7 +81,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::apiResource('freight-vehicles', FreightVehicleApiController::class);
 
     // Intercity Service
-    Route::post('intercity-services/media', [IntercityServiceApiController::class, 'storeMedia'])->name('intercity_services.store_media');
     Route::apiResource('intercity-services', IntercityServiceApiController::class);
 
     // Languages
@@ -92,7 +105,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::apiResource('review-drivers', ReviewDriverApiController::class);
 
     // Service
-    Route::post('services/media', [ServiceApiController::class, 'storeMedia'])->name('services.store_media');
     Route::apiResource('services', ServiceApiController::class);
 
     // Sos

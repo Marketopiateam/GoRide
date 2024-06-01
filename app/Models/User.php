@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements HasLocalePreference
 {
-    use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes;
+    use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes,HasApiTokens;
 
     public $table = 'users';
 
@@ -36,8 +37,8 @@ class User extends Authenticatable implements HasLocalePreference
     ];
 
     protected $fillable = [
-        'name',
-        'email',
+        'full_name',
+        'phone_number',
         'password',
         'locale',
         'country_code',
@@ -84,7 +85,14 @@ class User extends Authenticatable implements HasLocalePreference
         'reviews_sum',
         'wallet_amount',
     ];
+    public function getImageurlAttribute()
+    {
+        if($this->profile_pic ==null){
 
+            return '';
+        }
+        return path($this->id,'users')  . $this->profile_pic;
+    }
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('title', 'Admin')->exists();
@@ -121,7 +129,10 @@ class User extends Authenticatable implements HasLocalePreference
             $this->attributes['password'] = Hash::needsRehash($input) ? Hash::make($input) : $input;
         }
     }
-
+    public function otp()
+    {
+        return $this->hasMany(Otp::class);
+    }
     public function roles()
     {
         return $this->belongsToMany(Role::class);

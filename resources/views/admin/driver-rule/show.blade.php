@@ -35,6 +35,14 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ trans('cruds.driverRule.fields.image') }}
+                            </th>
+                            <td>
+                                {{ $driverRule->image }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ trans('cruds.driverRule.fields.is_deleted') }}
                             </th>
                             <td>
@@ -47,18 +55,6 @@
                             </th>
                             <td>
                                 {{ $driverRule->name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.driverRule.fields.image') }}
-                            </th>
-                            <td>
-                                @foreach($driverRule->image as $key => $entry)
-                                    <a class="link-photo" href="{{ $entry['url'] }}">
-                                        <img src="{{ $entry['preview_thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
-                                    </a>
-                                @endforeach
                             </td>
                         </tr>
                     </tbody>
