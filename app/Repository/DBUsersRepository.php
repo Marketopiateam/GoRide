@@ -65,6 +65,7 @@ class DBUsersRepository implements UsersRepositoryinterface
                 'email'         => $this->request->email ?? null,
                 'phone_number'  => $this->request->phone,
                 'fcm_token'     => $this->request->fcm_token,
+                'wallet_amount'     => 0,
 
             ];
             $user =  User::create($data);
@@ -141,7 +142,7 @@ class DBUsersRepository implements UsersRepositoryinterface
             }
 
             $dataX = $this->saveImageAndThumbnail($this->request->image, false, $user->id, 'users');
-          
+
             $user->profile_pic =  $dataX['image'];
         }
         $user->save();
