@@ -30,27 +30,8 @@ class DBUsersRepository implements UsersRepositoryinterface
         $this->model = $model;
         $this->request = $request;
     }
-    // public function credentials($data)
-    // {
 
-    //     $credentials = [
-    //         'phone' => $data['phone'],
-    //         'password' =>  $data['password'],
-    //     ];
-    //     if ($token = Auth::guard('api')->attempt($credentials)) {
-    //         $user = auth('api')->user();
-    //     } else {
-    //         return Resp('', 'Invalid Credentials', 404, false);
-    //     }
 
-    //     if ($token == null) {
-    //         return Resp('', 'User Not found', 404, false);
-    //     }
-    //     // $user =  auth('api')->user();
-    //     $user->token = $token;
-    //     $data =  new LoginUserResource($user);
-    //     return Resp($data, 'Success', 200, true);
-    // }
 
     public function verify_otp()
     {
@@ -73,9 +54,6 @@ class DBUsersRepository implements UsersRepositoryinterface
         Otp::create(['phone' => $this->request->phone, 'otp' => $otp]);
         return Resp('', __('messages.success_send_otp'), 200, true);
     }
-
-
-
     public function signup()
     {
 
@@ -169,13 +147,32 @@ class DBUsersRepository implements UsersRepositoryinterface
         }
         return Resp('', 'error', 402, true);
     }
+
+    // public function credentials($data)
+    // {
+    //     $credentials = [
+    //         'phone' => $data['phone'],
+    //         'password' =>  $data['password'],
+    //     ];
+    //     if ($token = Auth::guard('api')->attempt($credentials)) {
+    //         $user = auth('api')->user();
+    //     } else {
+    //         return Resp('', 'Invalid Credentials', 404, false);
+    //     }
+
+    //     if ($token == null) {
+    //         return Resp('', 'User Not found', 404, false);
+    //     }
+    //     // $user =  auth('api')->user();
+    //     $user->token = $token;
+    //     $data =  new LoginUserResource($user);
+    //     return Resp($data, 'Success', 200, true);
+    // }
     // public function profile_details()
     // {
-
     //     $id = Auth::guard('api')->user()->id;
     //     $user =  User::find($id);
     //     if ($user != null) {
-
     //         $data =  new LoginUserResource($user);
     //         return Resp($data, 'Success', 200, true);
     //     }
@@ -194,7 +191,6 @@ class DBUsersRepository implements UsersRepositoryinterface
     //         return Resp('', 'invalid Code', 400, false);
     //     }
     // }
-
     // public function  resend_code($request)
     // {
     //     return Resp('', 'Send Code Success', 200, true);
