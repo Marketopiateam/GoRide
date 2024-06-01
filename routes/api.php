@@ -28,8 +28,10 @@ use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
 use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
 use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
+use App\Models\User;
 
 Route::prefix('v1/auth')->group(function () {
+ 
     Route::post('signup', [AuthenticationController::class, 'signup']);
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
