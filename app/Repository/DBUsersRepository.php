@@ -39,6 +39,7 @@ class DBUsersRepository implements UsersRepositoryinterface
         if ($otp == null) {
             return Resp('', __('messages.code_not_correct'), 400, true);
         }
+        
         $user = User::where(['phone_number' => $otp->phone])->first();
         if ($user != null) {
             $user->token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
