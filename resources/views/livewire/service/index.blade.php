@@ -53,10 +53,6 @@
                             @include('components.table.sort', ['field' => 'enable'])
                         </th>
                         <th>
-                            {{ trans('cruds.service.fields.image') }}
-                            @include('components.table.sort', ['field' => 'image'])
-                        </th>
-                        <th>
                             {{ trans('cruds.service.fields.intercity_type') }}
                             @include('components.table.sort', ['field' => 'intercity_type'])
                         </th>
@@ -71,6 +67,9 @@
                         <th>
                             {{ trans('cruds.service.fields.title') }}
                             @include('components.table.sort', ['field' => 'title'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.service.fields.image') }}
                         </th>
                         <th>
                         </th>
@@ -92,9 +91,6 @@
                                 <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $service->enable ? 'checked' : '' }}>
                             </td>
                             <td>
-                                {{ $service->image }}
-                            </td>
-                            <td>
                                 <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $service->intercity_type ? 'checked' : '' }}>
                             </td>
                             <td>
@@ -105,6 +101,13 @@
                             </td>
                             <td>
                                 {{ $service->title }}
+                            </td>
+                            <td>
+                                @foreach($service->image as $key => $entry)
+                                    <a class="link-photo" href="{{ $entry['url'] }}">
+                                        <img src="{{ $entry['thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
+                                    </a>
+                                @endforeach
                             </td>
                             <td>
                                 <div class="flex justify-end">

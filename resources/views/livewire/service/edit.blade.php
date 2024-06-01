@@ -20,16 +20,6 @@
             {{ trans('cruds.service.fields.enable_helper') }}
         </div>
     </div>
-    <div class="form-group {{ $errors->has('service.image') ? 'invalid' : '' }}">
-        <label class="form-label" for="image">{{ trans('cruds.service.fields.image') }}</label>
-        <input class="form-control" type="text" name="image" id="image" wire:model.defer="service.image">
-        <div class="validation-message">
-            {{ $errors->first('service.image') }}
-        </div>
-        <div class="help-block">
-            {{ trans('cruds.service.fields.image_helper') }}
-        </div>
-    </div>
     <div class="form-group {{ $errors->has('service.intercity_type') ? 'invalid' : '' }}">
         <input class="form-control" type="checkbox" name="intercity_type" id="intercity_type" wire:model.defer="service.intercity_type">
         <label class="form-label inline ml-1" for="intercity_type">{{ trans('cruds.service.fields.intercity_type') }}</label>
@@ -68,6 +58,16 @@
         </div>
         <div class="help-block">
             {{ trans('cruds.service.fields.title_helper') }}
+        </div>
+    </div>
+    <div class="form-group {{ $errors->has('mediaCollections.service_image') ? 'invalid' : '' }}">
+        <label class="form-label" for="image">{{ trans('cruds.service.fields.image') }}</label>
+        <x-dropzone id="image" name="image" action="{{ route('admin.services.storeMedia') }}" collection-name="service_image" max-file-size="2" max-width="4096" max-height="4096" max-files="1" />
+        <div class="validation-message">
+            {{ $errors->first('mediaCollections.service_image') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.service.fields.image_helper') }}
         </div>
     </div>
 

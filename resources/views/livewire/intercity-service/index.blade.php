@@ -49,10 +49,6 @@
                             @include('components.table.sort', ['field' => 'enable'])
                         </th>
                         <th>
-                            {{ trans('cruds.intercityService.fields.image') }}
-                            @include('components.table.sort', ['field' => 'image'])
-                        </th>
-                        <th>
                             {{ trans('cruds.intercityService.fields.km_charge') }}
                             @include('components.table.sort', ['field' => 'km_charge'])
                         </th>
@@ -67,6 +63,9 @@
                         <th>
                             {{ trans('cruds.intercityService.fields.name') }}
                             @include('components.table.sort', ['field' => 'name'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.intercityService.fields.image') }}
                         </th>
                         <th>
                         </th>
@@ -85,9 +84,6 @@
                                 <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $intercityService->enable ? 'checked' : '' }}>
                             </td>
                             <td>
-                                {{ $intercityService->image }}
-                            </td>
-                            <td>
                                 {{ $intercityService->km_charge }}
                             </td>
                             <td>
@@ -98,6 +94,13 @@
                             </td>
                             <td>
                                 {{ $intercityService->name }}
+                            </td>
+                            <td>
+                                @foreach($intercityService->image as $key => $entry)
+                                    <a class="link-photo" href="{{ $entry['url'] }}">
+                                        <img src="{{ $entry['thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
+                                    </a>
+                                @endforeach
                             </td>
                             <td>
                                 <div class="flex justify-end">

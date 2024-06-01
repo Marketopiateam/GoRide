@@ -49,16 +49,15 @@
                             @include('components.table.sort', ['field' => 'enable'])
                         </th>
                         <th>
-                            {{ trans('cruds.driverRule.fields.image') }}
-                            @include('components.table.sort', ['field' => 'image'])
-                        </th>
-                        <th>
                             {{ trans('cruds.driverRule.fields.is_deleted') }}
                             @include('components.table.sort', ['field' => 'is_deleted'])
                         </th>
                         <th>
                             {{ trans('cruds.driverRule.fields.name') }}
                             @include('components.table.sort', ['field' => 'name'])
+                        </th>
+                        <th>
+                            {{ trans('cruds.driverRule.fields.image') }}
                         </th>
                         <th>
                         </th>
@@ -77,13 +76,17 @@
                                 <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $driverRule->enable ? 'checked' : '' }}>
                             </td>
                             <td>
-                                {{ $driverRule->image }}
-                            </td>
-                            <td>
                                 <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $driverRule->is_deleted ? 'checked' : '' }}>
                             </td>
                             <td>
                                 {{ $driverRule->name }}
+                            </td>
+                            <td>
+                                @foreach($driverRule->image as $key => $entry)
+                                    <a class="link-photo" href="{{ $entry['url'] }}">
+                                        <img src="{{ $entry['thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
+                                    </a>
+                                @endforeach
                             </td>
                             <td>
                                 <div class="flex justify-end">

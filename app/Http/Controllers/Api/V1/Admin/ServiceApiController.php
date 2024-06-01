@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadTrait;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Http\Resources\Admin\ServiceResource;
@@ -13,6 +14,8 @@ use Illuminate\Http\Response;
 
 class ServiceApiController extends Controller
 {
+    use MediaUploadTrait;
+
     public function index()
     {
         abort_if(Gate::denies('service_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -23,6 +26,10 @@ class ServiceApiController extends Controller
     public function store(StoreServiceRequest $request)
     {
         $service = Service::create($request->validated());
+
+        if ($request->input('service_image', false)) {
+            $service->addMedia(storage_path('tmp/uploads/' . basename($request->input('service_image'))))->toMediaCollection('service_image');
+        }
 
         return (new ServiceResource($service))
             ->response()
@@ -39,6 +46,17 @@ class ServiceApiController extends Controller
     public function update(UpdateServiceRequest $request, Service $service)
     {
         $service->update($request->validated());
+
+        if ($request->input('service_image', false)) {
+            if (! $service->service_image || $request->input('service_image') !== $service->service_image->file_name) {
+                if ($service->service_image) {
+                    $service->service_image->delete();
+                }
+                $service->addMedia(storage_path('tmp/uploads/' . basename($request->input('service_image'))))->toMediaCollection('service_image');
+            }
+        } elseif ($service->service_image) {
+            $service->service_image->delete();
+        }
 
         return (new ServiceResource($service))
             ->response()
