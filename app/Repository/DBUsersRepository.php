@@ -130,17 +130,19 @@ class DBUsersRepository implements UsersRepositoryinterface
         $id = Auth::user()->id;
         $user =  User::find($id);
         if ($this->request->has('name')) {
-            $user->name = $this->request->name;
+            $user->full_name = $this->request->name;
         }
         if ($this->request->has('email')) {
             $user->email = $this->request->email;
         }
         if ($this->request->has('image')) {
-            if ($user->image != null) {
-                $this->deletefile($user->image, $user->id, 'users');
+            if ($user->profile_pic != null) {
+                $this->deletefile($user->profile_pic, $user->id, 'users');
             }
+
             $dataX = $this->saveImageAndThumbnail($this->request->image, false, $user->id, 'users');
-            $user->image =  $dataX['image'];
+          
+            $user->profile_pic =  $dataX['image'];
         }
         $user->save();
         if ($user != null) {

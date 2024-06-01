@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Admin\SoApiController;
 use App\Http\Controllers\Api\V1\Admin\FaqApiController;
@@ -31,10 +32,16 @@ use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
 use App\Models\User;
 
 Route::prefix('v1/auth')->group(function () {
- 
+
     Route::post('signup', [AuthenticationController::class, 'signup']);
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
+});
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('v1/user')->group(function () {
+        Route::get('profile', [AuthenticationController::class, 'profile']);
+        Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
+    });
 });
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions

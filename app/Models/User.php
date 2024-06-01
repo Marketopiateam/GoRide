@@ -87,11 +87,11 @@ class User extends Authenticatable implements HasLocalePreference
     ];
     public function getImageurlAttribute()
     {
-        if($this->image ==null){
+        if($this->profile_pic ==null){
 
             return '';
         }
-        return path($this->id,'users')  . $this->image;
+        return path($this->id,'users')  . $this->profile_pic;
     }
     public function getIsAdminAttribute()
     {

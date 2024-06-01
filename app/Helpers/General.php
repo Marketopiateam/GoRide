@@ -55,7 +55,9 @@ function path($course_id, $folder)
 {
     $p =  '/files' . '/' . $folder . '/' . $course_id . '/';
     $path = asset($p);
+
     if (!File::exists($path)) {
+     
         mkdir($path, 0777, true);
     }
     return  $path . '/';
