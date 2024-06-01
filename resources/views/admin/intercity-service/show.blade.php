@@ -35,6 +35,14 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ trans('cruds.intercityService.fields.image') }}
+                            </th>
+                            <td>
+                                {{ $intercityService->image }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ trans('cruds.intercityService.fields.km_charge') }}
                             </th>
                             <td>
@@ -63,18 +71,6 @@
                             </th>
                             <td>
                                 {{ $intercityService->name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.intercityService.fields.image') }}
-                            </th>
-                            <td>
-                                @foreach($intercityService->image as $key => $entry)
-                                    <a class="link-photo" href="{{ $entry['url'] }}">
-                                        <img src="{{ $entry['preview_thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
-                                    </a>
-                                @endforeach
                             </td>
                         </tr>
                     </tbody>

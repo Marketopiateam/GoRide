@@ -28,6 +28,10 @@ class UpdateIntercityServiceRequest extends FormRequest
             'enable' => [
                 'boolean',
             ],
+            'image' => [
+                'string',
+                'nullable',
+            ],
             'km_charge' => [
                 'string',
                 'nullable',

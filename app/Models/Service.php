@@ -8,19 +8,12 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Service extends Model implements HasMedia
+class Service extends Model
 {
-    use HasFactory, HasAdvancedFilter, SoftDeletes, InteractsWithMedia;
+    use HasFactory, HasAdvancedFilter, SoftDeletes;
 
     public $table = 'services';
-
-    protected $appends = [
-        'image',
-    ];
 
     protected $dates = [
         'created_at',
@@ -36,6 +29,7 @@ class Service extends Model implements HasMedia
     public $filterable = [
         'id',
         'admin_commission',
+        'image',
         'km_charge',
         'offer_rate',
         'title',
@@ -44,6 +38,7 @@ class Service extends Model implements HasMedia
     protected $fillable = [
         'admin_commission',
         'enable',
+        'image',
         'intercity_type',
         'km_charge',
         'offer_rate',
@@ -54,6 +49,7 @@ class Service extends Model implements HasMedia
         'id',
         'admin_commission',
         'enable',
+        'image',
         'intercity_type',
         'km_charge',
         'offer_rate',
@@ -63,36 +59,6 @@ class Service extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $thumbnailWidth  = 50;
-        $thumbnailHeight = 50;
-
-        $thumbnailPreviewWidth  = 120;
-        $thumbnailPreviewHeight = 120;
-
-        $this->addMediaConversion('thumbnail')
-            ->width($thumbnailWidth)
-            ->height($thumbnailHeight)
-            ->fit('crop', $thumbnailWidth, $thumbnailHeight);
-        $this->addMediaConversion('preview_thumbnail')
-            ->width($thumbnailPreviewWidth)
-            ->height($thumbnailPreviewHeight)
-            ->fit('crop', $thumbnailPreviewWidth, $thumbnailPreviewHeight);
-    }
-
-    public function getImageAttribute()
-    {
-        return $this->getMedia('service_image')->map(function ($item) {
-            $media                      = $item->toArray();
-            $media['url']               = $item->getUrl();
-            $media['thumbnail']         = $item->getUrl('thumbnail');
-            $media['preview_thumbnail'] = $item->getUrl('preview_thumbnail');
-
-            return $media;
-        });
     }
 
     public function getCreatedAtAttribute($value)

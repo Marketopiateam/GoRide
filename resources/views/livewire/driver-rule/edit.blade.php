@@ -10,6 +10,16 @@
             {{ trans('cruds.driverRule.fields.enable_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('driverRule.image') ? 'invalid' : '' }}">
+        <label class="form-label" for="image">{{ trans('cruds.driverRule.fields.image') }}</label>
+        <input class="form-control" type="text" name="image" id="image" wire:model.defer="driverRule.image">
+        <div class="validation-message">
+            {{ $errors->first('driverRule.image') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.driverRule.fields.image_helper') }}
+        </div>
+    </div>
     <div class="form-group {{ $errors->has('driverRule.is_deleted') ? 'invalid' : '' }}">
         <input class="form-control" type="checkbox" name="is_deleted" id="is_deleted" wire:model.defer="driverRule.is_deleted">
         <label class="form-label inline ml-1" for="is_deleted">{{ trans('cruds.driverRule.fields.is_deleted') }}</label>
@@ -28,16 +38,6 @@
         </div>
         <div class="help-block">
             {{ trans('cruds.driverRule.fields.name_helper') }}
-        </div>
-    </div>
-    <div class="form-group {{ $errors->has('mediaCollections.driver_rule_image') ? 'invalid' : '' }}">
-        <label class="form-label" for="image">{{ trans('cruds.driverRule.fields.image') }}</label>
-        <x-dropzone id="image" name="image" action="{{ route('admin.driver-rules.storeMedia') }}" collection-name="driver_rule_image" max-file-size="2" max-width="4096" max-height="4096" max-files="1" />
-        <div class="validation-message">
-            {{ $errors->first('mediaCollections.driver_rule_image') }}
-        </div>
-        <div class="help-block">
-            {{ trans('cruds.driverRule.fields.image_helper') }}
         </div>
     </div>
 

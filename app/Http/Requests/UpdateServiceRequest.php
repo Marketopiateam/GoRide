@@ -32,6 +32,10 @@ class UpdateServiceRequest extends FormRequest
             'enable' => [
                 'boolean',
             ],
+            'image' => [
+                'string',
+                'nullable',
+            ],
             'intercity_type' => [
                 'boolean',
             ],

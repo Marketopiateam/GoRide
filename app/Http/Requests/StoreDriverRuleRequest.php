@@ -28,6 +28,10 @@ class StoreDriverRuleRequest extends FormRequest
             'enable' => [
                 'boolean',
             ],
+            'image' => [
+                'string',
+                'nullable',
+            ],
             'is_deleted' => [
                 'boolean',
             ],

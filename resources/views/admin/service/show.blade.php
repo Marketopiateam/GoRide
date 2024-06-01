@@ -43,6 +43,14 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ trans('cruds.service.fields.image') }}
+                            </th>
+                            <td>
+                                {{ $service->image }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ trans('cruds.service.fields.intercity_type') }}
                             </th>
                             <td>
@@ -71,18 +79,6 @@
                             </th>
                             <td>
                                 {{ $service->title }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.service.fields.image') }}
-                            </th>
-                            <td>
-                                @foreach($service->image as $key => $entry)
-                                    <a class="link-photo" href="{{ $entry['url'] }}">
-                                        <img src="{{ $entry['preview_thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
-                                    </a>
-                                @endforeach
                             </td>
                         </tr>
                     </tbody>
