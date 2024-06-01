@@ -32,7 +32,7 @@ use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
 Route::prefix('v1/auth')->group(function () {
     Route::post('signup', [AuthenticationController::class, 'signup']);
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
-    Route::get('send_otp', [AuthenticationController::class, 'send_otp']);
+    Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
 });
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
