@@ -10,16 +10,6 @@
             {{ trans('cruds.intercityService.fields.enable_helper') }}
         </div>
     </div>
-    <div class="form-group {{ $errors->has('intercityService.image') ? 'invalid' : '' }}">
-        <label class="form-label" for="image">{{ trans('cruds.intercityService.fields.image') }}</label>
-        <input class="form-control" type="text" name="image" id="image" wire:model.defer="intercityService.image">
-        <div class="validation-message">
-            {{ $errors->first('intercityService.image') }}
-        </div>
-        <div class="help-block">
-            {{ trans('cruds.intercityService.fields.image_helper') }}
-        </div>
-    </div>
     <div class="form-group {{ $errors->has('intercityService.km_charge') ? 'invalid' : '' }}">
         <label class="form-label" for="km_charge">{{ trans('cruds.intercityService.fields.km_charge') }}</label>
         <input class="form-control" type="text" name="km_charge" id="km_charge" wire:model.defer="intercityService.km_charge">
@@ -58,6 +48,16 @@
         </div>
         <div class="help-block">
             {{ trans('cruds.intercityService.fields.name_helper') }}
+        </div>
+    </div>
+    <div class="form-group {{ $errors->has('mediaCollections.intercity_service_image') ? 'invalid' : '' }}">
+        <label class="form-label" for="image">{{ trans('cruds.intercityService.fields.image') }}</label>
+        <x-dropzone id="image" name="image" action="{{ route('admin.intercity-services.storeMedia') }}" collection-name="intercity_service_image" max-file-size="2" max-width="4096" max-height="4096" max-files="1" />
+        <div class="validation-message">
+            {{ $errors->first('mediaCollections.intercity_service_image') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.intercityService.fields.image_helper') }}
         </div>
     </div>
 

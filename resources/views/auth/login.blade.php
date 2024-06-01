@@ -18,11 +18,11 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="phone_number">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="email">
                                     {{ __('global.login_email') }}
                                 </label>
-                                <input id="phone_number" name="phone_number" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('phone_number') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" autofocus value="{{ old('phone_number') }}" />
-                                @error('phone_number')
+                                <input id="email" name="email" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full {{ $errors->has('email') ? ' ring ring-red-300' : '' }}" placeholder="{{ __('global.login_email') }}" required autocomplete="email" autofocus value="{{ old('email') }}" />
+                                @error('email')
                                     <div class="text-red-500">
                                         <small>{{ $message }}</small>
                                     </div>
