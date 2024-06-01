@@ -54,11 +54,12 @@ function Resp($data = null, $msg = null, $status = 200, $statusval = true)
 function path($course_id, $folder)
 {
     $p =  '/files' . '/' . $folder . '/' . $course_id . '/';
-    $path = asset($p);
+    $path1 = public_path($p);
+    $path = url('/') .  asset($p);
 
-    if (!File::exists($path)) {
-     
-        mkdir($path, 0777, true);
+    if (!File::exists($path1)) {
+
+        mkdir($path1, 0777, true);
     }
     return  $path . '/';
 }
