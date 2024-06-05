@@ -16,7 +16,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 class admin extends  Authenticatable implements HasLocalePreference
 {
 
-    use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes, HasApiTokens;
+    use HasFactory, HasAdvancedFilter, Notifiable, HasApiTokens;
     protected $guarded = [];
     protected $hidden = [
         'remember_token',
@@ -44,7 +44,7 @@ class admin extends  Authenticatable implements HasLocalePreference
         return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }
 
-  
+
     public function getEmailVerifiedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
