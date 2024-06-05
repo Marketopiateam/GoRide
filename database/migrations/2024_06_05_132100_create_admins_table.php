@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('login_type')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('profile_pic')->nullable();
+            $table->string('remember_token')->nullable();
             $table->timestamps();
         });
     }
