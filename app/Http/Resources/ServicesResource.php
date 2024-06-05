@@ -15,8 +15,8 @@ class ServicesResource extends JsonResource
 
         return [
             'id'          => $this->id,
-            'name'          => $this->name,
-            'check'          => $this->myservice->count()>0 ?1:0
+            'name'        => $this->name,
+            'image'       => $this->image
         ];
     }
 }

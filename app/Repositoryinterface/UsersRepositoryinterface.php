@@ -14,6 +14,7 @@ interface UsersRepositoryinterface{
     public function address_new();
     public function address();
 
+    
     // public function profile_update($request);
     // public function profile_details();
     // public function verificationcode($request);
