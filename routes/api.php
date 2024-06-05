@@ -37,8 +37,8 @@ Route::prefix('v1/auth')->group(function () {
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
 });
-
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
+//'auth:sanctum'
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => []], function () {
     Route::prefix('user')->group(function () {
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
