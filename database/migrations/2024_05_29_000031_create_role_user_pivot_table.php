@@ -12,7 +12,7 @@ class CreateRoleUserPivotTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id', 'user_id_fk_9827493')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id', 'role_id_fk_9827493')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id', 'role_id_fk_982a7493')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 }
