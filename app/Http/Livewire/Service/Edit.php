@@ -8,10 +8,11 @@ use Livewire\Component;
 class Edit extends Component
 {
     public Service $service;
-
+    public array $listsForFields = [];
     public function mount(Service $service)
     {
         $this->service = $service;
+        $this->initListsForFields();
     }
 
     public function render()
@@ -27,14 +28,20 @@ class Edit extends Component
 
         return redirect()->route('admin.services.index');
     }
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['commission_type'] = $this->service::COMISSION_TYPE;
+    }
 
     protected function rules(): array
     {
         return [
             'service.admin_commission' => [
-                'string',
+                'json',
                 'nullable',
             ],
+
+
             'service.enable' => [
                 'boolean',
             ],

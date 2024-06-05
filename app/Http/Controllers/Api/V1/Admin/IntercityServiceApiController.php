@@ -19,6 +19,16 @@ class IntercityServiceApiController extends Controller
 
         return new IntercityServiceResource(IntercityService::all());
     }
+    public function incity()
+    {
+        
+        return new IntercityServiceResource(IntercityService::all());
+    }
+    public function outcity()
+    {
+
+        return new IntercityServiceResource(IntercityService::all());
+    }
 
     public function store(StoreIntercityServiceRequest $request)
     {

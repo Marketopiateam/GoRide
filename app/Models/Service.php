@@ -14,7 +14,10 @@ class Service extends Model
     use HasFactory, HasAdvancedFilter, SoftDeletes;
 
     public $table = 'services';
-
+    public const COMISSION_TYPE= [
+        'flex'       => 'flex',
+        'percentage' => 'percentage',
+    ];
     protected $dates = [
         'created_at',
         'updated_at',

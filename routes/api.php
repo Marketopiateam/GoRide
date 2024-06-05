@@ -37,91 +37,91 @@ Route::prefix('v1/auth')->group(function () {
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
 });
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::prefix('v1/user')->group(function () {
+
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
+    Route::prefix('user')->group(function () {
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
     });
-});
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
+   // // Service
+   Route::apiResource('services', ServiceApiController::class);
     // Permissions
-    Route::apiResource('permissions', PermissionApiController::class);
+    // Route::apiResource('permissions', PermissionApiController::class);
 
-    // Roles
-    Route::apiResource('roles', RoleApiController::class);
+    // // Roles
+    // Route::apiResource('roles', RoleApiController::class);
 
-    // Users
-    Route::apiResource('users', UserApiController::class);
+    // // Users
+    // Route::apiResource('users', UserApiController::class);
 
-    // Coupon
-    Route::apiResource('coupons', CouponApiController::class);
+    // // Coupon
+    // Route::apiResource('coupons', CouponApiController::class);
 
-    // Airports
-    Route::apiResource('airports', AirportApiController::class);
+    // // Airports
+    // Route::apiResource('airports', AirportApiController::class);
 
-    // Cms Pages
-    Route::apiResource('cms-pages', CmsPageApiController::class);
+    // // Cms Pages
+    // Route::apiResource('cms-pages', CmsPageApiController::class);
 
-    // Currency
-    Route::apiResource('currencies', CurrencyApiController::class);
+    // // Currency
+    // Route::apiResource('currencies', CurrencyApiController::class);
 
-    // Documents
-    Route::apiResource('documents', DocumentApiController::class);
+    // // Documents
+    // Route::apiResource('documents', DocumentApiController::class);
 
-    // Driver Document
-    Route::apiResource('driver-documents', DriverDocumentApiController::class);
+    // // Driver Document
+    // Route::apiResource('driver-documents', DriverDocumentApiController::class);
 
-    // Driver Rules
-    Route::apiResource('driver-rules', DriverRuleApiController::class);
+    // // Driver Rules
+    // Route::apiResource('driver-rules', DriverRuleApiController::class);
 
-    // Faq
-    Route::apiResource('faqs', FaqApiController::class);
+    // // Faq
+    // Route::apiResource('faqs', FaqApiController::class);
 
-    // Freight Vehicle
-    Route::apiResource('freight-vehicles', FreightVehicleApiController::class);
+    // // Freight Vehicle
+    // Route::apiResource('freight-vehicles', FreightVehicleApiController::class);
 
-    // Intercity Service
-    Route::apiResource('intercity-services', IntercityServiceApiController::class);
+    // // Intercity Service
+    // Route::apiResource('intercity-services', IntercityServiceApiController::class);
 
-    // Languages
-    Route::apiResource('languages', LanguageApiController::class);
+    // // Languages
+    // Route::apiResource('languages', LanguageApiController::class);
 
-    // On Boarding
-    Route::apiResource('on-boardings', OnBoardingApiController::class);
+    // // On Boarding
+    // Route::apiResource('on-boardings', OnBoardingApiController::class);
 
-    // Orders
-    Route::apiResource('orders', OrderApiController::class);
+    // // Orders
+    // Route::apiResource('orders', OrderApiController::class);
 
-    // Orders Intercity
-    Route::apiResource('orders-intercities', OrdersIntercityApiController::class);
+    // // Orders Intercity
+    // Route::apiResource('orders-intercities', OrdersIntercityApiController::class);
 
-    // Referral
-    Route::apiResource('referrals', ReferralApiController::class);
+    // // Referral
+    // Route::apiResource('referrals', ReferralApiController::class);
 
-    // Review Customer
-    Route::apiResource('review-customers', ReviewCustomerApiController::class);
+    // // Review Customer
+    // Route::apiResource('review-customers', ReviewCustomerApiController::class);
 
-    // Review Driver
-    Route::apiResource('review-drivers', ReviewDriverApiController::class);
+    // // Review Driver
+    // Route::apiResource('review-drivers', ReviewDriverApiController::class);
 
-    // Service
-    Route::apiResource('services', ServiceApiController::class);
 
-    // Sos
-    Route::apiResource('sos', SoApiController::class);
 
-    // Tax
-    Route::apiResource('taxes', TaxApiController::class);
+    // // Sos
+    // Route::apiResource('sos', SoApiController::class);
 
-    // Vehicle Type
-    Route::apiResource('vehicle-types', VehicleTypeApiController::class);
+    // // Tax
+    // Route::apiResource('taxes', TaxApiController::class);
 
-    // Wallet Transaction
-    Route::apiResource('wallet-transactions', WalletTransactionApiController::class);
+    // // Vehicle Type
+    // Route::apiResource('vehicle-types', VehicleTypeApiController::class);
 
-    // Chat
-    Route::apiResource('chats', ChatApiController::class);
+    // // Wallet Transaction
+    // Route::apiResource('wallet-transactions', WalletTransactionApiController::class);
 
-    // Thread
-    Route::apiResource('threads', ThreadApiController::class, ['only' => ['index']]);
+    // // Chat
+    // Route::apiResource('chats', ChatApiController::class);
+
+    // // Thread
+    // Route::apiResource('threads', ThreadApiController::class, ['only' => ['index']]);
 });

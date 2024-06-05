@@ -101,7 +101,7 @@
                                 {{ $service->km_charge }}
                             </td>
                             <td>
-                                {{ $service->offer_rate }}
+                                <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $service->offer_rate ? 'checked' : '' }}>
                             </td>
                             <td>
                                 {{ $service->title }}
