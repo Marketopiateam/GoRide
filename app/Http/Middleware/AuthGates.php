@@ -11,7 +11,7 @@ class AuthGates
 {
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
+        $user = auth('admin')->user();
 
         if (! $user) {
             return $next($request);
