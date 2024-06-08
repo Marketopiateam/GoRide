@@ -21,8 +21,6 @@ return [
      * Optionally you can disable client events so clients cannot send
      * messages to each other via the webSockets.
      */
-
-
     'apps' => [
         [
             'id' => env('PUSHER_APP_ID'),
@@ -31,7 +29,6 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
-            
             'enable_client_messages' => false,
             'enable_statistics' => true,
         ],
@@ -131,10 +128,6 @@ return [
          * Passphrase for your local_cert file.
          */
         'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
-
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true,
     ],
 
     /*
