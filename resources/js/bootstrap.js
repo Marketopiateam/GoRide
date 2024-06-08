@@ -49,5 +49,6 @@ window.Echo = new Echo({
     cluster: 'mt1',
     wsHost: window.location.hostname,
     wsPort: 6001,
-    wssPort: 443
+    forceTLS: false,
+    disableStatus:true
 });
