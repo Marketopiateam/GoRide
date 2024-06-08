@@ -36,10 +36,10 @@ use App\Http\Controllers\Admin\OrdersIntercityController;
 use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
 
-Route::get('user333', function(){
-event(new test);
-    test::dispatch();
-    return 'sucess';
+Route::get('welcome', function(){
+
+
+     return view('welcome');
     // $user =  User::find(1);
     // $user->password = 'password';
     // $user->save();
