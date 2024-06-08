@@ -10,13 +10,13 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('admin_commission')->nullable();
-            $table->boolean('enable')->default(0)->nullable();
+            $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->boolean('intercity_type')->default(0)->nullable();
             $table->string('km_charge')->nullable();
             $table->string('offer_rate')->nullable();
-            $table->string('title')->nullable();
+            $table->boolean('enable')->default(0)->nullable();
+            $table->string('admin_commission')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

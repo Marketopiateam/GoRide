@@ -89,7 +89,8 @@ class DBUsersRepository implements UsersRepositoryinterface
     public function profile()
     {
         $user = Auth::user();
-        if ($user != null) {
+
+          if ($user != null) {
             return Resp(new UserResource($user), __('messages.success'), 200, true);
         }
         return Resp('', 'error', 402, true);
@@ -158,7 +159,7 @@ class DBUsersRepository implements UsersRepositoryinterface
     //         'phone' => $data['phone'],
     //         'password' =>  $data['password'],
     //     ];
-    //     if ($token = Auth::guard('api')->attempt($credentials)) {
+    //     if ($token = Auth::attempt($credentials)) {
     //         $user = auth('api')->user();
     //     } else {
     //         return Resp('', 'Invalid Credentials', 404, false);
@@ -174,7 +175,7 @@ class DBUsersRepository implements UsersRepositoryinterface
     // }
     // public function profile_details()
     // {
-    //     $id = Auth::guard('api')->user()->id;
+    //     $id = Auth::user()->id;
     //     $user =  User::find($id);
     //     if ($user != null) {
     //         $data =  new LoginUserResource($user);

@@ -78,4 +78,8 @@ class Service extends Model
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
     }
+    public function ScopeType($q,$value)
+    {
+        return $q->where('intercity_type',$value);
+    }
 }

@@ -38,13 +38,20 @@ Route::prefix('v1/auth')->group(function () {
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
 });
 //'auth:sanctum'
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => []], function () {
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     Route::prefix('user')->group(function () {
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
     });
-   // // Service
-   Route::apiResource('services', ServiceApiController::class);
+    Route::prefix('services')->group(function () {
+        Route::get('incity', [ServiceApiController::class, 'incity']);
+        Route::get('outcity', [ServiceApiController::class, 'outcity']);
+    });
+    Route::prefix('order')->group(function () {
+        Route::post('getprice', [OrderApiController::class, 'getprice']);
+    });
+    // // Service
+
     // Permissions
     // Route::apiResource('permissions', PermissionApiController::class);
 

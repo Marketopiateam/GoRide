@@ -9,7 +9,7 @@ class UserProfileController extends Controller
 {
     public function show(Request $request)
     {
-        $this->authorize('auth_profile_edit');
+        // $this->authorize('auth_profile_edit');
 
         return view('profile.show');
     }
