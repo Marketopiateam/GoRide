@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\test;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,11 @@ use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
 
 Route::get('user333', function(){
-    $user =  User::find(1);
-    $user->password = 'password';
-    $user->save();
+    event(new test);
+    return 'sucess';
+    // $user =  User::find(1);
+    // $user->password = 'password';
+    // $user->save();
  });
 Route::redirect('/', '/login');
 
