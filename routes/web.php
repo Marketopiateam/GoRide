@@ -37,7 +37,8 @@ use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
 
 Route::get('user333', function(){
-    event(new test);
+event(new test);
+    test::dispatch();
     return 'sucess';
     // $user =  User::find(1);
     // $user->password = 'password';
