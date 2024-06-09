@@ -12,9 +12,9 @@ class CreateCouponsTable extends Migration
             $table->bigIncrements('id');
             $table->string('amount');
             $table->string('code');
-            $table->string('is_public')->nullable();
-            $table->string('title')->nullable();
-            $table->string('type')->nullable();
+            $table->string('start_at')->nullable();
+            $table->string('end_at')->nullable();
+            $table->string('max_usage')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
