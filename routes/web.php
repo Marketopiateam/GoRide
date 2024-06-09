@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 use App\Events\test;
+=======
+use App\Http\Controllers\Admin\AdminController;
+>>>>>>> 93b2d91 (Commit)
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -115,7 +119,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('review-drivers', ReviewDriverController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Service
-    Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('services', ServiceController::class);
 
     // Sos
     Route::resource('sos', SoController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -137,6 +141,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
 
     // Thread
     Route::resource('threads', ThreadController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
+    // Admins
+    Route::resource('admins', AdminController::class);
+
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

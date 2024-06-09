@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>{{ trans('panel.site_title') }}</title>
+  <title>@yield('title') | {{ env('APP_NAME') }}</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
@@ -41,6 +41,7 @@
                 <x-nav />
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ env('APP_NAME') }} / </span> @yield('pageName')</h4>
                         @yield('content')
                     </div>
                     <x-footer />
@@ -59,7 +60,7 @@
   <script src="{{ asset('assets') }}/vendor/libs/typeahead-js/typeahead.js"></script>
   <script src="{{ asset('assets') }}/js/main.js"></script>
   @livewireStyles
-  @stack('styles')
+  @stack('scripts')
   <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 
-class admin extends  Authenticatable implements HasLocalePreference
+class Admin extends  Authenticatable implements HasLocalePreference
 {
 
     use HasFactory, HasAdvancedFilter, Notifiable, HasApiTokens;
