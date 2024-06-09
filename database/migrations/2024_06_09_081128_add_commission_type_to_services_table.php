@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('services', function (Blueprint $table) {
-            //
+            $table->boolean('commission_type')->default(false)->comment('False => Fixed , True => Customizable');
         });
     }
 

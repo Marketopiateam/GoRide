@@ -26,30 +26,25 @@ class StoreServiceRequest extends FormRequest
     {
         return [
             'admin_commission' => [
-                'string',
+                'numeric',
                 'nullable',
             ],
-            'enable' => [
-                'boolean',
+            'images' => [
+                'array'
             ],
-            'image' => [
-                'string',
-                'nullable',
-            ],
-            'intercity_type' => [
-                'boolean',
+            'images.*' => [
+                'image',
+                'mimes:png,jpg,webp,jpeg',
+                'required'
             ],
             'km_charge' => [
                 'string',
                 'nullable',
             ],
-            'offer_rate' => [
-                'string',
-                'nullable',
-            ],
             'title' => [
                 'string',
-                'nullable',
+                'required',
+                'max:255'
             ],
         ];
     }

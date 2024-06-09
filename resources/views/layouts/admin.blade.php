@@ -42,6 +42,12 @@
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ env('APP_NAME') }} / </span> @yield('pageName')</h4>
+                        @if ($errors->any())
+                        <br>
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger mb-2" role="alert">{{ $error }}</div>
+                            @endforeach
+                        @endif
                         @yield('content')
                     </div>
                     <x-footer />
