@@ -143,7 +143,7 @@ class DBUsersRepository implements UsersRepositoryinterface
             }
 
             $dataX = $this->saveImageAndThumbnail($this->request->image, false, $user->id, 'users');
-
+        
             $user->profile_pic =  $dataX['image'];
         }
         $user->save();
