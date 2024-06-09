@@ -77,7 +77,7 @@ class StoreOrderRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 }

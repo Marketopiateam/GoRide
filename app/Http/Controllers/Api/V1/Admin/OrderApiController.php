@@ -29,9 +29,14 @@ class OrderApiController extends Controller
     public function startorder(StoreOrderRequest $request)
     {
 
-        $request->validated();
-        // $request->user_id = 1;
-        dd($request);
+        $validatedData = $request->validated();
+ 
+        $validatedData['user_id'] = 1;
+
+
+        dd($validatedData);
+        $order = Order::create($validatedData);
+
         // $order = Order::create($request->validated());
 
         // return (new OrderResource($order))

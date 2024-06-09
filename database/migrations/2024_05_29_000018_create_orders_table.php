@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('driver_id')->nullable();
             $table->integer('payment_id')->nullable();
-            $table->boolean('paid')->nullable();
+            $table->boolean('paid')->default(0)->nullable();
             $table->string('distance')->nullable();
             $table->string('distance_type')->nullable();
             $table->string('destination_address')->nullable();
@@ -27,6 +27,12 @@ class CreateOrdersTable extends Migration
             $table->string('offer_rate')->nullable();
             $table->string('final_rate')->nullable();
             $table->string('commission')->nullable();
+            $table->string('destination_City')->nullable();
+            $table->string('source_city')->nullable();
+            $table->string('parcel_dimension')->nullable();
+            $table->string('parcel_weight')->nullable();
+            $table->string('when_dates')->nullable();
+            $table->string('when_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
