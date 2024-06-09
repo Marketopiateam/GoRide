@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-use App\Events\test;
-=======
 use App\Http\Controllers\Admin\AdminController;
->>>>>>> 93b2d91 (Commit)
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
