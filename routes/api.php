@@ -48,8 +48,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
         Route::get('outcity', [ServiceApiController::class, 'outcity']);
     });
     Route::prefix('order')->group(function () {
+        Route::post('/', [OrderApiController::class, 'getprice']);
         Route::post('getprice', [OrderApiController::class, 'getprice']);
     });
+
     // // Service
 
     // Permissions
