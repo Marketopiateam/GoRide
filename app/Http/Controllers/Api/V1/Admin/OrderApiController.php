@@ -26,14 +26,20 @@ class OrderApiController extends Controller
         return  $result;
     }
 
-    public function store(StoreOrderRequest $request)
+    public function startorder(StoreOrderRequest $request)
     {
-        $order = Order::create($request->validated());
 
-        return (new OrderResource($order))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $request->validated();
+        // $request->user_id = 1;
+        dd($request);
+        // $order = Order::create($request->validated());
+
+        // return (new OrderResource($order))
+        //     ->response()
+        //     ->setStatusCode(Response::HTTP_CREATED);
     }
+
+
 
     public function show(Order $order)
     {

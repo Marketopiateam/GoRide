@@ -11,13 +11,6 @@ class StoreOrderRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(
-            Gate::denies('order_create'),
-            response()->json(
-                ['message' => 'This action is unauthorized.'],
-                Response::HTTP_FORBIDDEN
-            ),
-        );
 
         return true;
     }
@@ -25,19 +18,19 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'accepted_driver' => [
+            'service_id' => [
                 'string',
                 'nullable',
             ],
-            'admin_commission' => [
+            'driver_id' => [
                 'string',
                 'nullable',
             ],
-            'destination_location_name' => [
+            'offer' => [
                 'string',
                 'nullable',
             ],
-            'destination_location_l_at_lng' => [
+            'coupon_id' => [
                 'string',
                 'nullable',
             ],
@@ -49,11 +42,30 @@ class StoreOrderRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'driver' => [
+            'payment_id' => [
                 'string',
                 'nullable',
             ],
-            'final_rate' => [
+            'destination_name' => [
+                'string',
+                'nullable',
+            ],
+            'destination_lat' => [
+                'string',
+                'nullable',
+            ],
+            'destination_long' => [
+                'string',
+                'nullable',
+            ],
+            'source_name' => [
+                'boolean',
+            ],
+            'source_lat' => [
+                'string',
+                'nullable',
+            ],
+            'source_long' => [
                 'string',
                 'nullable',
             ],
@@ -61,54 +73,11 @@ class StoreOrderRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'otp' => [
+            'final_rate' => [
                 'string',
                 'nullable',
             ],
-            'payment_status' => [
-                'boolean',
-            ],
-            'payment_type' => [
-                'string',
-                'nullable',
-            ],
-            'position' => [
-                'string',
-                'nullable',
-            ],
-            'rejected_driver' => [
-                'string',
-                'nullable',
-            ],
-            'service' => [
-                'string',
-                'nullable',
-            ],
-            'source_location_l_at_lng' => [
-                'string',
-                'nullable',
-            ],
-            'source_location_name' => [
-                'string',
-                'nullable',
-            ],
-            'status' => [
-                'string',
-                'nullable',
-            ],
-            'tax_list' => [
-                'string',
-                'nullable',
-            ],
-            'update_date' => [
-                'string',
-                'nullable',
-            ],
-            'user_id' => [
-                'integer',
-                'exists:users,id',
-                'nullable',
-            ],
+            
         ];
     }
 }
