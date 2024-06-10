@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use Gate;
+use App\Models\Order;
+use App\Models\Service;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\Admin\OrderResource;
-use App\Models\Order;
-use App\Models\Service;
-use Gate;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class OrderApiController extends Controller
 {
@@ -30,7 +31,7 @@ class OrderApiController extends Controller
     {
 
         $validatedData = $request->validated();
- 
+
         $validatedData['user_id'] = 1;
 
 
@@ -44,30 +45,10 @@ class OrderApiController extends Controller
         //     ->setStatusCode(Response::HTTP_CREATED);
     }
 
-
-
-    public function show(Order $order)
+    public function get_my_order(Request $request)
     {
-        abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return new OrderResource($order->load(['user']));
+        $order = Order::where('user_id',Auth::user()->id)->get();
     }
 
-    public function update(UpdateOrderRequest $request, Order $order)
-    {
-        $order->update($request->validated());
 
-        return (new OrderResource($order))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
-    }
-
-    public function destroy(Order $order)
-    {
-        abort_if(Gate::denies('order_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $order->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
 }

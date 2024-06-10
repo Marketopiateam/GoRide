@@ -50,6 +50,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::prefix('order')->group(function () {
         Route::post('/start/order', [OrderApiController::class, 'startorder']);
         Route::post('getprice', [OrderApiController::class, 'getprice']);
+        Route::get('my', [OrderApiController::class, 'get_my_order']);
+    });
+    Route::prefix('coupon')->group(function () {
+        Route::get('/verify', [CouponApiController::class, 'verifycoupon']);
     });
 
     // // Service
