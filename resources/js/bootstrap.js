@@ -53,6 +53,6 @@ window.Echo = new Echo({
     encrypted: true,
     forceTLS:  true,
     disableStatus:  true,
-    enabledTransports: ['ws'],
+    enabledTransports: ['ws','wss'],
 });
 
