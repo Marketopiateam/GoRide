@@ -11,7 +11,7 @@ try {
     require('select2')
     window.Dropzone = require('dropzone').default
     require('flatpickr')
-} catch (e) {}
+} catch (e) { }
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -46,13 +46,13 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '2',
-    cluster:  'mt1',
+    cluster: 'mt1',
     wsHost: window.location.hostname,
     wsPort: 6001,
     wssPort: 6001,
     encrypted: true,
-    forceTLS:  true,
-    disableStatus:  true,
-    enabledTransports: ['ws','wss'],
+    forceTLS: true,
+    disableStatus: true,
+    enabledTransports: ['ws', 'wss'],
 });
 
