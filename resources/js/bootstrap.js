@@ -59,7 +59,7 @@ window.Echo = new Echo({
 
 });
 
+
 window.Echo.channel('channe-1').listen('.message', (e) => {
    console.log(e);
 });
- 
