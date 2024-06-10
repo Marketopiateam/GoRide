@@ -2171,6 +2171,12 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   wsPort: 6001,
   wssPort: 6001
 });
+window.Echo.channel('channe-1').listen('.message', function (e) {
+  console.log(e);
+});
+window.Echo.channel('DemoChannel').listen('WebSocketDemoEvent', function (e) {
+  console.log(e);
+});
 
 /***/ }),
 

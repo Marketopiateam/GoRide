@@ -17,20 +17,25 @@ class test implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $message;
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
     public function broadcastOn(): array
     {
         return [
-            new Channel('channel'),
+            new Channel('channe-1'),
         ];
+    }
+
+    // public function broadcastWith()
+    // {
+    //     // return (new ChatResource($this->conversion,$this->count_unread))->toArray(request());
+    // }
+    public function broadcastAs()
+    {
+        return  'message';
     }
 }
