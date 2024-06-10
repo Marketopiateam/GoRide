@@ -35,18 +35,18 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-            'cluster' => env('PUSHER_APP_CLUSTER'),
-            'host' => '127.0.0.1',
-            'encrypted' => true,
-            'port' => 6001,
-            'scheme' => 'https',
-            'debug' => true,
-            'useTLS' => true,
-            'curl_options' => [
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_SSL_VERIFYPEER => 0,
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'host' => '127.0.0.1',
+                'encrypted' => true,
+                'port' => 6001,
+                'scheme' => 'https',
+                'debug' => true,
+                'useTLS' => true,
+                'curl_options' => [
+                    'CURLOPT_SSL_VERIFYHOST' => 0,
+                    'CURLOPT_SSL_VERIFYPEER' => 0,
 
-            ],
+                ],
             ],
             'client_options' => [
                 'verify' => false,
