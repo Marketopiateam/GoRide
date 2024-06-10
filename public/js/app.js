@@ -2169,7 +2169,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   encrypted: true,
   forceTLS: true,
   disableStatus: true,
-  enabledTransports: ['ws']
+  enabledTransports: ['ws', 'wss']
 });
 
 /***/ }),
