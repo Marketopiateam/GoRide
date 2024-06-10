@@ -22,7 +22,7 @@ class OrderApiController extends Controller
         $response = distancematrix($request->origin, $request->destination);
         $km = $response['rows'][0]['elements'][0]['distance']['value'] / 1000;
         $result['km'] = $km;
-        $result['price'] = $km *  $Service->km_charge;
+        $result['price'] = number_format($km *  $Service->km_charge ,2);
         $result['min'] = number_format(($response['rows'][0]['elements'][0]['duration']['value'] / 60),1);
         return  $result;
     }
