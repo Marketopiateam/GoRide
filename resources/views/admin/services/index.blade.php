@@ -72,17 +72,17 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-primary btn-sm me-1"
-                                    href="{{ route('admin.admins.edit', $item->id) }}">
+                                    href="{{ route('admin.services.edit', $item->id) }}">
                                     <i class="ti ti-edit me-1"></i>
                                     {{ __('global.edit') }}
                                 </a>
                                 <a class="btn btn-success btn-sm me-1"
-                                    href="{{ route('admin.admins.show', $item->id) }}">
+                                    href="{{ route('admin.services.show', $item->id) }}">
                                     <i class="ti ti-eye me-1"></i>
                                     {{ __('global.show') }}
                                 </a>
                                 <a class="btn btn-danger btn-sm me-1"
-                                    href="{{ route('admin.admins.destroy', $item->id) }}">
+                                    href="{{ route('admin.services.destroy', $item->id) }}">
                                     <i class="ti ti-trash me-1"></i>
                                     {{ __('global.delete') }}
                                 </a>

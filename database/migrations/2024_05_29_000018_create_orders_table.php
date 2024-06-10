@@ -10,11 +10,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('service_id')->nullable();
-            $table->integer('coupon_id')->nullable();
-            $table->integer('user_id')->nullable();
-            $table->integer('driver_id')->nullable();
-            $table->integer('payment_id')->nullable();
+            $table->bigInteger('service_id')->unsigned();
+            $table->bigInteger('coupon_id')->unsigned();
+            $table->bigInteger('driver_id')->unsigned();
+            $table->bigInteger('payment_id')->unsigned();
             $table->boolean('paid')->default(0)->nullable();
             $table->string('distance')->nullable();
             $table->string('distance_type')->nullable();

@@ -74,7 +74,27 @@
                 @endcan
             </ul>
         </li>
-
+        @can('service_access')
+        <li class="menu-item menu-item {{ request()->is('admin/services*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-car"></i>
+                <div data-i18n="Layouts">{{ trans('cruds.service.title') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/services') ? 'active' : '' }}">
+                    <a href="{{ route('admin.services.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('global.list') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/services/create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.services.create') }}" class="menu-link">
+                        <div data-i18n="Content navbar">{{ __('global.create') }}</div>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+        @endcan
 
 
 
