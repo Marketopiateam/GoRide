@@ -23,7 +23,7 @@ class OrderApiController extends Controller
         $km = $response['rows'][0]['elements'][0]['distance']['value'] / 1000;
         $result['km'] = $km;
         $result['price'] = number_format($km *  $Service->km_charge ,2);
-        $result['min'] = number_format(($response['rows'][0]['elements'][0]['duration']['value'] / 60),1);
+        $result['min'] = number_format(($response['rows'][0]['elements'][0]['duration']['value'] / 60));
         return  $result;
     }
 
