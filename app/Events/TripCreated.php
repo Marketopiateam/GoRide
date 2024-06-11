@@ -19,7 +19,7 @@ class TripCreated implements ShouldBroadcast
 
 
     public $trip;
- 
+
 
     /**
      * Create a new event instance.
@@ -36,5 +36,9 @@ class TripCreated implements ShouldBroadcast
         return [
                new Channel('drivers')
         ];
+    }
+    public function broadcastAs()
+    {
+        return  'drivers';
     }
 }
