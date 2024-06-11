@@ -31,6 +31,9 @@ return new class extends Migration
             $table->decimal('request_price')->default(0);
             $table->timestamps();
         });
+        DB::table('settings')->insert([
+            []
+        ]);
     }
 
     /**

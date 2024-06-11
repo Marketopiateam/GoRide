@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,10 @@ Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    
+    Route::get('settings/{id}', [SettingController::class, 'edit'])->name('settings.index');
+    Route::post('settings/{id}', [SettingController::class, 'update'])->name('settings.update');
+    
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
 
@@ -127,7 +132,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('vehicle-types', VehicleTypeController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Wallet Transaction
-    Route::resource('wallet-transactions', WalletTransactionController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('wallet-transactions', WalletTransactionController::class);
 
     // Audit Logs
     Route::resource('audit-logs', AuditLogController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit']]);

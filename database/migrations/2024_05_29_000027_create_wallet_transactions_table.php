@@ -10,12 +10,20 @@ class CreateWalletTransactionsTable extends Migration
     {
         Schema::create('wallet_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('amount')->nullable();
+            
+            $table->decimal('amount', 10, 3)->default(0);
             $table->string('note')->nullable();
-            $table->string('order_type')->nullable();
-            $table->string('payment_type')->nullable();
-            $table->string('transaction')->nullable();
-            $table->string('user_type')->nullable();
+
+            $table->enum('type', ['voucher', 'bonus', 'order', 'refund'])->default('voucher');
+
+            $table->foreignId('order_id')->nullable();
+            $table->foreignId('driver_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+
+            $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('driver_id')->references('id')->on('driver_users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->timestamps();
             $table->softDeletes();
         });

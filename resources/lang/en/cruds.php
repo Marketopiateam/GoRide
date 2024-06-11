@@ -5,6 +5,7 @@ return [
         'title'          => 'User management',
         'title_singular' => 'User management',
     ],
+    
     'admin' => [
         'title'          => 'Admins',
         'title_singular' => 'Admin',
@@ -840,8 +841,26 @@ return [
         ],
     ],
     'setting' => [
-        'title'          => 'Setting',
+        'title'          => 'Settings',
         'title_singular' => 'Setting',
+        'fields'         => [
+            'facebook'                  => 'Facebook',
+            'youtube'                   => 'Youtube',
+            'linkedin'                  => 'Linkedin',
+            'twitter'                   => 'Twitter',
+            'tiktok'                    => 'Tiktok',   
+            'link_1'                    => 'Link 1',
+            'link_2'                    => 'Link 2 ',
+            'link_3'                    => 'Link 3',
+            'email_1'                   => 'Email 1',
+            'email_2'                   => 'Email 2',
+            'email_3'                   => 'Email 3',
+            'phone'                     => 'phone',
+            'increase'                  => 'Increase',
+            'min_withdraw'              => 'Min Withdraw',
+            'request_price'             => 'Request Price',
+            'min_deposit'               => 'Min Deposit',
+        ]
     ],
     'ordersM' => [
         'title'          => 'Orders',
