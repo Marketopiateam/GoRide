@@ -54,7 +54,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
         Route::get('outcity', [ServiceApiController::class, 'outcity']);
     });
     Route::prefix('order')->group(function () {
-        Route::post('/start/order', [OrderApiController::class, 'startorder']);
+        Route::post('/start', [OrderApiController::class, 'startorder']);
         Route::post('getprice', [OrderApiController::class, 'getprice']);
         Route::get('my', [OrderApiController::class, 'get_my_order']);
     });
