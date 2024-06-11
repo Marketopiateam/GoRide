@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Events\TripCreated;
 use Gate;
 use App\Models\Order;
 use App\Models\Service;
@@ -22,7 +23,7 @@ class OrderApiController extends Controller
         $response = distancematrix($request->origin, $request->destination);
         $km = $response['rows'][0]['elements'][0]['distance']['value'] / 1000;
         $result['km'] = $km;
-        $result['price'] = number_format($km *  $Service->km_charge ,2);
+        $result['price'] = number_format($km *  $Service->km_charge, 2);
         $result['min'] = number_format(($response['rows'][0]['elements'][0]['duration']['value'] / 60));
         return  $result;
     }
@@ -31,15 +32,14 @@ class OrderApiController extends Controller
     {
 
         $validatedData = $request->validated();
-
         $validatedData['user_id'] = 1;
 
 
-        dd($validatedData);
+
         $order = Order::create($validatedData);
 
-        // $order = Order::create($request->validated());
 
+        TripCreated::dispatch($order);
         // return (new OrderResource($order))
         //     ->response()
         //     ->setStatusCode(Response::HTTP_CREATED);
@@ -47,8 +47,6 @@ class OrderApiController extends Controller
 
     public function get_my_order(Request $request)
     {
-        $order = Order::where('user_id',Auth::user()->id)->get();
+        $order = Order::where('user_id', Auth::user()->id)->get();
     }
-
-
 }
