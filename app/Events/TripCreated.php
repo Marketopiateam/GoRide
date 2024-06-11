@@ -19,15 +19,15 @@ class TripCreated implements ShouldBroadcast
 
 
     public $trip;
-    private $user;
+ 
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Order $trip, User $user)
+    public function __construct(Order $trip )
     {
         $this->trip = $trip;
-        $this->user = $user;
+
     }
 
 

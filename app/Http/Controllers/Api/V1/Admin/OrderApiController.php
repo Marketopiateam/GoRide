@@ -34,12 +34,9 @@ class OrderApiController extends Controller
         $validatedData = $request->validated();
         $validatedData['user_id'] = 1;
 
-
-
         $order = Order::create($validatedData);
 
-
-        TripCreated::dispatch($order);
+        TripCreated::dispatch($order );
         // return (new OrderResource($order))
         //     ->response()
         //     ->setStatusCode(Response::HTTP_CREATED);
