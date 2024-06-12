@@ -31,8 +31,7 @@ class MarketopiaStarter extends Command
     public function handle()
     {
         // Read Json file from public path
-        $data = json_decode(File::get(public_path('mar/richness_states.json')), true);
-
+        $data = json_decode(File::get(public_path('mar/marketopia_cities.json')), true);
         // Initialize a progress bar
         $bar = $this->output->createProgressBar(count($data));
 

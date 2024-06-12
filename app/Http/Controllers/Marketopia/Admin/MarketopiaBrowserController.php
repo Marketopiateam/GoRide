@@ -107,26 +107,38 @@ class MarketopiaBrowserController extends BaseController
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function destroy($id)
+    {
+        $this->model->FindOrFail($id)->delete();
+
+        return redirect()->route($this->getClassNameFromModel() . '.index');
+    }
+
     public function edit($id)
     {
-        //
+        $row = $this->model->FindOrFail($id);
+        $moduleName = $this->getModelName();
+        $pageTitle = "Edit " . $moduleName;
+        $pageDes = "Here you can edit " .$moduleName;
+        $folderName = $this->getClassNameFromModel();
+        $routeName = $folderName;
+        $append = $this->append();
+        return view('admin.' . $folderName . '.edit', compact(
+            'row',
+            'pageTitle',
+            'moduleName',
+            'pageDes',
+            'folderName',
+            'routeName',
+            'append'
+        ));
     }
+   
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
     {
         //
     }

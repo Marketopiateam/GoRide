@@ -26,9 +26,9 @@ return new class extends Migration
             $table->string('email_3')->nullable();
             $table->string('phone')->nullable();
             $table->json('increase')->nullable();
-            $table->decimal('min_withdraw')->default(0);
-            $table->decimal('min_deposit')->default(0);
-            $table->decimal('request_price')->default(0);
+            $table->decimal('min_withdraw', 14, 3)->default(0);
+            $table->decimal('min_deposit', 14, 3)->default(0);
+            $table->decimal('request_price', 14, 3)->default(0);
             $table->boolean('radius')->default(2);
             $table->timestamps();
         });
