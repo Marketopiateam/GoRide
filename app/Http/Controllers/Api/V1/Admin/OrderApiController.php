@@ -33,9 +33,10 @@ class OrderApiController extends Controller
     {
         $data =[
              'service_id'        => $request->service_id??'',
+             'driver_id'         => null,
              'distance'          => $request->distance??'',
              'distance_type'     => 'km',
-             'payment_type'      => $request->payment_type??'',
+            //  'payment_type'      => $request->payment_type??'',
              'destination_name'  => $request->destination_name??'',
              'destination_lat'   => $request->destination_lat??'',
              'destination_long'  => $request->destination_long??'',
@@ -46,8 +47,7 @@ class OrderApiController extends Controller
              'final_rate'        => $request->final_rate??'',
              'user_id'           => Auth::user()->id,
         ];
-
-        $order = Order::create( $data);
+       $order = Order::create( $data);
         TripCreated::dispatch($order );
         return Resp('','success');
     }

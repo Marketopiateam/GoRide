@@ -14,7 +14,7 @@ class Order extends Model
     use HasFactory, HasAdvancedFilter, SoftDeletes;
 
     public $table = 'orders';
-
+    protected $guarded = ['id'];
     protected $casts = [
         'payment_status' => 'boolean',
     ];
@@ -49,29 +49,7 @@ class Order extends Model
         'user.name',
     ];
 
-    protected $fillable = [
-        'accepted_driver',
-        'admin_commission',
-        'destination_location_name',
-        'destination_location_l_at_lng',
-        'distance',
-        'distance_type',
-        'driver',
-        'final_rate',
-        'offer_rate',
-        'otp',
-        'payment_status',
-        'payment_type',
-        'position',
-        'rejected_driver',
-        'service',
-        'source_location_l_at_lng',
-        'source_location_name',
-        'status',
-        'tax_list',
-        'update_date',
-        'user_id',
-    ];
+
 
     public $orderable = [
         'id',
