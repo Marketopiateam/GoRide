@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\CarBrand;
 use App\Models\Marketopia\MarketopiaCity;
 use App\Models\Marketopia\MarketopiaState;
 use App\Models\Marketopia\MarketopiaSubContinent;
@@ -27,19 +28,12 @@ class TranslateStateName implements ShouldQueue
     {
         try {
             // Translate state name
-            $result = GoogleTranslate::withSource('en')
+          /*   $result = GoogleTranslate::withSource('en')
                 ->withTarget('ar')
-                ->translate($this->state['name']);
+                ->translate($this->state['name']); */
 
             // Update the state name in the database
-            MarketopiaSubContinent::find($this->state['id'])->update([
-                'ar' => [
-                    'name' => $result->getAlternativeTranslations()[0],
-                ],
-                'en' => [
-                    'name' => $this->state['name'],
-                ]
-            ]);
+            CarBrand::create($this->state);
         } catch (\Exception $e) {
             // Log any errors for debugging
             Log::error("Failed to translate and update state: " . $e->getMessage());

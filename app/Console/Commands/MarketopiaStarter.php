@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\TranslateStateName;
+use App\Models\CarBrand;
 use App\Models\Marketopia\MarketopiaBrowser;
 use App\Models\Marketopia\MarketopiaContinent;
 use App\Models\Marketopia\MarketopiaCountry;
@@ -37,7 +38,7 @@ class MarketopiaStarter extends Command
 
         // Dispatch jobs for each state
         foreach ($data as $value) {
-            TranslateStateName::dispatch($value);
+            CarBrand::create($value);
             // Advance the progress bar
             $bar->advance();
         }
