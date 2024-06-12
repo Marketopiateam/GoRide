@@ -92,6 +92,7 @@ class BaseController extends Controller
     }
     public function show($id)
     {
+
         $row = $this->model->FindOrFail($id);
         $moduleName = $this->getModelName();
         $pageTitle = "Edit " . $moduleName;
@@ -133,4 +134,6 @@ class BaseController extends Controller
 
     protected function append(){
         return [];
-    }}
+    }
+
+}

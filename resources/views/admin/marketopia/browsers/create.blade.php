@@ -11,7 +11,7 @@
                     @csrf
                     @method('POST')
                     <div class="">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs languageModelSwitcher">
                             <li class="nav-item">
                                 <a class="nav-link active" id="english-tab" data-toggle="tab" href="#english">English</a>
                             </li>
@@ -41,18 +41,5 @@
     </div>
 </div>
 @push('scripts')
-<script>
-    $(document).ready(function() {
-    $('a[data-toggle="tab"]').on('click', function (e) {
-        var target = $(e.target).attr("href") // activated tab
-        $(target).show().addClass('show active').siblings().removeClass('show active').hide();
-        $('.nav.nav-tabs .nav-link').each(function() {
-            $(this).removeClass('active');
-        });
-        $(this).addClass('active');
-    });
-    $('a[data-toggle="tab"]').first().trigger('shown.bs.tab');
-});
-    </script>    
 @endpush
 @endsection
