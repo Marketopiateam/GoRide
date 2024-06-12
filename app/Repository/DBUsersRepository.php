@@ -15,6 +15,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\AddressResource;
+use App\Http\Resources\CountryResource;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\LoginUserResource;
 use App\Models\Marketopia\MarketopiaCity;
@@ -99,7 +100,7 @@ class DBUsersRepository implements UsersRepositoryinterface
         }
         return Resp('', 'error', 402, true);
     }
-
+    
     public function country()
     {
         $country =  MarketopiaCountry::get();
@@ -108,9 +109,10 @@ class DBUsersRepository implements UsersRepositoryinterface
         }
         return Resp('', 'error', 402, true);
     }
-    public function city()
+
+    public function city($id)
     {
-        $citys =  MarketopiaCity::where('country_id','64')->get();
+        $citys =  MarketopiaCity::where('country_id',$id)->get();
           if ($citys != null) {
             return Resp(CityResource::collection($citys), __('messages.success'), 200, true);
         }

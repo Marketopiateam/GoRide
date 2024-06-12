@@ -21,8 +21,8 @@ class AuthenticationController extends Controller
     public function signup() {
        return $this->userRepositry->signup();
     }
-    public function city() {
-       return $this->userRepositry->city();
+    public function city($id) {
+       return $this->userRepositry->city($id);
     }
     public function country() {
        return $this->userRepositry->country();
