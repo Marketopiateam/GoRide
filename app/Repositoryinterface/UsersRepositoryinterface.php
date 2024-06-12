@@ -12,9 +12,10 @@ interface UsersRepositoryinterface{
     public function profile();
     public function profile_update();
     public function address_new();
+    public function city();
     public function address();
 
-    
+
     // public function profile_update($request);
     // public function profile_details();
     // public function verificationcode($request);

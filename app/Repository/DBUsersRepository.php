@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use App\Traits\MapsProcessing;
 use App\Traits\ImageProcessing;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\CityResource;
 use App\Http\Resources\UserResource;
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\AddressResource;
-
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\LoginUserResource;
+use App\Models\Marketopia\MarketopiaCity;
 use App\Repositoryinterface\UsersRepositoryinterface;
 
 class DBUsersRepository implements UsersRepositoryinterface
@@ -61,11 +63,11 @@ class DBUsersRepository implements UsersRepositoryinterface
         DB::beginTransaction();
         try {
             $data = [
-                'full_name'     => $this->request->name,
-                'email'         => $this->request->email ?? null,
-                'phone_number'  => $this->request->phone,
-                'fcm_token'     => $this->request->fcm_token,
-                'country_id'    => $this->request->country_id,
+                'full_name'         => $this->request->name,
+                'email'             => $this->request->email ?? null,
+                'phone_number'      => $this->request->phone,
+                'fcm_token'         => $this->request->fcm_token,
+                'country_id'        => '64',
                 'wallet_amount'     => 0,
 
             ];
@@ -93,6 +95,15 @@ class DBUsersRepository implements UsersRepositoryinterface
 
           if ($user != null) {
             return Resp(new UserResource($user), __('messages.success'), 200, true);
+        }
+        return Resp('', 'error', 402, true);
+    }
+    public function city()
+    {
+        $citys =  MarketopiaCity::where('country_id','64')->get();
+
+          if ($citys != null) {
+            return Resp(CityResource::collection($citys), __('messages.success'), 200, true);
         }
         return Resp('', 'error', 402, true);
     }
