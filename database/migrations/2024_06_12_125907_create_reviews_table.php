@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->increments('id');
-            $table->id('user_id')->nullable();
+            $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->text('comment');
             $table->decimal('rating',8,2)->default(0);
             $table->morphs('reviewable');
