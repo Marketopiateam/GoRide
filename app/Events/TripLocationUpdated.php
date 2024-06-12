@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Trip;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -22,7 +23,7 @@ class TripLocationUpdated implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(Trip $trip, User $user)
+    public function __construct(Order $trip, User $user)
     {
         $this->trip = $trip;
         $this->user = $user;
@@ -39,4 +40,9 @@ class TripLocationUpdated implements ShouldBroadcast
             new Channel('passenger_' . $this->user->id)
         ];
     }
+    public function broadcastAs()
+    {
+        return  'TripLocationUpdated';
+    }
+
 }

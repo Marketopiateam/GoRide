@@ -39,6 +39,6 @@ class TripCreated implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return  'drivers';
+        return  'drivers1';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Order;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
@@ -22,7 +23,7 @@ class TripStarted implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(Trip $trip, User $user)
+    public function __construct(Order $trip, User $user)
     {
         $this->trip = $trip;
         $this->user = $user;

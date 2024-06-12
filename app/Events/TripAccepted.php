@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-
+use App\Models\Order;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
@@ -21,7 +21,7 @@ class TripAccepted implements ShouldBroadcast
     private $user;
 
 
-    public function __construct(Trip $trip, User $user)
+    public function __construct(Order $trip, User $user)
     {
         $this->trip = $trip;
         $this->user = $user;
@@ -33,5 +33,9 @@ class TripAccepted implements ShouldBroadcast
         return [
             new Channel('passenger_' . $this->user->id)
         ];
+    }
+    public function broadcastAs()
+    {
+        return  'TripAccepted';
     }
 }

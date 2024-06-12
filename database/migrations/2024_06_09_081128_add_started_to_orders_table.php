@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->boolean('commission_type')->default(false)->comment('False => Fixed , True => Customizable');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->timestamp('is_started')->nullable();
+            $table->timestamp('is_complete')->nullable();
+            $table->timestamp('is_accept')->nullable();
         });
     }
 
@@ -21,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
         });
     }

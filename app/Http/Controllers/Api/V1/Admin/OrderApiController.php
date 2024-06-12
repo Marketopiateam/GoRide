@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Events\TripCreated;
 use Gate;
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Service;
+use App\Events\TripCreated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -28,18 +29,31 @@ class OrderApiController extends Controller
         return  $result;
     }
 
-    public function startorder(StoreOrderRequest $request)
+    public function neworder(StoreOrderRequest $request)
     {
-
         $validatedData = $request->validated();
-        $validatedData['user_id'] = 1;
-
+        $validatedData['user_id'] = Auth::user()->id;
         $order = Order::create($validatedData);
-
         TripCreated::dispatch($order );
-        // return (new OrderResource($order))
-        //     ->response()
-        //     ->setStatusCode(Response::HTTP_CREATED);
+        return Resp('','success');
+    }
+    public function startorder(Request $request,Order $order)
+    {
+        $order->update(['accepted_driver'=>Carbon::now()]);
+        TripCreated::dispatch($order );
+        return Resp('','success');
+    }
+    public function acceptorder(Request $request,Order $order)
+    {
+        $order->update(['is_accept'=>Carbon::now(),'driver_id'=>Auth::user()->id]);
+        TripCreated::dispatch($order );
+        return Resp('','success');
+    }
+    public function endorder(Request $request,Order $order)
+    {
+        $order->update(['is_end'=>Carbon::now()]);
+        TripCreated::dispatch($order );
+        return Resp('','success');
     }
 
     public function get_my_order(Request $request)
