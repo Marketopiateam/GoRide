@@ -14,7 +14,7 @@ class CityResource extends JsonResource
     {
         return [
             'id'        => $this->id,
-            'name'      => $this->translate('en')->name,
+            'name'      => $this->translate('ar')->name,
             'latitude'  => $this->latitude,
             'longitude' => $this->longitude??'',
 

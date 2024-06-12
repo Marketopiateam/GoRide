@@ -18,6 +18,7 @@
         "laravel/ui": "^4.2",
         "livewire/livewire": "^2.11",
         "maatwebsite/excel": "^3.1",
+        "nafezly/payments": "dev-master",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-medialibrary": "^11.5"
     },

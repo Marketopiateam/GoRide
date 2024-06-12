@@ -48,6 +48,8 @@ Route::get('test', function(){
 dd($result->getAlternativeTranslations());
 
 });
+// Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
+
 Route::get('welcome', function(){
 
 
@@ -63,10 +65,10 @@ Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    
+
     Route::get('settings/{id}', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings/{id}', [SettingController::class, 'update'])->name('settings.update');
-    
+
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
 
@@ -157,11 +159,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('admins', AdminController::class);
 
     // create Marketopia Browser recourse route
-    Route::resource('marketopia-browsers', MarketopiaBrowserController::class); 
-    
+    Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
+
 // Create function to upload image with media library package
 
-    
+
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
