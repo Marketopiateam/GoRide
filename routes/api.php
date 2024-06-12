@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\CurrencyApiController;
 use App\Http\Controllers\Api\V1\Admin\DocumentApiController;
 use App\Http\Controllers\Api\V1\Admin\LanguageApiController;
+use App\Http\Controllers\Api\V1\Admin\PaymentsApiController;
 use App\Http\Controllers\Api\V1\Admin\ReferralApiController;
 use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
 use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
@@ -62,8 +63,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
         Route::post('getprice', [OrderApiController::class, 'getprice']);
         Route::get('my', [OrderApiController::class, 'get_my_order']);
     });
-    Route::prefix('coupon')->group(function () {
-        Route::get('/verify', [CouponApiController::class, 'verifycoupon']);
+
+    Route::prefix('payments')->group(function () {
+        Route::get('/get', [PaymentsApiController::class, 'get_payments']);
     });
 
     // // Service

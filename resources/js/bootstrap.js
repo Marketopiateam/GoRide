@@ -48,6 +48,13 @@ window.Echo = new Echo({
 });
 
 
+// window.io = require('socket.io-client');
+
+// window.Echo = new Echo({
+//     broadcaster: 'socket.io',
+//     host: window.location.hostname + ':6001' // Adjust as needed
+// });
+
 window.Echo.channel('drivers').listen('.drivers', (e) => {
    console.log(e);
 });

@@ -19,11 +19,7 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'service_id' => [
-                'string',
-                'nullable',
-            ],
-            'driver_id' => [
-                'string',
+               'integer',
                 'nullable',
             ],
             'offer' => [

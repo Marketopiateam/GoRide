@@ -31,9 +31,23 @@ class OrderApiController extends Controller
 
     public function neworder(StoreOrderRequest $request)
     {
-        $validatedData = $request->validated();
-        $validatedData['user_id'] = Auth::user()->id;
-        $order = Order::create($validatedData);
+        $data =[
+             'service_id'        => $request->service_id??'',
+             'distance'          => $request->distance??'',
+             'distance_type'     => 'km',
+             'payment_type'      => $request->payment_type??'',
+             'destination_name'  => $request->destination_name??'',
+             'destination_lat'   => $request->destination_lat??'',
+             'destination_long'  => $request->destination_long??'',
+             'source_name'       => $request->source_name??'',
+             'source_lat'        => $request->source_lat??'',
+             'source_long'       => $request->source_long??'',
+             'offer_rate'        => $request->offer_rate??'',
+             'final_rate'        => $request->final_rate??'',
+             'user_id'           => Auth::user()->id,
+        ];
+
+        $order = Order::create( $data);
         TripCreated::dispatch($order );
         return Resp('','success');
     }

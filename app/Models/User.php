@@ -42,12 +42,12 @@ class User extends Authenticatable implements HasLocalePreference
         'email',
         'password',
         'locale',
-        'country_code',
         'fcm_token',
         'is_active',
         'login_type',
         'profile_pic',
         'reviews_count',
+        'country_id',
         'reviews_sum',
         'wallet_amount',
     ];

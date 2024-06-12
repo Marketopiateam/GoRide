@@ -65,13 +65,15 @@ class DBUsersRepository implements UsersRepositoryinterface
                 'email'         => $this->request->email ?? null,
                 'phone_number'  => $this->request->phone,
                 'fcm_token'     => $this->request->fcm_token,
+                'country_id'    => $this->request->country_id,
                 'wallet_amount'     => 0,
 
             ];
             $user =  User::create($data);
+
             if ($this->request->image) {
                 $dataX = $this->saveImageAndThumbnail($this->request->image, false, $user->id, 'users');
-                $user->image =  $dataX['profile_pic'];
+                $user->profile_pic =  $dataX['image'];
                 $user->save();
             }
             $user->token = $user->createToken($user->full_name . '-AuthToken')->plainTextToken;
@@ -81,8 +83,7 @@ class DBUsersRepository implements UsersRepositoryinterface
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return($e->getMessage());
-            // return Resp('', $e->getMessage(), 404, true);
+            return Resp('', $e->getMessage(), 404, true);
             // return false;
         }
     }
@@ -137,13 +138,16 @@ class DBUsersRepository implements UsersRepositoryinterface
         if ($this->request->has('email')) {
             $user->email = $this->request->email;
         }
+        if ($this->request->has('country_id')) {
+            $user->country_id = $this->request->country_id;
+        }
         if ($this->request->has('image')) {
             if ($user->profile_pic != null) {
                 $this->deletefile($user->profile_pic, $user->id, 'users');
             }
 
             $dataX = $this->saveImageAndThumbnail($this->request->image, false, $user->id, 'users');
-        
+
             $user->profile_pic =  $dataX['image'];
         }
         $user->save();

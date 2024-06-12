@@ -2157,6 +2157,14 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   wsPort: 6001,
   wssPort: 6001
 });
+
+// window.io = require('socket.io-client');
+
+// window.Echo = new Echo({
+//     broadcaster: 'socket.io',
+//     host: window.location.hostname + ':6001' // Adjust as needed
+// });
+
 window.Echo.channel('drivers').listen('.drivers', function (e) {
   console.log(e);
 });
@@ -56064,7 +56072,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"axios","version":"0.21.4","de
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkgoride"] = self["webpackChunkgoride"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
