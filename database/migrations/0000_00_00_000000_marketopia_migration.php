@@ -43,7 +43,7 @@ return new class extends Migration
             if (!File::exists($modelTranslationPath)) {
                 Artisan::call('make:model', [
                     'name' => $model.'Translation',
-                    '--migration' => true
+                    // '--migration' => true
                 ]);
             }
             if (!File::exists($controllerPath)) {

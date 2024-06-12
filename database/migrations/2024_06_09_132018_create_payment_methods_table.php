@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+
             $table->string('logo');
             $table->string('app_key');
             $table->string('app_secret');

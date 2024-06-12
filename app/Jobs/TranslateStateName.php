@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Marketopia\MarketopiaCity;
 use App\Models\Marketopia\MarketopiaState;
+use App\Models\Marketopia\MarketopiaSubContinent;
 use Datlechin\GoogleTranslate\Facades\GoogleTranslate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,9 +32,12 @@ class TranslateStateName implements ShouldQueue
                 ->translate($this->state['name']);
 
             // Update the state name in the database
-            MarketopiaCity::find($this->state['id'])->update([
+            MarketopiaSubContinent::find($this->state['id'])->update([
                 'ar' => [
                     'name' => $result->getAlternativeTranslations()[0],
+                ],
+                'en' => [
+                    'name' => $this->state['name'],
                 ]
             ]);
         } catch (\Exception $e) {

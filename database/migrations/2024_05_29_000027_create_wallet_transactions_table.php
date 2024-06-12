@@ -21,7 +21,7 @@ class CreateWalletTransactionsTable extends Migration
             $table->foreignId('user_id')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('driver_id')->references('id')->on('driver_users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('driver_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();

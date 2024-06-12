@@ -123,7 +123,7 @@ class MarketopiaBrowserController extends BaseController
         $folderName = $this->getClassNameFromModel();
         $routeName = $folderName;
         $append = $this->append();
-        return view('admin.' . $folderName . '.edit', compact(
+        return view('admin.marketopia.browsers.edit', compact(
             'row',
             'pageTitle',
             'moduleName',
@@ -140,7 +140,22 @@ class MarketopiaBrowserController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+         // validation name_en and name_ar
+         $request->validate([
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
+        ]);
+        // create a browser record with translations
+        $this->model->firstOrFail($id)->update([
+            'en' => [
+                'bane' => $request->name_en
+            ],
+            'ar' => [
+                'ar' => $request->name_ar,
+            ],
+        ]);
+        // return to index page with success message translated
+        return redirect()->route('admin.marketopia-browsers.index')->with('success', 'Browser updated successfully');
     }
 
 }
