@@ -104,7 +104,7 @@ class DBUsersRepository implements UsersRepositoryinterface
     {
         $country =  MarketopiaCountry::get();
           if ($country != null) {
-            return Resp(CityResource::collection($country), __('messages.success'), 200, true);
+            return Resp(CountryResource::collection($country), __('messages.success'), 200, true);
         }
         return Resp('', 'error', 402, true);
     }

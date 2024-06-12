@@ -13,6 +13,7 @@ interface UsersRepositoryinterface{
     public function profile_update();
     public function address_new();
     public function city();
+    public function country();
     public function address();
 
 

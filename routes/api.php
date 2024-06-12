@@ -47,7 +47,8 @@ Route::get('event',function(){
 //'auth:sanctum'
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     Route::prefix('user')->group(function () {
-        Route::get('city', [AuthenticationController::class, 'city']);
+        Route::get('country', [AuthenticationController::class, 'country']);
+        Route::get('city/{id}', [AuthenticationController::class, 'city']);
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
     });
