@@ -14,7 +14,7 @@ class CreateWalletTransactionsTable extends Migration
             $table->decimal('amount', 10, 3)->default(0);
             $table->string('note')->nullable();
 
-            $table->enum('type', ['voucher', 'bonus', 'order', 'refund'])->default('voucher');
+            $table->enum('type', ['voucher', 'bonus', 'order', 'refund', 'compensation'])->default('voucher');
 
             $table->foreignId('order_id')->nullable();
             $table->foreignId('driver_id')->nullable();

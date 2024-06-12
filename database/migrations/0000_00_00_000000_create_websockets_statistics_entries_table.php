@@ -13,6 +13,8 @@ class CreateWebSocketsStatisticsEntriesTable extends Migration
      */
     public function up()
     {
+
+        
         Schema::create('websockets_statistics_entries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('app_id');
@@ -21,6 +23,9 @@ class CreateWebSocketsStatisticsEntriesTable extends Migration
             $table->integer('api_message_count');
             $table->nullableTimestamps();
         });
+
+        // Path to the SQL file
+       
     }
 
     /**

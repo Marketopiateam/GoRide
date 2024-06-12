@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
 use App\Models\User;
+use Datlechin\GoogleTranslate\Facades\GoogleTranslate;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SoController;
@@ -36,7 +39,15 @@ use App\Http\Controllers\Admin\ReviewCustomerController;
 use App\Http\Controllers\Admin\OrdersIntercityController;
 use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
+Route::get('test', function(){
+    $result = GoogleTranslate::withSource('en')
+    ->withTarget('ar')
+    ->translate('Hello world!');
 
+
+dd($result->getAlternativeTranslations());
+
+});
 Route::get('welcome', function(){
 
 
@@ -144,6 +155,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('threads', ThreadController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
     // Admins
     Route::resource('admins', AdminController::class);
+
+    // create Marketopia Browser recourse route
+    Route::resource('marketopia-browsers', MarketopiaBrowserController::class); 
+    
 
 });
 

@@ -78,4 +78,6 @@ class FreightVehicle extends Model
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
     }
+
+    ## make a user relation 
 }

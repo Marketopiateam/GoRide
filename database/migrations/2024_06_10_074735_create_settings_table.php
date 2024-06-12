@@ -29,6 +29,7 @@ return new class extends Migration
             $table->decimal('min_withdraw')->default(0);
             $table->decimal('min_deposit')->default(0);
             $table->decimal('request_price')->default(0);
+            $table->boolean('radius')->default(2);
             $table->timestamps();
         });
         DB::table('settings')->insert([

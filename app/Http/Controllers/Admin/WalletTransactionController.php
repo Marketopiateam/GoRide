@@ -14,4 +14,14 @@ class WalletTransactionController extends BaseController
     {
         parent::__construct($model);
     }
+    public function mostPaidClients()
+    {
+        // Fetch clients ordered by the total amount paid
+        $clients = Client::withSum('payments', 'amount')
+            ->orderBy('payments_sum_amount', 'desc')
+            ->take(10) // You can adjust the number of clients to fetch
+            ->get();
+
+        return response()->json($clients);
+    }
 }

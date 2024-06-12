@@ -14,5 +14,19 @@ class WalletTransaction extends Model
     use HasFactory, HasAdvancedFilter, SoftDeletes;
     protected $table = "wallet_transactions";
     protected $guarded = ['id'];
+    public function getCreatedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d h:i A') : null;
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d h:i A') : null;
+    }
+
+    public function getDeletedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d h:i A') : null;
+    }
 
 }

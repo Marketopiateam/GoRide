@@ -12,7 +12,6 @@ class CreateDriverUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('country_code')->nullable();
             $table->boolean('document_verification')->default(0)->nullable();
-            $table->string('email')->nullable();
             $table->longText('fcm_token')->nullable();
             $table->string('full_name')->nullable();
             $table->boolean('is_online')->default(0)->nullable();

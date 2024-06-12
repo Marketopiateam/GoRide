@@ -20,12 +20,12 @@
         <thead>
           <tr>
             <th class="text-center">#</th>
-            <th class="text-center">amount</th>
-            <th class="text-center">type</th>
-            <th class="text-center">order</th>
-            <th class="text-center">driver</th>
-            <th class="text-center">user</th>
-            <th class="text-center"></th>
+            <th class="text-center">{{ __('global.amount') }}</th>
+            <th class="text-center">{{ __('global.type') }}</th>
+            <th class="text-center">{{ __('global.order') }}</th>
+            <th class="text-center">{{ __('global.driver') }}</th>
+            <th class="text-center">{{ __('global.user') }}</th>
+            <th class="text-center">{{ __('global.created_at') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -55,21 +55,8 @@
                     <i class="ti ti-circle-check text-danger"></i>
                     @endif
                 </td>
-                <td>
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-primary btn-sm me-1" href="{{ route('admin.wallet-transactions.edit', $item->id) }}">
-                            <i class="ti ti-edit me-1"></i>
-                            {{ __('global.edit') }}
-                        </a>    
-                        <a class="btn btn-success btn-sm me-1" href="{{ route('admin.wallet-transactions.show', $item->id) }}">
-                            <i class="ti ti-eye me-1"></i>
-                            {{ __('global.show') }}
-                        </a>    
-                        <a class="btn btn-danger btn-sm me-1" href="{{ route('admin.wallet-transactions.destroy', $item->id) }}">
-                            <i class="ti ti-trash me-1"></i>
-                            {{ __('global.delete') }}
-                        </a>    
-                    </div>    
+                <td class="text-center">
+                   {{$item->created_at}}
                 </td>
             </tr>
             @endforeach
