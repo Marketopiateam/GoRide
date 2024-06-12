@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use App\Support\HasAdvancedFilter;
+use Hash;
 use Carbon\Carbon;
 use DateTimeInterface;
-use Hash;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\Reviews;
 use Laravel\Sanctum\HasApiTokens;
+use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable implements HasLocalePreference
 {
@@ -97,8 +98,11 @@ class User extends Authenticatable implements HasLocalePreference
     {
         return $this->roles()->where('title', 'Admin')->exists();
     }
-
-    public function scopeAdmins()
+    public function review()
+    {
+        return $this->morphMany(Reviews::class, 'reviewable');
+    }
+    public function scopeAdmins()   
     {
         return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }

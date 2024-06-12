@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-
+use App\Models\User;
 use App\Repository\DBUsersRepository;
 use App\Repository\DBCreditRepository;
 use Illuminate\Support\ServiceProvider;
 
 use App\Repository\DBNotificationRepository;
 use App\Repository\DBExtraServicesRepository;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Repositoryinterface\UsersRepositoryinterface;
 use App\Repositoryinterface\CreditRepositoryinterface;
 use App\Repositoryinterface\NotificationRepositoryinterface;
@@ -16,7 +17,7 @@ use App\Repositoryinterface\ExtraServicesRepositoryinterface;
 
 class AppServiceProvider extends ServiceProvider
 {
-  
+
     public function register(): void
     {
         $repositories = [
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Relation::morphMap([
+            'driver' => User::class,
+            'user'   => User::class
+        ]);
     }
 }

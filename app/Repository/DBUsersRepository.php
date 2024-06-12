@@ -18,6 +18,7 @@ use App\Http\Resources\AddressResource;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\LoginUserResource;
 use App\Models\Marketopia\MarketopiaCity;
+use App\Models\Marketopia\MarketopiaCountry;
 use App\Repositoryinterface\UsersRepositoryinterface;
 
 class DBUsersRepository implements UsersRepositoryinterface
@@ -98,15 +99,24 @@ class DBUsersRepository implements UsersRepositoryinterface
         }
         return Resp('', 'error', 402, true);
     }
+
+    public function country()
+    {
+        $country =  MarketopiaCountry::get();
+          if ($country != null) {
+            return Resp(CityResource::collection($country), __('messages.success'), 200, true);
+        }
+        return Resp('', 'error', 402, true);
+    }
     public function city()
     {
         $citys =  MarketopiaCity::where('country_id','64')->get();
-
           if ($citys != null) {
             return Resp(CityResource::collection($citys), __('messages.success'), 200, true);
         }
         return Resp('', 'error', 402, true);
     }
+
     public function address_new()
     {
         $user_id = Auth::user()->id;
