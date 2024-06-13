@@ -48,14 +48,9 @@ Route::get('test', function () {
         }
         dd($payment_methods);
 });
-<<<<<<< HEAD
-// Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
+    Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
 
 Route::get('welcome', function(){
-=======
-Route::get('welcome', function () {
->>>>>>> 3c9f595 (Payments)
-
 
     return view('welcome');
     // $user =  User::find(1);
@@ -69,12 +64,8 @@ Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-<<<<<<< HEAD
-=======
     Route::get('payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
     Route::put('payment-methods', [PaymentMethodController::class, 'update'])->name('payment-methods.update');
-
->>>>>>> 3c9f595 (Payments)
 
     Route::get('settings/{id}', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings/{id}', [SettingController::class, 'update'])->name('settings.update');
@@ -129,15 +120,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     // create Marketopia Browser recourse route
     Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
 
-<<<<<<< HEAD
-// Create function to upload image with media library package
-
-
-=======
-    // Create function to upload image with media library package
-
-
->>>>>>> 3c9f595 (Payments)
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
