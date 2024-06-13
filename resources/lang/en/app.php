@@ -72,6 +72,7 @@ return [
     'project_id' => 'Project ID',
     'secret_word_2' => 'Secret Word 2',
     'app_id' => 'App ID',
-
+    'vehicle_types' => 'Vehicle Types',
+    'add_vehicle_types' => 'Add Vehicle Type',
     
 ];

@@ -24,29 +24,12 @@ use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\VehicleTypeController;
 use App\Http\Controllers\Admin\FreightVehicleController;
 use App\Http\Controllers\Admin\WalletTransactionController;
+use Nafezly\Payments\Classes\PaymobPayment;
 use function SergeYakovlev\CountryFlagEmoji\country_flag_emoji;
 
 
 Route::get('test', function () {
-    $methods = PaymentMethod::get();
-        $configs = config('nafezly-payments');
-        $payment_methods = [];
-        foreach ($methods as $method) {
-            $configArray = [];
-            $configArray['name'] = $method->name;
-            $configArray['logo'] = $method->logo;
-            foreach ($configs as $config => $value) {
-                if (str_starts_with($config, $method->name)) {
-                    $key = strtolower(str_replace($method->name . '_', "", $config));
-                    if ($method->name == 'PERFECTMONEY' && $key == 'id') {
-                        $key = 'api_key';
-                    }
-                    $configArray[$key] = $method->$key;
-                }
-            }
-            $payment_methods[$method->name] = $configArray;
-        }
-        dd($payment_methods);
+    return view('test');
 });
    // Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
 
@@ -73,13 +56,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
     Route::resource('countries', CountryController::class);
-    Route::get('countries/activate/{id}', [CountryController::class, 'activate'])->name('countries.activate');
-    Route::get('countries/deactivate/{id}', [CountryController::class, 'deactivate'])->name('countries.deactivate');
+    Route::put('countries/activate/{id}', [CountryController::class, 'activate'])->name('countries.activate');
+    Route::put('countries/deactivate/{id}', [CountryController::class, 'deactivate'])->name('countries.deactivate');
 
 
     Route::resource('cities', CityController::class);
-    Route::get('cities/activate/{id}', [CityController::class, 'activate'])->name('cities.activate');
-    Route::get('cities/deactivate/{id}', [CityController::class, 'deactivate'])->name('cities.deactivate');
+    Route::put('cities/activate/{id}', [CityController::class, 'activate'])->name('cities.activate');
+    Route::put('cities/deactivate/{id}', [CityController::class, 'deactivate'])->name('cities.deactivate');
 
 
     // Roles
@@ -106,7 +89,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('services', ServiceController::class);
 
     // Vehicle Type
-    Route::resource('vehicle-types', VehicleTypeController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('vehicle-types', VehicleTypeController::class);
+    Route::put('vehicle-types/activate/{id}', [VehicleTypeController::class, 'activate'])->name('vehicle-types.activate');
+    Route::put('vehicle-types/deactivate/{id}', [VehicleTypeController::class, 'deactivate'])->name('vehicle-types.deactivate');
 
     // Wallet Transaction
     Route::resource('wallet-transactions', WalletTransactionController::class);

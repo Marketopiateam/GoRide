@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         $searchQuery = $request->input('search');
 
@@ -19,20 +19,21 @@ class CountryController extends Controller
         return view('admin.countries.index', compact('countries', 'pageTitle'));
     }
     public function deactivate($id)
-{
-    $country = MarketopiaCountry::findOrFail($id);
-    $country->status = 0;
-    $country->save();
+    {
+        $country = MarketopiaCountry::findOrFail($id);
+        $country->status = 0;
+        $country->save();
 
-    return redirect()->route('admin.countries.index');
-}
+        return redirect()->route('admin.countries.index');
+    }
 
-public function activate($id)
-{
-    $country = MarketopiaCountry::findOrFail($id);
-    $country->status = 1;
-    $country->save();
+    public function activate($id)
+    {
+        $country = MarketopiaCountry::findOrFail($id);
+        $country->status = 1;
+        $country->save();
 
-    return redirect()->route('admin.countries.index');
-}
+        return redirect()->route('admin.countries.index');
+    }
+    // Create Distory Method
 }

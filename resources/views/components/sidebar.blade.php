@@ -115,8 +115,13 @@
                 <div>{{ trans('app.cities') }}</div>
             </a>
         </li>
-
-
+        <li class="menu-item {{ request()->is('admin/payment-methods*') ? 'active' : '' }}">
+            <a href="{{ route('admin.payment-methods.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-cash"></i>
+                <div>{{ trans('app.payment_methods') }}</div>
+            </a>
+        </li>
+        
 
 
 
