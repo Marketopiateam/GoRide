@@ -1,63 +1,67 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
-use App\Models\User;
-use Datlechin\GoogleTranslate\Facades\GoogleTranslate;
-
+use App\Models\Marketopia\MarketopiaCity;
+use App\Models\Marketopia\MarketopiaCountry;
+use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\SoController;
 use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\TaxController;
-use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\ThreadController;
 use App\Http\Controllers\Admin\AirportController;
-use App\Http\Controllers\Admin\CmsPageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AuditLogController;
-use App\Http\Controllers\Admin\CurrencyController;
-use App\Http\Controllers\Admin\DocumentController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\ReferralController;
-use App\Http\Controllers\Admin\DriverRuleController;
-use App\Http\Controllers\Admin\DriverUserController;
-use App\Http\Controllers\Admin\OnBoardingController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\VehicleTypeController;
-use App\Http\Controllers\Admin\ReviewDriverController;
-use App\Http\Controllers\Admin\DriverDocumentController;
 use App\Http\Controllers\Admin\FreightVehicleController;
-use App\Http\Controllers\Admin\ReviewCustomerController;
-use App\Http\Controllers\Admin\OrdersIntercityController;
-use App\Http\Controllers\Admin\IntercityServiceController;
 use App\Http\Controllers\Admin\WalletTransactionController;
-Route::get('test', function(){
-    $result = GoogleTranslate::withSource('en')
-    ->withTarget('ar')
-    ->translate('Hello world!');
+use function SergeYakovlev\CountryFlagEmoji\country_flag_emoji;
 
 
-dd($result->getAlternativeTranslations());
-
+Route::get('test', function () {
+    $methods = PaymentMethod::get();
+        $configs = config('nafezly-payments');
+        $payment_methods = [];
+        foreach ($methods as $method) {
+            $configArray = [];
+            $configArray['name'] = $method->name;
+            $configArray['logo'] = $method->logo;
+            foreach ($configs as $config => $value) {
+                if (str_starts_with($config, $method->name)) {
+                    $key = strtolower(str_replace($method->name . '_', "", $config));
+                    if ($method->name == 'PERFECTMONEY' && $key == 'id') {
+                        $key = 'api_key';
+                    }
+                    $configArray[$key] = $method->$key;
+                }
+            }
+            $payment_methods[$method->name] = $configArray;
+        }
+        dd($payment_methods);
 });
+<<<<<<< HEAD
 // Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
 
 Route::get('welcome', function(){
+=======
+Route::get('welcome', function () {
+>>>>>>> 3c9f595 (Payments)
 
 
-     return view('welcome');
+    return view('welcome');
     // $user =  User::find(1);
     // $user->password = 'password';
     // $user->save();
- });
+});
 Route::redirect('/', '/login');
 
 Auth::routes(['register' => false]);
@@ -65,12 +69,27 @@ Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+<<<<<<< HEAD
+=======
+    Route::get('payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
+    Route::put('payment-methods', [PaymentMethodController::class, 'update'])->name('payment-methods.update');
+
+>>>>>>> 3c9f595 (Payments)
 
     Route::get('settings/{id}', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings/{id}', [SettingController::class, 'update'])->name('settings.update');
 
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('countries', CountryController::class);
+    Route::get('countries/activate/{id}', [CountryController::class, 'activate'])->name('countries.activate');
+    Route::get('countries/deactivate/{id}', [CountryController::class, 'deactivate'])->name('countries.deactivate');
+
+
+    Route::resource('cities', CityController::class);
+    Route::get('cities/activate/{id}', [CityController::class, 'activate'])->name('cities.activate');
+    Route::get('cities/deactivate/{id}', [CityController::class, 'deactivate'])->name('cities.deactivate');
+
 
     // Roles
     Route::resource('roles', RoleController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -78,29 +97,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     // Users
     Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
 
-    // Coupon
-    Route::resource('coupons', CouponController::class, ['except' => ['store', 'update', 'destroy']]);
-
     // Airports
     Route::resource('airports', AirportController::class, ['except' => ['store', 'update', 'destroy']]);
 
-    // Cms Pages
-    Route::resource('cms-pages', CmsPageController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Currency
-    Route::resource('currencies', CurrencyController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Documents
-    Route::resource('documents', DocumentController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Driver Document
-    Route::resource('driver-documents', DriverDocumentController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Driver Rules
-    Route::resource('driver-rules', DriverRuleController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Driver Users
-    Route::resource('driver-users', DriverUserController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Faq
     Route::resource('faqs', FaqController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -108,38 +107,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     // Freight Vehicle
     Route::resource('freight-vehicles', FreightVehicleController::class, ['except' => ['store', 'update', 'destroy']]);
 
-    // Intercity Service
-    Route::resource('intercity-services', IntercityServiceController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Languages
-    Route::resource('languages', LanguageController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // On Boarding
-    Route::resource('on-boardings', OnBoardingController::class, ['except' => ['store', 'update', 'destroy']]);
-
     // Orders
     Route::resource('orders', OrderController::class, ['except' => ['store', 'update', 'destroy']]);
 
-    // Orders Intercity
-    Route::resource('orders-intercities', OrdersIntercityController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Referral
-    Route::resource('referrals', ReferralController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Review Customer
-    Route::resource('review-customers', ReviewCustomerController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Review Driver
-    Route::resource('review-drivers', ReviewDriverController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Service
     Route::resource('services', ServiceController::class);
-
-    // Sos
-    Route::resource('sos', SoController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Tax
-    Route::resource('taxes', TaxController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Vehicle Type
     Route::resource('vehicle-types', VehicleTypeController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -150,20 +123,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     // Audit Logs
     Route::resource('audit-logs', AuditLogController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit']]);
 
-    // Chat
-    Route::resource('chats', ChatController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Thread
-    Route::resource('threads', ThreadController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
     // Admins
     Route::resource('admins', AdminController::class);
 
     // create Marketopia Browser recourse route
     Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
 
+<<<<<<< HEAD
 // Create function to upload image with media library package
 
 
+=======
+    // Create function to upload image with media library package
+
+
+>>>>>>> 3c9f595 (Payments)
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

@@ -14,4 +14,19 @@ class MarketopiaCity extends  Model implements TranslatableContract
     public $guarded = ['id'];
 
     public $translatedAttributes = ['name'];
+
+
+    public function city_translations()
+    {
+        return $this->hasMany(MarketopiaCityTranslation::class, 'marketopia_city_id');
+    }
+    public function country()
+    {
+        return $this->belongsTo(MarketopiaCountry::class, 'country_id');
+    }
+    // Create relationship continent with country
+    public function state()
+    {
+        return $this->belongsTo(MarketopiaState::class, 'state_id');
+    }
 }

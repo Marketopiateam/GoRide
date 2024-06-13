@@ -103,7 +103,18 @@
             </a>
         </li>
         @endcan
-
+        <li class="menu-item {{ request()->is('admin/countries*') ? 'active' : '' }}">
+            <a href="{{ route('admin.countries.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-flag"></i>
+                <div>{{ trans('app.countries') }}</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('admin/cities*') ? 'active' : '' }}">
+            <a href="{{ route('admin.cities.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-building"></i>
+                <div>{{ trans('app.cities') }}</div>
+            </a>
+        </li>
 
 
 

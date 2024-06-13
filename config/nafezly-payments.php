@@ -1,5 +1,6 @@
 <?php
 return [
+<<<<<<< HEAD
     #PAYMOB
     'PAYMOB_API_KEY' => env('PAYMOB_API_KEY'),
     'PAYMOB_INTEGRATION_ID' => env('PAYMOB_INTEGRATION_ID'),
@@ -51,6 +52,14 @@ return [
     'TAP_SECRET_KEY'=>env('TAP_SECRET_KEY','sk_test_XKokBfNWv6FIYuTMg5sLPjhJ'),
     'TAP_PUBLIC_KEY'=>env('TAP_PUBLIC_KEY','pk_test_EtHFV4BuPQokJT6jiROls87Y'),
     'TAP_LANG_KEY'=>env('TAP_LANG_KEY','ar'),
+=======
+
+#PAYMOB
+
+
+
+/*   
+>>>>>>> 3c9f595 (Payments)
 
 
     #OPAY
@@ -63,7 +72,10 @@ return [
 
 
     #PAYMOB_WALLET (vodaphone-cash,orange-money,etisalat-cash,we-cash,meza-wallet) - test phone 01010101010 ,PIN & OTP IS 123456
+<<<<<<< HEAD
     'PAYMOB_WALLET_INTEGRATION_ID'=>env('PAYMOB_WALLET_INTEGRATION_ID'),
+=======
+>>>>>>> 3c9f595 (Payments)
 
     #Paytabs
     'PAYTABS_PROFILE_ID'  => env('PAYTABS_PROFILE_ID'),
@@ -90,11 +102,19 @@ return [
 
 
     #Perfectmoney
+<<<<<<< HEAD
     /*
     *please 
     *1- create POST route /payments/verify/{payment} and put it before your verify route 
     *2- put it into app/Http/Middleware/VerifyCsrfToken.php middleware inside except array
     */
+=======
+    
+    please 
+    1- create POST route /payments/verify/{payment} and put it before your verify route 
+    2- put it into app/Http/Middleware/VerifyCsrfToken.php middleware inside except array
+
+>>>>>>> 3c9f595 (Payments)
     'PERFECT_MONEY_ID'=>env('PERFECT_MONEY_ID','UXXXXXXX'),
     'PERFECT_MONEY_PASSPHRASE'=>env('PERFECT_MONEY_PASSPHRASE'),
 
@@ -124,7 +144,11 @@ return [
     #BigPay
     'BIGPAY_KEY'=>env('BIGPAY_KEY',"02b0203c-558c-45d4-ba90-954017d40eb6"),
     'BIGPAY_SECRET'=>env('BIGPAY_SECRET',"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmb3VhZC5mYXJpc0BhcmVxYWQuY29tIiwiaWF0IjoxNjky MTEwMzQ3LCJleHAiOjIwMDc3Mjk1NDd9.re3qVEjbJ19KWedzWySGsUjChN0DuF2p-SgfBi7mlzM"),
+<<<<<<< HEAD
     'BIGPAY_MODE'=>env('BIGPAY_MODE','test'),/*live,test*/
+=======
+    'BIGPAY_MODE'=>env('BIGPAY_MODE','test'), // live,test
+>>>>>>> 3c9f595 (Payments)
 
 
     'ENOT_KEY'=>env('ENOT_KEY'),
@@ -162,5 +186,9 @@ return [
     'PAYLINK_MODE'=>env('PAYLINK_MODE','test'),
 
 
+<<<<<<< HEAD
 
+=======
+ */
+>>>>>>> 3c9f595 (Payments)
 ];

@@ -15,4 +15,23 @@ class MarketopiaCountry extends  Model implements TranslatableContract
     
     public $translatedAttributes = ['name'];
 
+    public function country_translations()
+    {
+        return $this->hasMany(MarketopiaCountryTranslation::class, 'marketopia_country_id');
+    }
+    public function cities()
+    {
+        return $this->hasMany(MarketopiaCity::class, 'marketopia_country_id');
+    }
+    // Create relationship continent with country
+    public function continent()
+    {
+        return $this->belongsTo(MarketopiaContinent::class, 'continent_id');
+    }
+    // Create relationship sub continent with country
+    public function sub_continent()
+    {
+        return $this->belongsTo(MarketopiaSubContinent::class, 'sub_continent_id');
+    }
+
 }
