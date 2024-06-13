@@ -48,7 +48,7 @@ Route::get('test', function () {
         }
         dd($payment_methods);
 });
-    Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
+   // Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
 
 Route::get('welcome', function(){
 

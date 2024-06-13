@@ -33,8 +33,6 @@ return new class extends Migration
             $table->string('mode')->default('test');
             $table->string('webhook_url')->nullable();
             $table->boolean('enabled')->default(false);
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->string('secret_key')->nullable();
             $table->string('public_key')->nullable();
             $table->string('lang_key')->nullable();
