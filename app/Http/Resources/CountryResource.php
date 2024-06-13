@@ -12,9 +12,10 @@ class CountryResource extends JsonResource
 
     public function toArray(Request $request): array
     {
+        
         return [
             'id'        => $this->id,
-            'name'      => $this->translate('ar')->name,
+            'name'      => $this->translate(request()->header('lang'))->name,
             'latitude'  => $this->latitude,
             'longitude' => $this->longitude??'',
 

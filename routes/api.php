@@ -43,6 +43,12 @@ Route::get('event',function(){
     Route::post('signup', [AuthenticationController::class, 'signup']);
     Route::get('verify_otp', [AuthenticationController::class, 'verify_otp']);
     Route::post('send_otp', [AuthenticationController::class, 'send_otp']);
+    Route::prefix('user')->group(function () {
+    Route::get('country', [AuthenticationController::class, 'country']);
+    Route::get('city/{id}', [AuthenticationController::class, 'city']);
+});
+
+
 });
 //'auth:sanctum'
 Route::get('v1/user/charge_wallet', [AuthenticationController::class, 'charge_wallet']);
