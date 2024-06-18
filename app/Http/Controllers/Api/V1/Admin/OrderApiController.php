@@ -31,43 +31,43 @@ class OrderApiController extends Controller
 
     public function neworder(StoreOrderRequest $request)
     {
-        $data =[
-             'service_id'        => $request->service_id??'',
-             'driver_id'         => null,
-             'distance'          => $request->distance??'',
-             'distance_type'     => 'km',
+        $data = [
+            'service_id'        => $request->service_id ?? '',
+            'driver_id'         => null,
+            'distance'          => $request->distance ?? '',
+            'distance_type'     => 'km',
             //  'payment_type'      => $request->payment_type??'',
-             'destination_name'  => $request->destination_name??'',
-             'destination_lat'   => $request->destination_lat??'',
-             'destination_long'  => $request->destination_long??'',
-             'source_name'       => $request->source_name??'',
-             'source_lat'        => $request->source_lat??'',
-             'source_long'       => $request->source_long??'',
-             'offer_rate'        => $request->offer_rate??'',
-             'final_rate'        => $request->final_rate??'',
-             'user_id'           => Auth::user()->id,
+            'destination_name'  => $request->destination_name ?? '',
+            'destination_lat'   => $request->destination_lat ?? '',
+            'destination_long'  => $request->destination_long ?? '',
+            'source_name'       => $request->source_name ?? '',
+            'source_lat'        => $request->source_lat ?? '',
+            'source_long'       => $request->source_long ?? '',
+            'offer_rate'        => $request->offer_rate ?? '0',
+            'final_rate'        => $request->final_rate ?? '0',
+            'user_id'           => Auth::user()->id,
         ];
-       $order = Order::create( $data);
-        TripCreated::dispatch($order );
-        return Resp('','success');
+        $order = Order::create($data);
+        TripCreated::dispatch($order);
+        return Resp('', 'success');
     }
-    public function startorder(Request $request,Order $order)
+    public function startorder(Request $request, Order $order)
     {
-        $order->update(['accepted_driver'=>Carbon::now()]);
-        TripCreated::dispatch($order );
-        return Resp('','success');
+        $order->update(['accepted_driver' => Carbon::now()]);
+        TripCreated::dispatch($order);
+        return Resp('', 'success');
     }
-    public function acceptorder(Request $request,Order $order)
+    public function acceptorder(Request $request, Order $order)
     {
-        $order->update(['is_accept'=>Carbon::now(),'driver_id'=>Auth::user()->id]);
-        TripCreated::dispatch($order );
-        return Resp('','success');
+        $order->update(['is_accept' => Carbon::now(), 'driver_id' => Auth::user()->id]);
+        TripCreated::dispatch($order);
+        return Resp('', 'success');
     }
-    public function endorder(Request $request,Order $order)
+    public function endorder(Request $request, Order $order)
     {
-        $order->update(['is_end'=>Carbon::now()]);
-        TripCreated::dispatch($order );
-        return Resp('','success');
+        $order->update(['is_end' => Carbon::now()]);
+        TripCreated::dispatch($order);
+        return Resp('', 'success');
     }
 
     public function get_my_order(Request $request)

@@ -22,9 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $repositories = [
             UsersRepositoryinterface::class                => DBUsersRepository::class,
-            CreditRepositoryinterface::class               => DBCreditRepository::class,
-            ExtraServicesRepositoryinterface::class        => DBExtraServicesRepository::class,
-            NotificationRepositoryinterface::class        => DBNotificationRepository::class,
+            // CreditRepositoryinterface::class               => DBCreditRepository::class,
+            // ExtraServicesRepositoryinterface::class        => DBExtraServicesRepository::class,
+            // NotificationRepositoryinterface::class        => DBNotificationRepository::class,
         ];
         foreach ($repositories as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

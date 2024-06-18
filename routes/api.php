@@ -2,6 +2,8 @@
 
 use App\Events\test;
 use App\Models\User;
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Admin\SoApiController;
 use App\Http\Controllers\Api\V1\Admin\FaqApiController;
@@ -32,6 +34,14 @@ use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
 use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
 use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
 use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
+
+
+Route::post('v1/send-message', function (Request $request) {
+
+    $message = $request->input('message');
+    event(new MessageSent($message));
+    return response()->json(['message' => $message]);
+});
 
 Route::prefix('v1/user')->group(function () {
     Route::get('country', [AuthenticationController::class, 'country']);

@@ -45,3 +45,4 @@ window.openDropdown = function openDropdown(event, dropdownID) {
     fetch('/admin/user-alerts/seen')
   }
 }
+

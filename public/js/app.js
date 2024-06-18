@@ -2165,8 +2165,24 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 //     host: window.location.hostname + ':6001' // Adjust as needed
 // });
 
-window.Echo.channel('drivers').listen('.drivers', function (e) {
+window.Echo.channel('drivers').listen('.drivers1', function (e) {
   console.log(e);
+});
+window.Echo.channel('my-channel').listenToAll(function (event, data) {
+  // do what you need to do based on the event name and data
+  console.log(event, data);
+});
+// window.Echo.channel('my-channel')
+//     .listen('MessageSen1t', (e) => {
+//         console.log(e.message);
+//     })     .listenForWhisper('**', (e) => {
+//         console.log('Received a whisper:', e);
+//     });
+
+window.Echo.channel('drivers').listen('pusher_internal:subscription_succeeded', function (e) {
+  console.log('Successfully subscribed to drivers channel.');
+}).listen('.*', function (e) {
+  console.log('Received an event:', e);
 });
 
 /***/ }),

@@ -1,39 +1,40 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CityController;
-use App\Http\Controllers\Admin\CountryController;
-use App\Http\Controllers\Admin\PaymentMethodController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
-use App\Models\Marketopia\MarketopiaCity;
-use App\Models\Marketopia\MarketopiaCountry;
-use App\Models\PaymentMethod;
+use App\Events\MessageSent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\AirportController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\VehicleTypeController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\FreightVehicleController;
 use App\Http\Controllers\Admin\WalletTransactionController;
-use Nafezly\Payments\Classes\PaymobPayment;
-use function SergeYakovlev\CountryFlagEmoji\country_flag_emoji;
+use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
+use Illuminate\Http\Request;
+
+// WebSocketsRouter::webSocket('/my-websocket', \App\MyCustomWebSocketHandler::class);
+// Broadcast::routes();
 
 
 Route::get('test', function () {
     return view('test');
 });
-   // Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
+// Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
 
-Route::get('welcome', function(){
+Route::get('welcome', function () {
 
     return view('welcome');
     // $user =  User::find(1);
@@ -104,7 +105,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
 
     // create Marketopia Browser recourse route
     Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
-
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

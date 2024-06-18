@@ -25,57 +25,7 @@ class Order extends Model
         'deleted_at',
     ];
 
-    public $filterable = [
-        'id',
-        'accepted_driver',
-        'admin_commission',
-        'destination_location_name',
-        'destination_location_l_at_lng',
-        'distance',
-        'distance_type',
-        'driver',
-        'final_rate',
-        'offer_rate',
-        'otp',
-        'payment_type',
-        'position',
-        'rejected_driver',
-        'service',
-        'source_location_l_at_lng',
-        'source_location_name',
-        'status',
-        'tax_list',
-        'update_date',
-        'user.name',
-    ];
-
-
-
-    public $orderable = [
-        'id',
-        'accepted_driver',
-        'admin_commission',
-        'destination_location_name',
-        'destination_location_l_at_lng',
-        'distance',
-        'distance_type',
-        'driver',
-        'final_rate',
-        'offer_rate',
-        'otp',
-        'payment_status',
-        'payment_type',
-        'position',
-        'rejected_driver',
-        'service',
-        'source_location_l_at_lng',
-        'source_location_name',
-        'status',
-        'tax_list',
-        'update_date',
-        'user.name',
-    ];
-
+    
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

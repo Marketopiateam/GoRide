@@ -55,6 +55,25 @@ window.Echo = new Echo({
 //     host: window.location.hostname + ':6001' // Adjust as needed
 // });
 
-window.Echo.channel('drivers').listen('.drivers', (e) => {
+window.Echo.channel('drivers').listen('.drivers1', (e) => {
    console.log(e);
 });
+window.Echo.channel('my-channel').listenToAll((event, data) => {
+    // do what you need to do based on the event name and data
+    console.log(event, data)
+ });
+// window.Echo.channel('my-channel')
+//     .listen('MessageSen1t', (e) => {
+//         console.log(e.message);
+//     })     .listenForWhisper('**', (e) => {
+//         console.log('Received a whisper:', e);
+//     });
+
+window.Echo.channel('drivers')
+    .listen('pusher_internal:subscription_succeeded', (e) => {
+        console.log('Successfully subscribed to drivers channel.');
+    })
+    .listen('.*', (e) => {
+        console.log('Received an event:', e);
+    })
+   ;
