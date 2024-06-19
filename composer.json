@@ -19,7 +19,7 @@
         "livewire/livewire": "^2.11",
         "maatwebsite/excel": "^3.1",
         "nafezly/payments": "dev-master",
-        "pusher/pusher-php-server": "^7.0.2",
+        "pusher/pusher-php-server": "^7.2.4",
         "sergeyakovlev/country-flag-emoji": "^1.0",
         "spatie/laravel-medialibrary": "^11.5"
     },
