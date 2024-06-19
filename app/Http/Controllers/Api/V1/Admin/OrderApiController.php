@@ -49,7 +49,7 @@ class OrderApiController extends Controller
         ];
         $order = Order::create($data);
         TripCreated::dispatch($order);
-        return Resp('', 'success');
+        return Resp($order, 'success');
     }
     public function startorder(Request $request, Order $order)
     {
