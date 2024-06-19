@@ -26,7 +26,7 @@ use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
 use Illuminate\Http\Request;
 
 // WebSocketsRouter::webSocket('/my-websocket', \App\MyCustomWebSocketHandler::class);
-// Broadcast::routes();
+Broadcast::routes();
 
 
 Route::get('test', function () {
