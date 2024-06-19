@@ -27,8 +27,16 @@ use Illuminate\Http\Request;
 
 // WebSocketsRouter::webSocket('/my-websocket', \App\MyCustomWebSocketHandler::class);
 Broadcast::routes();
+Route::get('send-message/{message}', function ($message) {
 
+    
+    event(new MessageSent($message));
+    return response()->json(['message' => $message]);
+});
 
+Route::get('test', function () {
+    return view('test');
+});
 Route::get('test', function () {
     return view('test');
 });

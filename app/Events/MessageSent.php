@@ -17,13 +17,17 @@ class MessageSent implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            new Channel('my-channel')
+            new Channel('channel')
      ];
-   
+
     }
 
-    public function broadcastWith()
+    // public function broadcastWith()
+    // {
+    //     return ['message' => $this->message];
+    // }
+    public function broadcastAs()
     {
-        return ['message' => $this->message];
+        return  'message';
     }
 }
