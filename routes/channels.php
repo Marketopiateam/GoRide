@@ -18,7 +18,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('drivers11', function ($user) {
+Broadcast::channel('drivers', function ($user) {
     return true;
 });
 Broadcast::channel('my-channel', function ($user) {

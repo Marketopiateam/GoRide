@@ -20,7 +20,7 @@ class User extends Authenticatable implements HasLocalePreference
     use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes,HasApiTokens;
 
     public $table = 'users';
-
+    protected $guarded = [];
     protected $casts = [
         'is_active' => 'boolean',
     ];
@@ -37,21 +37,6 @@ class User extends Authenticatable implements HasLocalePreference
         'deleted_at',
     ];
 
-    protected $fillable = [
-        'full_name',
-        'phone_number',
-        'email',
-        'password',
-        'locale',
-        'fcm_token',
-        'is_active',
-        'login_type',
-        'profile_pic',
-        'reviews_count',
-        'country_id',
-        'reviews_sum',
-        'wallet_amount',
-    ];
 
     public $orderable = [
         'id',
@@ -100,9 +85,9 @@ class User extends Authenticatable implements HasLocalePreference
     }
     public function review()
     {
-        return $this->morphMany(Reviews::class, 'reviewable');
+        return $this->morphMany(Review::class, 'reviewable');
     }
-    public function scopeAdmins()   
+    public function scopeAdmins()
     {
         return $this->whereHas('roles', fn ($q) => $q->where('title', 'Admin'));
     }
