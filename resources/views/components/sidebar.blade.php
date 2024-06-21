@@ -74,6 +74,54 @@
                 @endcan
             </ul>
         </li>
+        <li class="menu-item menu-item {{ request()->is('admin/users*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div data-i18n="Layouts">{{ trans('cruds.user.title') }}</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/users') ? 'active' : '' }}">
+                    <a href="{{ route('admin.users.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('global.list') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/users/create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.users.create') }}" class="menu-link">
+                        <div data-i18n="Content navbar">{{ __('global.create') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item menu-item {{ request()->is('admin/drivers*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div data-i18n="Layouts">{{ trans('cruds.driver.title') }}</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/drivers') ? 'active' : '' }}">
+                    <a href="{{ route('admin.drivers.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('cruds.driver.list_all') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/drivers/activated') ? 'active' : '' }}">
+                    <a href="{{ route('admin.drivers.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('cruds.driver.activated') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/drivers/deactivated') ? 'active' : '' }}">
+                    <a href="{{ route('admin.drivers.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('cruds.driver.deactivated') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/drivers/create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.drivers.create') }}" class="menu-link">
+                        <div data-i18n="Content navbar">{{ __('global.create') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         @can('service_access')
         <li class="menu-item menu-item {{ request()->is('admin/services*') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -121,6 +169,12 @@
                 <div>{{ trans('app.payment_methods') }}</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->is('admin/vehicle-types*') ? 'active' : '' }}">
+            <a href="{{ route('admin.vehicle-types.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-car-garage"></i>
+                <div>{{ trans('app.vehicle_types') }}</div>
+            </a>
+        </li>
         
 
 
@@ -136,87 +190,13 @@
 
 {{-- 
 
-                @can('user_management_access')
-                    <li class="items-center">
-                        <a class="has-sub {{ request()->is("admin/permissions*")||request()->is("admin/roles*")||request()->is("admin/users*")||request()->is("admin/audit-logs*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="#" onclick="window.openSubNav(this)">
-                            <i class="fa-fw fas c-sidebar-nav-icon fa-users">
-                            </i>
-                            {{ trans('cruds.userManagement.title') }}
-                        </a>
-                        <ul class="ml-4 subnav hidden">
-                            @can('permission_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/permissions*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.permissions.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
-                                        </i>
-                                        {{ trans('cruds.permission.title') }}
-                                    </a>
-                                </li>
-                            @endcan
-                           
-                        </ul>
-                    </li>
-                @endcan
-                @can('coupon_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/coupons*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.coupons.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.coupon.title') }}
-                        </a>
-                    </li>
-                @endcan
+              
                 @can('airport_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/airports*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.airports.index") }}">
                             <i class="fa-fw c-sidebar-nav-icon fas fa-plane">
                             </i>
                             {{ trans('cruds.airport.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('cms_page_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/cms-pages*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.cms-pages.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.cmsPage.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('document_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/documents*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.documents.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-file-alt">
-                            </i>
-                            {{ trans('cruds.document.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('driver_document_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/driver-documents*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.driver-documents.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.driverDocument.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('driver_rule_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/driver-rules*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.driver-rules.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.driverRule.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('driver_user_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/driver-users*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.driver-users.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.driverUser.title') }}
                         </a>
                     </li>
                 @endcan
@@ -229,96 +209,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('intercity_service_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/intercity-services*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.intercity-services.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.intercityService.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('on_boarding_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/on-boardings*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.on-boardings.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.onBoarding.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('orders_intercity_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/orders-intercities*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.orders-intercities.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.ordersIntercity.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('referral_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/referrals*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.referrals.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.referral.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('review_customer_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/review-customers*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.review-customers.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-eye">
-                            </i>
-                            {{ trans('cruds.reviewCustomer.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('review_driver_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/review-drivers*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.review-drivers.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.reviewDriver.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('service_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/services*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.services.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.service.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('so_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/sos*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.sos.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.so.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('vehicle_type_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/vehicle-types*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.vehicle-types.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.vehicleType.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('wallet_transaction_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/wallet-transactions*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.wallet-transactions.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.walletTransaction.title') }}
-                        </a>
-                    </li>
-                @endcan
                 @can('chat_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/chats*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.chats.index") }}">
@@ -328,32 +218,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('thread_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/threads*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.threads.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.thread.title') }}
-                        </a>
-                    </li>
-                @endcan
-                @can('setting_access')
-                    <li class="items-center">
-                        <a class="has-sub {{ request()->is("admin/currencies*")||request()->is("admin/faqs*")||request()->is("admin/languages*")||request()->is("admin/taxes*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="#" onclick="window.openSubNav(this)">
-                            <i class="fa-fw fas c-sidebar-nav-icon fa-cogs">
-                            </i>
-                            {{ trans('cruds.setting.title') }}
-                        </a>
-                        <ul class="ml-4 subnav hidden">
-                            @can('currency_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/currencies*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.currencies.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-dollar-sign">
-                                        </i>
-                                        {{ trans('cruds.currency.title') }}
-                                    </a>
-                                </li>
-                            @endcan
                             @can('faq_access')
                                 <li class="items-center">
                                     <a class="{{ request()->is("admin/faqs*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.faqs.index") }}">
@@ -363,25 +227,6 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('language_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/languages*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.languages.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                                        </i>
-                                        {{ trans('cruds.language.title') }}
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('tax_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/taxes*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.taxes.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                                        </i>
-                                        {{ trans('cruds.tax.title') }}
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
                     </li>
                 @endcan
                 @can('orders_m_access')
@@ -404,15 +249,6 @@
                         </ul>
                     </li>
                 @endcan
-
-               
-
-                <li class="items-center">
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();" class="sidebar-nav">
-                        <i class="fa-fw fas fa-sign-out-alt"></i>
-                        {{ trans('global.logout') }}
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
