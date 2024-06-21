@@ -76,6 +76,7 @@
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

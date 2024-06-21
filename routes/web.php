@@ -1,7 +1,20 @@
 <?php
 
+<<<<<<< HEAD
 use App\Events\MessageSent;
 use Illuminate\Http\Request;
+=======
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
+use App\Models\Marketopia\MarketopiaCity;
+use App\Models\Marketopia\MarketopiaCountry;
+use App\Models\PaymentMethod;
+>>>>>>> 0a3d0de (Commit)
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Broadcast;
@@ -80,7 +93,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('roles', RoleController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Users
-    Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('users', UserController::class);
+    
+    // Drivers
+    Route::resource('drivers', DriverController::class);
 
     // Airports
     Route::resource('airports', AirportController::class, ['except' => ['store', 'update', 'destroy']]);

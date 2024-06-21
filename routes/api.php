@@ -69,9 +69,6 @@ Route::get('v1/user/charge_wallet', [AuthenticationController::class, 'charge_wa
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     Route::prefix('user')->group(function () {
         // Route::get('charge_wallet', [AuthenticationController::class, 'charge_wallet']);
-
-        Route::get('country', [AuthenticationController::class, 'country']);
-        Route::get('city/{id}', [AuthenticationController::class, 'city']);
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
     });
