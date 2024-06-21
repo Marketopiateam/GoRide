@@ -36,7 +36,7 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'host' => 'shakshak.marketopiasystems.com',
+                'host' => '127.0.0.1',
                 'encrypted' => true,
                 'port' => '6001',
                 'scheme' => 'https',
@@ -47,7 +47,7 @@ return [
                     CURLOPT_SSL_VERIFYPEER => 0,
 
                 ],
-               
+
             ],
             'client_options' => [
                 'verify' => false,
