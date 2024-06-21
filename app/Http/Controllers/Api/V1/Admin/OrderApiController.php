@@ -29,6 +29,13 @@ class OrderApiController extends Controller
         return  $result;
     }
 
+    public function getorders(Request $request)
+    {
+        $order =  Order::get();
+        $order =  OrderResource::collection($order);
+        return Resp($order, 'success');
+    }
+
     public function neworder(StoreOrderRequest $request)
     {
         $data = [
@@ -36,7 +43,7 @@ class OrderApiController extends Controller
             'driver_id'         => null,
             'distance'          => $request->distance ?? '',
             'distance_type'     => 'km',
-            //  'payment_type'      => $request->payment_type??'',
+            //'payment_type'    => $request->payment_type??'',
             'destination_name'  => $request->destination_name ?? '',
             'destination_lat'   => $request->destination_lat ?? '',
             'destination_long'  => $request->destination_long ?? '',
@@ -51,18 +58,21 @@ class OrderApiController extends Controller
         TripCreated::dispatch($order);
         return Resp($order, 'success');
     }
+
     public function startorder(Request $request, Order $order)
     {
         $order->update(['accepted_driver' => Carbon::now()]);
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
+
     public function acceptorder(Request $request, Order $order)
     {
         $order->update(['is_accept' => Carbon::now(), 'driver_id' => Auth::user()->id]);
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
+    
     public function endorder(Request $request, Order $order)
     {
         $order->update(['is_end' => Carbon::now()]);

@@ -64,6 +64,7 @@ Route::get('event',function(){
 
 });
 //'auth:sanctum'
+Route::get('v1/send/chat', [ChatApiController::class, 'send_message']);
 Route::get('v1/user/charge_wallet', [AuthenticationController::class, 'charge_wallet']);
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     Route::prefix('user')->group(function () {

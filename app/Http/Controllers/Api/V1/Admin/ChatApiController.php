@@ -2,55 +2,34 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreChatRequest;
-use App\Http\Requests\UpdateChatRequest;
-use App\Http\Resources\Admin\ChatResource;
+use App\Events\MessageSent;
 use App\Models\Chat;
-use Gate;
+use App\Models\room;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
+use App\Helpers\ResponseHelper;
+
 
 class ChatApiController extends Controller
 {
-    public function index()
+    use ResponseHelper;
+    public function send_message(Request $request)
     {
-        abort_if(Gate::denies('chat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ChatResource(Chat::with(['customer', 'driver', 'order'])->get());
-    }
+        $room = room::where(['trip_id' =>  $request->trip_id])->first();
+        if ($room  == null) {
+            $room = room::create(['trip_id' =>  $request->trip_id]);
+        }
 
-    public function store(StoreChatRequest $request)
-    {
-        $chat = Chat::create($request->validated());
+        $conversion = [
+            'sender_id'     => 1,
+            'message'       => $request->message,
+            'receiver_id'   => 2,
+            'room_id'       => $room->id,
+        ];
+        $conversion = Chat::create($conversion);
+        event(new MessageSent($conversion,  $request->trip_id));
 
-        return (new ChatResource($chat))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
-    }
-
-    public function show(Chat $chat)
-    {
-        abort_if(Gate::denies('chat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return new ChatResource($chat->load(['customer', 'driver', 'order']));
-    }
-
-    public function update(UpdateChatRequest $request, Chat $chat)
-    {
-        $chat->update($request->validated());
-
-        return (new ChatResource($chat))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
-    }
-
-    public function destroy(Chat $chat)
-    {
-        abort_if(Gate::denies('chat_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $chat->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
+        return $this->apiResponseHandler(200, true, __('request.data_retrieved'));
     }
 }

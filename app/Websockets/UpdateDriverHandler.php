@@ -2,7 +2,7 @@
 
 namespace App\Websockets;
 
-
+use App\Events\MessageSent;
 use stdClass;
 use Exception;
 
@@ -91,8 +91,6 @@ class UpdateDriverHandler implements MessageComponentInterface
     {
         $conn->close();
     }
-
-
     function onMessage(ConnectionInterface $connection, MessageInterface $msg)
     {
         $body = collect(json_decode($msg->getPayload(), true));
@@ -107,9 +105,15 @@ class UpdateDriverHandler implements MessageComponentInterface
         }
 
         // Example: Handling a message to be sent to a channel
-        if ($body->get('action') === 'sendMessage') {
+        if ($body->get('action') === 'sendmessage') {
             $channel = $body->get('channel');
             $message = $body->get('message');
+            try {
+                event(new MessageSent($message));
+            } catch (\Exception $e) {
+                // Handle or log the exception
+                $connection->send(json_encode(['status' => 'error', 'message' => $e->getMessage()]));
+            }
         }
 
         // Example: Update user's location
@@ -134,7 +138,6 @@ class UpdateDriverHandler implements MessageComponentInterface
             'channel' => $this->channelName,
         ]));
     }
-
     public function hasConnections(): bool
     {
         return count($this->subscribedConnections) > 0;
