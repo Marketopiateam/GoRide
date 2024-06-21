@@ -10,6 +10,12 @@ use Ratchet\WebSocket\MessageComponentInterface;
 
 abstract class BaseSocketHandler implements MessageComponentInterface
 {
+    protected $clients;
+
+    public function __construct()
+    {
+        $this->clients = new \SplObjectStorage;
+    }
 
     protected function verifyAppKey(ConnectionInterface $connection)
     {
@@ -30,6 +36,7 @@ abstract class BaseSocketHandler implements MessageComponentInterface
 
         $connection->socketId = $socketId;
 
+        dump($socketId);
         return $this;
     }
 
@@ -40,7 +47,7 @@ abstract class BaseSocketHandler implements MessageComponentInterface
 //        auth logic here
 
         $this->verifyAppKey($conn)->generateSocketId($conn);
-
+        // $this->clients->attach($conn);
 
     }
 
@@ -54,4 +61,7 @@ abstract class BaseSocketHandler implements MessageComponentInterface
         dump($e);
         dump('onerror');
     }
+
+
+
 }

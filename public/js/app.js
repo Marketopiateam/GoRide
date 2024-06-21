@@ -2157,8 +2157,15 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   wsPort: 6001,
   wssPort: 6001
 });
+window.Echo.channel('channel').listen('.message', function (e) {
+  console.log(e);
+});
 window.Echo.channel('drivers').listen('.drivers1', function (e) {
   console.log(e);
+});
+window.Echo.channel('channel').listenToAll(function (event, data) {
+  // do what you need to do based on the event name and data
+  console.log(event, data);
 });
 window.Echo.channel('my-channel').listenToAll(function (event, data) {
   // do what you need to do based on the event name and data
