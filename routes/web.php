@@ -1,18 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CityController;
-use App\Http\Controllers\Admin\CountryController;
-use App\Http\Controllers\Admin\DriverController;
-use App\Http\Controllers\Admin\PaymentMethodController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
-use App\Models\Marketopia\MarketopiaCity;
-use App\Models\Marketopia\MarketopiaCountry;
+
+use App\Events\MessageSent;
+
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Websockets\UpdateDriverHandler;
+use App\Models\Marketopia\MarketopiaCity;
 use Illuminate\Support\Facades\Broadcast;
+use App\Models\Marketopia\MarketopiaCountry;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\HomeController;
@@ -20,6 +17,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\AirportController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -33,16 +31,9 @@ use App\Http\Controllers\Admin\FreightVehicleController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use App\Http\Controllers\Admin\WalletTransactionController;
 use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
-use App\Websockets\UpdateDriverHandler;
 
 // WebSocketsRouter::webSocket('/my-websocket', \App\MyCustomWebSocketHandler::class);
 Broadcast::routes();
-Route::get('send-message/{message}', function ($message) {
-
-
-    event(new MessageSent($message));
-    return response()->json(['message' => $message]);
-});
 
 Route::get('test', function () {
     return view('test');
@@ -50,7 +41,7 @@ Route::get('test', function () {
 Route::get('test', function () {
     return view('test');
 });
-// Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('verify-payment');
+
 WebSocketsRouter::webSocket('/socket/update-driver', UpdateDriverHandler::class);
 Route::get('welcome', function () {
 
