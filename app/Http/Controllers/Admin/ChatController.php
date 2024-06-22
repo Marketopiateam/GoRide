@@ -12,6 +12,14 @@ class ChatController extends Controller
 
     }
     public function single($id)  {
-        dd($id);
+        return view('admin.chats.single' , compact(
+            'pageTitle',
+            'moduleName',
+            'pageDes',
+            'folderName',
+            'routeName',
+            'roles'
+        ));
+
     }
 }
