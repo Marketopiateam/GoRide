@@ -71,14 +71,15 @@ class UpdateDriverHandler extends BaseSocketHandler  implements MessageComponent
         // Example: Update user's location
         if ($body->get('action') === 'updateLocation') {
             $payload = $body->get('payload');
-            $id = $body->get('id');
-            $user = User::find($id);
-            if ($user) {
-                $user->update(['latitude' => $payload['lat'], 'longitude' => $payload['long']]);
-                $connection->send(json_encode(['status' => 'location_updated', 'user' => $user]));
-            } else {
-                $connection->send(json_encode(['status' => 'user_not_found']));
-            }
+            dump($connection);
+            // $id = $body->get('id');
+            // $user = User::find($id);
+            // if ($user) {
+            //     $user->update(['latitude' => $payload['lat'], 'longitude' => $payload['long']]);
+            //     $connection->send(json_encode(['status' => 'location_updated', 'user' => $user]));
+            // } else {
+            //     $connection->send(json_encode(['status' => 'user_not_found']));
+            // }
         }
     }
     public function subscribe(ConnectionInterface $connection)
