@@ -72,3 +72,12 @@ window.Echo.channel('drivers')
         console.log('Received an event:', e);
     })
    ;
+   let element = document.getElementById('ChatAppPage');
+
+   if (element != undefined && element != null) {
+       console.log('trip-'+element.getAttribute('chat-id'));
+       window.Echo.channel('trip-'+element.getAttribute('chat-id')).listen('.chat', (e) => {
+           console.log(e);
+       });
+   }
+   
