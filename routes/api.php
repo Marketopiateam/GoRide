@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
 use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
 use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\AuthenticationController;
+use App\Http\Controllers\Api\V1\Admin\DriverApiController;
 use App\Http\Controllers\Api\V1\Admin\VehicleTypeApiController;
 use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
 use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
@@ -56,7 +57,11 @@ Route::get('v1/user/charge_wallet', [AuthenticationController::class, 'charge_wa
 Route::get('v1/car/brands', [CarApiController::class, 'get_car_brands']);
 Route::get('v1/car/models', [CarApiController::class, 'get_car_models']);
 
+
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::get('driver/registration', [DriverApiController::class, 'driver_registration']);
+    
     Route::prefix('user')->group(function () {
         // Route::get('charge_wallet', [AuthenticationController::class, 'charge_wallet']);
         Route::get('country', [AuthenticationController::class, 'country']);

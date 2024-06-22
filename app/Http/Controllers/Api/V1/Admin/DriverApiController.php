@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class DriverApiController extends Controller
 {
     use ResponseHelper;
-    public function get_car_brands(Request $request)
+    public function driver_registration(Request $request)
     {
 
         DB::beginTransaction();
