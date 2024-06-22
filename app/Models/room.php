@@ -14,5 +14,9 @@ class room extends Model
     {
         return $this->hasMany(chat::class, 'room_id');
     }
+    public function trip()
+    {
+        return $this->hasMany(Order::class, 'trip_id');
+    }
     
 }

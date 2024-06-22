@@ -16,6 +16,9 @@ class CreateUsersTable extends Migration
             
             $table->integer('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('marketopia_countries')->cascadeOnDelete()->cascadeOnUpdate();
+
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('marketopia_cities')->cascadeOnDelete()->cascadeOnUpdate();
             
             $table->string('fcm_token')->nullable();
             $table->boolean('is_active')->default(0)->nullable();

@@ -14,6 +14,7 @@ class ChatController extends BaseController
         }
 
     public function single($id)  {
+        $row = $this->model->with('chat', 'trip', 'chat.sender', 'chat.receiver',)->findOrFail($id);
         $moduleName = $this->getModelName();
         $pageTitle = "Create ". $moduleName;
         $pageDes = "Here you can create " .$moduleName;
@@ -25,7 +26,8 @@ class ChatController extends BaseController
             'pageDes',
             'folderName',
             'routeName',
-            'id'
+            'id',
+            'row'
         ));
 
     }
