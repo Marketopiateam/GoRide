@@ -2,22 +2,23 @@
 
 namespace App\Websockets;
 
-use App\Events\MessageSent;
 use stdClass;
 use Exception;
-
-
 use App\Models\User;
+
+
+use App\Events\MessageSent;
 use Ratchet\ConnectionInterface;
 
+use Illuminate\Support\Facades\Log;
 use BeyondCode\LaravelWebSockets\Apps\App;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
 use BeyondCode\LaravelWebSockets\QueryParameters;
+
 use BeyondCode\LaravelWebSockets\Facades\StatisticsLogger;
 
 use BeyondCode\LaravelWebSockets\Dashboard\DashboardLogger;
-
 use BeyondCode\LaravelWebSockets\WebSockets\Exceptions\UnknownAppKey;
 
 class UpdateDriverHandler extends BaseSocketHandler  implements MessageComponentInterface
@@ -71,6 +72,7 @@ class UpdateDriverHandler extends BaseSocketHandler  implements MessageComponent
         // Example: Update user's location
         if ($body->get('action') === 'updateLocation') {
             $payload = $body->get('payload');
+            Log::error($connection);
             dump($connection);
             // $id = $body->get('id');
             // $user = User::find($id);
