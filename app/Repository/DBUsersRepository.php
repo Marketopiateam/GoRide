@@ -69,7 +69,8 @@ class DBUsersRepository implements UsersRepositoryinterface
                 'email'             => $this->request->email ?? null,
                 'phone_number'      => $this->request->phone,
                 'fcm_token'         => $this->request->fcm_token,
-                'country_id'        => '64',
+                'country_id'        => $this->request->country_id,
+                'city_id'           => $this->request->city_id,
                 'wallet_amount'     => 0,
 
             ];
@@ -100,7 +101,7 @@ class DBUsersRepository implements UsersRepositoryinterface
         }
         return Resp('', 'error', 402, true);
     }
-    
+
     public function country()
     {
         $country =  MarketopiaCountry::get();
