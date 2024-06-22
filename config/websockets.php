@@ -50,10 +50,7 @@ return [
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        'localhost',
-        '127.0.0.1',
-        'your-domain.com',
-        'goride.test'
+     
     ],
 
     /*
