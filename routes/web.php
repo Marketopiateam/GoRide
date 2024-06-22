@@ -43,6 +43,7 @@ Route::get('test', function () {
 });
 
 WebSocketsRouter::webSocket('/socket/update-driver', UpdateDriverHandler::class);
+
 Route::get('welcome', function () {
 
     return view('welcome');

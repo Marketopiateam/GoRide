@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Resources\Admin\OrderResource;
+use App\Http\Resources\OrderResource;
 
 class OrderApiController extends Controller
 {
@@ -31,7 +31,7 @@ class OrderApiController extends Controller
 
     public function getorders(Request $request)
     {
-        $order =  Order::get();
+        $order =  Order::where('inter_city', $request->in_city)->get();
         $order =  OrderResource::collection($order);
         return Resp($order, 'success');
     }
@@ -72,7 +72,7 @@ class OrderApiController extends Controller
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
-    
+
     public function endorder(Request $request, Order $order)
     {
         $order->update(['is_end' => Carbon::now()]);

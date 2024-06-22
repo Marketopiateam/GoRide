@@ -15,12 +15,10 @@ class ChatApiController extends Controller
     use ResponseHelper;
     public function send_message(Request $request)
     {
-
         $room = room::where(['trip_id' =>  $request->trip_id])->first();
         if ($room  == null) {
             $room = room::create(['trip_id' =>  $request->trip_id]);
         }
-
         $conversion = [
             'sender_id'     => 1,
             'message'       => $request->message,
@@ -29,7 +27,6 @@ class ChatApiController extends Controller
         ];
         $conversion = Chat::create($conversion);
         event(new MessageSent($conversion,  $request->trip_id));
-
         return $this->apiResponseHandler(200, true, __('request.data_retrieved'));
     }
 }

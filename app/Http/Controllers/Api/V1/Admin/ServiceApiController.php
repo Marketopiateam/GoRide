@@ -16,14 +16,10 @@ class ServiceApiController extends Controller
 {
     public function incity()
     {
-
-
         return  ServicesResource::Collection(Service::type(0)->get());
     }
     public function outcity()
     {
-
-
         return  ServicesResource::Collection(Service::type(1)->get());
     }
 
