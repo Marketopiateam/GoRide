@@ -74,5 +74,16 @@ return [
     'app_id' => 'App ID',
     'vehicle_types' => 'Vehicle Types',
     'add_vehicle_types' => 'Add Vehicle Type',
-    
+    'unknown'           => 'Unknown',
+    'pending'           =>'Pending',
+    'blocked'            =>'Blocked',
+    'all_drivers'           =>'All Drivers',
+    'pending_drivers'           =>'Pending Drivers',
+    'active_drivers'           =>'Active Drivers',
+    'blocked_drivers'           =>'Blocked Drivers',
+    'email'                     => 'Email',
+    'block'                     =>'Block',
+    'are_you_sure'              => 'Are you sure',
+    'activated_successfully'              => 'Activated Successfully',
+    'blocked_successfully'              => 'Blocked Successfully',
 ];

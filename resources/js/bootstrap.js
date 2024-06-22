@@ -47,28 +47,7 @@ window.Echo = new Echo({
 
 });
 
-
 window.Echo.channel('channel').listen('.message', (e) => {
-   console.log(e);
-});
-window.Echo.channel('drivers').listen('.drivers1', (e) => {
-   console.log(e);
-});
-window.Echo.channel('channel').listenToAll((event, data) => {
-    // do what you need to do based on the event name and data
-    console.log(event, data)
+    console.log(e);
  });
-window.Echo.channel('my-channel').listenToAll((event, data) => {
-    // do what you need to do based on the event name and data
-    console.log(event, data)
- });
-
-
-window.Echo.channel('drivers')
-    .listen('pusher_internal:subscription_succeeded', (e) => {
-        console.log('Successfully subscribed to drivers channel.');
-    })
-    .listen('.*', (e) => {
-        console.log('Received an event:', e);
-    })
-   ;
+console.log(window.location.pathname);

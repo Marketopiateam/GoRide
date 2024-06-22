@@ -2,35 +2,36 @@
 
 
 use App\Events\MessageSent;
-
+use App\Http\Controllers\Admin\ChatController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
+use App\Models\Marketopia\MarketopiaCity;
+use App\Models\Marketopia\MarketopiaCountry;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Websockets\UpdateDriverHandler;
-use App\Models\Marketopia\MarketopiaCity;
 use Illuminate\Support\Facades\Broadcast;
-use App\Models\Marketopia\MarketopiaCountry;
 use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\AirportController;
-use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\VehicleTypeController;
-use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\FreightVehicleController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use App\Http\Controllers\Admin\WalletTransactionController;
-use App\Http\Controllers\Marketopia\Admin\MarketopiaBrowserController;
 
 // WebSocketsRouter::webSocket('/my-websocket', \App\MyCustomWebSocketHandler::class);
 Broadcast::routes();
@@ -84,6 +85,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
 
     // Drivers
     Route::resource('drivers', DriverController::class);
+    Route::put('drivers/activate/{id}', [DriverController::class, 'active'])->name('drivers.active');
+    Route::put('drivers/block/{id}', [DriverController::class, 'block'])->name('drivers.block');
 
     // Airports
     Route::resource('airports', AirportController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -118,6 +121,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
 
     // create Marketopia Browser recourse route
     Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
+    
+    // Chat
+    Route::get('chats', [ChatController::class, 'index'])->name('chats.index');
+    Route::get('chats/single/{id}', [ChatController::class, 'single'])->name('chats.single');
+
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
