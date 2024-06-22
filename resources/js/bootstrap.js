@@ -46,8 +46,11 @@ window.Echo = new Echo({
     wssPort: 6001
 
 });
+let element = document.getElementById('ChatAppPage');
 
-window.Echo.channel('channel').listen('.message', (e) => {
-    console.log(e);
- });
-console.log(window.location.pathname);
+if (element != undefined && element != null) {
+    console.log('trip-'+element.getAttribute('chat-id'));
+    window.Echo.channel('trip-'+element.getAttribute('chat-id')).listen('.chat', (e) => {
+        console.log(e);
+    });
+}

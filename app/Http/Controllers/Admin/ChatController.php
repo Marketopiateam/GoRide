@@ -25,6 +25,7 @@ class ChatController extends BaseController
             'pageDes',
             'folderName',
             'routeName',
+            'id'
         ));
 
     }

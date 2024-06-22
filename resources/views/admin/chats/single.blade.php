@@ -9,7 +9,7 @@
 <script src="{{ asset('assets/js/app-chat.js')}}"></script>
 @endpush
 
-<div class="app-chat card overflow-hidden">
+<div class="app-chat card overflow-hidden" id="ChatAppPage" chat-id="{{ $id }}">
     <div class="row g-0">
       <!-- Sidebar Left -->
       <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
