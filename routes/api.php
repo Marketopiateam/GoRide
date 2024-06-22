@@ -60,8 +60,8 @@ Route::get('v1/car/models', [CarApiController::class, 'get_car_models']);
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
 
-    Route::get('driver/registration', [DriverApiController::class, 'driver_registration']);
-    
+    Route::post('driver/registration', [DriverApiController::class, 'driver_registration']);
+
     Route::prefix('user')->group(function () {
         // Route::get('charge_wallet', [AuthenticationController::class, 'charge_wallet']);
         Route::get('country', [AuthenticationController::class, 'country']);

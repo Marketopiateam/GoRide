@@ -12,11 +12,12 @@ use App\Helpers\ResponseHelper;
 use App\Models\DriverCarLicense;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Traits\ImageProcessing;
 use Illuminate\Support\Facades\Auth;
 
 class DriverApiController extends Controller
 {
-    use ResponseHelper;
+    use ResponseHelper,ImageProcessing;
     public function driver_registration(Request $request)
     {
 
@@ -24,9 +25,12 @@ class DriverApiController extends Controller
 
         try {
             $user_id = Auth::user()->id;
+            
+
 
             if ($request->has('criminal_record_image')) {
                 $criminal_record_image = $this->saveImageAndThumbnail($request->criminal_record_image, false, $user_id, 'DriverLicense');
+
             }
             if ($request->has('front_identity_image')) {
                 $front_identity_image = $this->saveImageAndThumbnail($request->front_identity_image, false, $user_id, 'DriverLicense');
@@ -65,7 +69,7 @@ class DriverApiController extends Controller
             return $this->apiResponseHandler(200, true, 'succes');
         } catch (\Exception $e) {
             DB::rollback();
-            // something went wrong
+            return $this->apiResponseHandler(400, false, 'error',$e->getMessage());
         }
     }
 }
