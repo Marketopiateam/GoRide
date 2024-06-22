@@ -145,7 +145,7 @@
         @endcan
         @can('setting_access')
         <li class="menu-item {{ request()->is('admin/settings*') ? 'active' : '' }}">
-            <a href="{{ route('admin.home') }}" class="menu-link">
+            <a href="{{ route('admin.settings.index', 1) }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-settings"></i>
                 <div>{{ trans('global.settings') }}</div>
             </a>
