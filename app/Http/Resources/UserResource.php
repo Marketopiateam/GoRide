@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'phone'    => $this->phone_number,
             'image'    => $this->imageurl??'',
             'email'    => $this->email ?? '',
-            'wallet_amount'    => $this->wallet_amount ?? '',
+            'wallet_amount'    => number_format($this->wallet_amount,2) ?? '',
 
 
         ];
@@ -27,7 +27,7 @@ class UserResource extends JsonResource
         if ($this->token) {
             $data['token'] = $this->token;
         }
-         
+
         // if ($this->credit) {
         //     $data['creadit'] = $this->creadit;
         // }
