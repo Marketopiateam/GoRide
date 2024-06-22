@@ -47,14 +47,14 @@ window.Echo = new Echo({
 
 });
 
-let element = document.getElementById('ChatAppPage');
+// let element = document.getElementById('ChatAppPage');
 
-if (element != undefined && element != null) {
-    console.log('trip-'+element.getAttribute('chat-id'));
-    window.Echo.channel('trip-'+element.getAttribute('chat-id')).listen('.chat', (e) => {
-        console.log(e);
-    });
-}
+// if (element != undefined && element != null) {
+//     console.log('trip-'+element.getAttribute('chat-id'));
+//     window.Echo.channel('trip-'+element.getAttribute('chat-id')).listen('.chat', (e) => {
+//         console.log(e);
+//     });
+// }
 
 window.Echo.channel('channel').listen('.message', (e) => {
    console.log(e);
