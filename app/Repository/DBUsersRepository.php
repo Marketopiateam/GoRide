@@ -165,6 +165,9 @@ class DBUsersRepository implements UsersRepositoryinterface
         if ($this->request->has('country_id')) {
             $user->country_id = $this->request->country_id;
         }
+        if ($this->request->has('city_id')) {
+            $user->city_id = $this->request->city_id;
+        }
         if ($this->request->has('image')) {
             if ($user->profile_pic != null) {
                 $this->deletefile($user->profile_pic, $user->id, 'users');
