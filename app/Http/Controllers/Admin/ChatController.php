@@ -12,13 +12,17 @@ class ChatController extends Controller
 
     }
     public function single($id)  {
+        $moduleName = $this->getModelName();
+        $pageTitle = "Create ". $moduleName;
+        $pageDes = "Here you can create " .$moduleName;
+        $folderName = $this->getClassNameFromModel();
+        $routeName = $folderName;
         return view('admin.chats.single' , compact(
             'pageTitle',
             'moduleName',
             'pageDes',
             'folderName',
             'routeName',
-            'roles'
         ));
 
     }
