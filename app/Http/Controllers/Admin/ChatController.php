@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\room;
 use Illuminate\Http\Request;
 
-class ChatController extends Controller
+class ChatController extends BaseController
 {
-    public function index()  {
+    public function __construct(room $model)
+        {
+            parent::__construct($model);
+        }
 
-    }
     public function single($id)  {
         $moduleName = $this->getModelName();
         $pageTitle = "Create ". $moduleName;
