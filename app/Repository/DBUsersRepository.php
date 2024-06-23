@@ -44,7 +44,7 @@ class DBUsersRepository implements UsersRepositoryinterface
             return Resp('', __('messages.code_not_correct'), 400, true);
         }
 
-        $user = User::where(['phone_number' => $otp->phone])->first();
+        $user = User::where(['phone_number' => $otp->phone])->with('profile')->first();
         if ($user != null) {
             $user->token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
             return Resp(new UserResource($user), __('messages.success_login'), 200, true);
@@ -120,37 +120,8 @@ class DBUsersRepository implements UsersRepositoryinterface
         return Resp('', 'error', 402, true);
     }
 
-    public function address_new()
-    {
-        $user_id = Auth::user()->id;
-        if ($this->request->is_default == 1) {
-            Useraddress::where(['user_id' =>  $user_id, 'is_default' => 1])->update(['is_default' => 0]);
-        }
-        $address = UserAddress::create([
-            'user_id' =>  $user_id,
-            'name' => $this->request->name,
-            'address' => $this->request->address,
-            'lat' => $this->request->lat ?? '0',
-            'long' => $this->request->long ?? '0',
-            'is_default' => $this->request->is_default ?? '0'
 
-        ]);
-        if ($address != null) {
-            return Resp(new AddressResource($address), __('messages.success'), 200, true);
-        }
-        return Resp('', 'error', 402, true);
-    }
-    public function address()
-    {
 
-        $user_id = Auth::user()->id;
-        $address = UserAddress::where('user_id', $user_id)->get();
-
-        if ($address != null) {
-            return Resp(AddressResource::collection($address), __('messages.success'), 200, true);
-        }
-        return Resp('', 'error', 402, true);
-    }
     public function profile_update()
     {
 

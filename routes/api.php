@@ -1,41 +1,20 @@
 <?php
 
-use App\Events\test;
-use App\Models\User;
-use App\Events\MessageSent;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Admin\SoApiController;
+
 use App\Http\Controllers\Api\V1\Admin\CarApiController;
-use App\Http\Controllers\Api\V1\Admin\FaqApiController;
-use App\Http\Controllers\Api\V1\Admin\TaxApiController;
+
 use App\Http\Controllers\Api\V1\Admin\ChatApiController;
-use App\Http\Controllers\Api\V1\Admin\RoleApiController;
-use App\Http\Controllers\Api\V1\Admin\UserApiController;
+
 use App\Http\Controllers\Api\V1\Admin\OrderApiController;
-use App\Http\Controllers\Api\V1\Admin\CouponApiController;
-use App\Http\Controllers\Api\V1\Admin\ThreadApiController;
-use App\Http\Controllers\Api\V1\Admin\AirportApiController;
-use App\Http\Controllers\Api\V1\Admin\CmsPageApiController;
+
 use App\Http\Controllers\Api\V1\Admin\ServiceApiController;
-use App\Http\Controllers\Api\V1\Admin\CurrencyApiController;
-use App\Http\Controllers\Api\V1\Admin\DocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\LanguageApiController;
+
 use App\Http\Controllers\Api\V1\Admin\PaymentsApiController;
-use App\Http\Controllers\Api\V1\Admin\ReferralApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverRuleApiController;
-use App\Http\Controllers\Api\V1\Admin\OnBoardingApiController;
-use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
+
 use App\Http\Controllers\Api\V1\Admin\AuthenticationController;
 use App\Http\Controllers\Api\V1\Admin\DriverApiController;
-use App\Http\Controllers\Api\V1\Admin\VehicleTypeApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewDriverApiController;
-use App\Http\Controllers\Api\V1\Admin\DriverDocumentApiController;
-use App\Http\Controllers\Api\V1\Admin\FreightVehicleApiController;
-use App\Http\Controllers\Api\V1\Admin\ReviewCustomerApiController;
-use App\Http\Controllers\Api\V1\Admin\OrdersIntercityApiController;
-use App\Http\Controllers\Api\V1\Admin\IntercityServiceApiController;
-use App\Http\Controllers\Api\V1\Admin\WalletTransactionApiController;
 
 
 

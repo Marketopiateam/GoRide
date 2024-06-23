@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +18,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable implements HasLocalePreference
 {
-    use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes,HasApiTokens;
+    use HasFactory, HasAdvancedFilter, Notifiable, SoftDeletes, HasApiTokens;
 
     public $table = 'users';
     protected $guarded = [];
@@ -73,11 +74,22 @@ class User extends Authenticatable implements HasLocalePreference
     ];
     public function getImageurlAttribute()
     {
-        if($this->profile_pic ==null){
+        if ($this->profile_pic == null) {
 
             return '';
         }
-        return path($this->id,'users')  . $this->profile_pic;
+        return path($this->id, 'users')  . $this->profile_pic;
+    }
+    public static function findToken($token)
+    {
+        $token = str_replace('Bearer ', '', $token); // Remove 'Bearer ' prefix if it exists
+        $accessToken = PersonalAccessToken::findToken($token);
+
+        if ($accessToken) {
+            return $accessToken->tokenable; // Assuming tokenable is the User model
+        }
+
+        return null;
     }
     public function getIsAdminAttribute()
     {
@@ -121,6 +133,10 @@ class User extends Authenticatable implements HasLocalePreference
     public function otp()
     {
         return $this->hasMany(Otp::class);
+    }
+    public function profile()
+    {
+        return $this->hasOne(DriverProfile::class);
     }
     public function roles()
     {

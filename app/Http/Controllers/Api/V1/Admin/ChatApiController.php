@@ -27,6 +27,7 @@ class ChatApiController extends Controller
         ];
         $conversion = Chat::create($conversion);
         event(new MessageSent($conversion,  $request->trip_id));
+
         return $this->apiResponseHandler(200, true, __('request.data_retrieved'));
     }
 }

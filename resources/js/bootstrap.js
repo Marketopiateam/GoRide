@@ -35,7 +35,7 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key:  'key',
+    key: 'key',
     cluster: 'mt1',
     forceTLS: true,
     disableStats: true,
@@ -47,21 +47,21 @@ window.Echo = new Echo({
 
 });
 
- 
-window.Echo.channel('channel').listen('.message', (e) => {
-   console.log(e);
+
+window.Echo.channel('trip-1').listen('.chat', (e) => {
+    console.log(e);
 });
 window.Echo.channel('drivers').listen('.drivers1', (e) => {
-   console.log(e);
+    console.log(e);
 });
-window.Echo.channel('channel').listenToAll((event, data) => {
+window.Echo.channel('trip-1').listenToAll((event, data) => {
     // do what you need to do based on the event name and data
     console.log(event, data)
- });
+});
 window.Echo.channel('my-channel').listenToAll((event, data) => {
     // do what you need to do based on the event name and data
     console.log(event, data)
- });
+});
 
 
 window.Echo.channel('drivers')
@@ -71,13 +71,12 @@ window.Echo.channel('drivers')
     .listen('.*', (e) => {
         console.log('Received an event:', e);
     })
-   ;
-   let element = document.getElementById('ChatAppPage');
+    ;
+let element = document.getElementById('ChatAppPage');
 
-   if (element != undefined && element != null) {
-       console.log('trip-'+element.getAttribute('chat-id'));
-       window.Echo.channel('trip-'+element.getAttribute('chat-id')).listen('.chat', (e) => {
-           console.log(e);
-       });
-   }
-   
+if (element != undefined && element != null) {
+    console.log('trip-' + element.getAttribute('chat-id'));
+    window.Echo.channel('trip-' + element.getAttribute('chat-id')).listen('.chat', (e) => {
+        console.log(e);
+    });
+}

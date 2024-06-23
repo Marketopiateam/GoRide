@@ -14,6 +14,7 @@ class MessageSent implements ShouldBroadcast
     {
         $this->message = $message;
         $this->trip_id = $trip_id;
+
     }
 
     public function broadcastOn()
@@ -24,6 +25,7 @@ class MessageSent implements ShouldBroadcast
     }
     public function broadcastWith()
     {
+        // return  $this->message;
         return (new ChatResource($this->message))->toArray(request());
     }
     public function broadcastAs()
