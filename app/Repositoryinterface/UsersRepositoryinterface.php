@@ -11,10 +11,10 @@ interface UsersRepositoryinterface{
     public function send_otp();
     public function profile();
     public function profile_update();
-    public function address_new();
+ 
     public function city($id);
     public function country();
-    public function address();
+
 
 
     // public function profile_update($request);

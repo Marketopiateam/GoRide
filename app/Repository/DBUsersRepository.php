@@ -35,8 +35,6 @@ class DBUsersRepository implements UsersRepositoryinterface
         $this->request = $request;
     }
 
-
-
     public function verify_otp()
     {
         $otp =  Otp::where(['otp' => $this->request->code, 'verify' => 0])->orderBy('created_at', 'desc')->first();
