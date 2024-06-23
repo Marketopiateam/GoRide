@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\SignUp;
 use App\Models\PaymentMethod;
-use App\Traits\MapsProcessing;
 use App\Helpers\PaymentHelper;
+use App\Traits\MapsProcessing;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\AddAddressRequest;
 use App\Repositoryinterface\UsersRepositoryinterface;
@@ -48,25 +50,28 @@ class AuthenticationController extends Controller
     {
         return $this->userRepositry->profile_update();
     }
-    public function address_new()
+    public function toggle_online()
     {
-        return $this->userRepositry->address_new();
+        $user  = User::find(Auth::user()->id);
+        if ($user->is_online == 0) {
+            $user->update(['is_online' => 1]);
+        } else {
+            $user->update(['is_online' => 0]);
+        }
+        return  Resp(['is_online'=>$user->is_online], 'success', 200, true);
     }
-    public function address()
-    {
-        return $this->userRepositry->address();
-    }
+
     public function charge_wallet(Request $request)
     {
         $payment =    PaymentMethod::find($request->id);
 
-        $payment = $this->tap($request->value );
+        $payment = $this->tap($request->value);
         $redirect_url = $payment['redirect_url'];
         // $paymentjson =   json_encode($payment);
         // $order->payment_gateway_data = $paymentjson;
         // $order->payment_id = $payment['payment_id'];
         // $order->payment_method = $request['formData']['gateway'];
         // $order->save();
-        return  $redirect_url ;
+        return  $redirect_url;
     }
 }
