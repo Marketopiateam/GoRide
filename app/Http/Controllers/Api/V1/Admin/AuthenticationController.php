@@ -50,15 +50,11 @@ class AuthenticationController extends Controller
     {
         return $this->userRepositry->profile_update();
     }
-    public function toggle_online()
+    public function toggle_online($online)
     {
         $user  = User::find(Auth::user()->id);
-        if ($user->is_online == 0) {
-            $user->update(['is_online' => 1]);
-        } else {
-            $user->update(['is_online' => 0]);
-        }
-        return  Resp(['is_online'=>$user->is_online], 'success', 200, true);
+        $user->update(['is_online' => $online]);
+        return  Resp(['is_online' => $user->is_online], 'success', 200, true);
     }
 
     public function charge_wallet(Request $request)

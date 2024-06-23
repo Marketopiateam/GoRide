@@ -45,7 +45,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
 
     Route::prefix('user')->group(function () {
         // Route::get('charge_wallet', [AuthenticationController::class, 'charge_wallet']);
-        Route::get('toggle_online', [AuthenticationController::class, 'toggle_online']);
+        Route::get('toggle_online/{online?}', [AuthenticationController::class, 'toggle_online']);
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
     });
