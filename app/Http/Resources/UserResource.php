@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'wallet_amount' => number_format($this->wallet_amount,2) ?? '',
             'driver_status' => $this->profile->status  ?? '',
             'is_driver'     => $this->profile != null  ?1:0 ,
+            'is_online'     => $this->is_online  ,
 
         ];
 
