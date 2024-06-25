@@ -16,10 +16,6 @@ class DriverProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function getCreatedAtAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d h:i:s A') : null;
-    }
-
+  
 
 }
