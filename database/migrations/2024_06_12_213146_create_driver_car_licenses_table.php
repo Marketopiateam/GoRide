@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('front_license_image');
             $table->string('back_license_image');
             $table->string('driver_with_license_image');
-
+            $table->string('car_number', 255);
 
             $table->foreignId('driver_profile_id');
             $table->foreign('driver_profile_id')->references('id')->on('driver_profiles')->cascadeOnDelete()->cascadeOnUpdate();
