@@ -16,8 +16,6 @@ use App\Http\Controllers\Api\V1\Admin\PaymentsApiController;
 use App\Http\Controllers\Api\V1\Admin\AuthenticationController;
 use App\Http\Controllers\Api\V1\Admin\DriverApiController;
 
-
-
 Route::prefix('v1/user')->group(function () {
     Route::get('country', [AuthenticationController::class, 'country']);
     Route::get('city/{id}', [AuthenticationController::class, 'city']);

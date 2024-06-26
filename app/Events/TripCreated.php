@@ -18,7 +18,7 @@ class TripCreated implements ShouldBroadcast
 
     public function __construct(Order $trip )
     {
-        $this->trip = $trip;
+        $this->trip = json_decode($trip);
 
     }
 
