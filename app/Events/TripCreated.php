@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
+use App\Http\Resources\OrderResource;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -18,7 +19,7 @@ class TripCreated implements ShouldBroadcast
 
     public function __construct(Order $trip )
     {
-        $this->trip =  $trip->toArray();
+        $this->trip =  $trip ;
 
     }
 
@@ -32,7 +33,7 @@ class TripCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         // return  $this->message;
-        return  $this->trip ;
+        return  new OrderResource($this->trip) ;
     }
     public function broadcastAs()
     {

@@ -56,7 +56,7 @@ class OrderApiController extends Controller
         ];
         $order = Order::create($data);
         $order =  Order::with('user')->find($order->id);
-        TripCreated::dispatch(new OrderResource($order));
+        TripCreated::dispatch($order);
         return Resp(new OrderResource($order), 'success');
     }
 
