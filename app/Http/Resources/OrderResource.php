@@ -20,6 +20,7 @@ class OrderResource extends JsonResource
             'source_lat'          => $this->source_lat??'',
             'source_long'         => $this->destination_long??'',
             'source_address'      => $this->source_address??'',
+            'offer_rate'          => $this->offer_rate??'',
             'final_rate'          => $this->final_rate??'',
             'distance'            => $this->distance??'',
             'status'              => $this->status??'',
