@@ -18,7 +18,7 @@ class TripCreated implements ShouldBroadcast
 
     public function __construct(Order $trip )
     {
-        $this->trip =  $trip;
+        $this->trip =  $trip->toArray();
 
     }
 
@@ -32,7 +32,7 @@ class TripCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         // return  $this->message;
-        return json_encode($this->trip->toArray());
+        return  $this->trip ;
     }
     public function broadcastAs()
     {
