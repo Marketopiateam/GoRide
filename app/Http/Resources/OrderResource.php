@@ -14,11 +14,11 @@ class OrderResource extends JsonResource
     {
         return [
             'id'                  => $this->id,
-            'destination_lat'     => $this->latitude,
-            'destination_long'    => $this->longitude??'',
-            'destination_address' => $this->longitude??'',
-            'source_lat'          => $this->longitude??'',
-            'source_long'         => $this->longitude??'',
+            'destination_lat'     => $this->destination_lat,
+            'destination_long'    => $this->destination_long??'',
+            'destination_address' => $this->destination_address??'',
+            'source_lat'          => $this->source_lat??'',
+            'source_long'         => $this->destination_long??'',
             'source_address'      => $this->source_address??'',
             'final_rate'          => $this->final_rate??'',
             'distance'            => $this->distance??'',
