@@ -55,9 +55,9 @@ class OrderApiController extends Controller
             'user_id'           => Auth::user()->id,
         ];
         $order = Order::create($data);
-        $order =  Order::find( $order->id);
+        $order =  Order::with('user')->find($order->id);
         TripCreated::dispatch(new OrderResource($order));
-        return Resp($order->toarray(), 'success');
+        return Resp(new OrderResource($order), 'success');
     }
 
     public function startorder(Request $request, Order $order)
