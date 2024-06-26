@@ -39,8 +39,7 @@ abstract class BaseSocketHandler implements MessageComponentInterface
                 'activity_timeout' => 30,
             ]),
         ]));
-
-        DashboardLogger::connection($connection);
+ 
 
         StatisticsLogger::connection($connection);
 

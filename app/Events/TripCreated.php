@@ -18,7 +18,7 @@ class TripCreated implements ShouldBroadcast
 
     public function __construct(Order $trip )
     {
-        $this->trip = json_decode($trip);
+        $this->trip =  $trip;
 
     }
 
@@ -28,6 +28,11 @@ class TripCreated implements ShouldBroadcast
         return [
                new Channel('drivers')
         ];
+    }
+    public function broadcastWith()
+    {
+        // return  $this->message;
+        return json_encode($this->trip);
     }
     public function broadcastAs()
     {
