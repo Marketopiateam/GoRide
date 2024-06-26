@@ -32,7 +32,7 @@ class TripCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         // return  $this->message;
-        return json_encode($this->trip);
+        return json_encode($this->trip->toArray());
     }
     public function broadcastAs()
     {
