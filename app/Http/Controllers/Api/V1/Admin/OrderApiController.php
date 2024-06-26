@@ -43,7 +43,6 @@ class OrderApiController extends Controller
             'driver_id'         => null,
             'distance'          => $request->distance ?? '',
             'distance_type'     => 'km',
-            //'payment_type'    => $request->payment_type??'',
             'destination_name'  => $request->destination_name ?? '',
             'destination_lat'   => $request->destination_lat ?? '',
             'destination_long'  => $request->destination_long ?? '',
@@ -52,11 +51,13 @@ class OrderApiController extends Controller
             'source_long'       => $request->source_long ?? '',
             'offer_rate'        => $request->offer_rate ?? '0',
             'final_rate'        => $request->final_rate ?? '0',
+            'status'            => 'searching',
             'user_id'           => Auth::user()->id,
         ];
         $order = Order::create($data);
-        TripCreated::dispatch($order);
-        return Resp($order, 'success');
+        $order =  Order::find( $order->id);
+        TripCreated::dispatch(new OrderResource($order));
+        return Resp($order->toarray(), 'success');
     }
 
     public function startorder(Request $request, Order $order)

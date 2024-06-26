@@ -23,6 +23,9 @@ class OrderResource extends JsonResource
             'final_rate'          => $this->final_rate??'',
             'distance'            => $this->distance??'',
             'status'              => $this->status??'',
+            'user_name'           => $this->user->full_name??'',
+            'user_image'           => $this->user->profile_pic??'',
+            'user_phone'          => $this->user->phone_number??'',
             'created_at'          => $this->created_at??'',
         ];
     }
