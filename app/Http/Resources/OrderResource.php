@@ -20,13 +20,14 @@ class OrderResource extends JsonResource
             'source_lat'          => $this->source_lat??'',
             'source_long'         => $this->destination_long??'',
             'source_address'      => $this->source_address??'',
-            'offer_rate'          => $this->offer_rate??'',
+            'amount'              => $this->offer_rate??'',
             'final_rate'          => $this->final_rate??'',
             'distance'            => $this->distance??'',
             'status'              => $this->status??'',
             'user_name'           => $this->user->full_name??'',
             'user_image'          => $this->user->profile_pic??'',
             'user_phone'          => $this->user->phone_number??'',
+            'offer_rate'          => $this->service->offer_rate??'',
             'created_at'          => $this->created_at??'',
         ];
     }
