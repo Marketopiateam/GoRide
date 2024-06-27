@@ -28,6 +28,7 @@ class OrderResource extends JsonResource
             'user_image'          => $this->user->profile_pic??'',
             'user_phone'          => $this->user->phone_number??'',
             'offer_rate'          => $this->service->offer_rate??'0',
+            'offerdriver'         => $this->offerdriver??'',
             'created_at'          => $this->created_at??'',
         ];
     }

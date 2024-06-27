@@ -73,6 +73,13 @@ class OrderApiController extends Controller
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
+    public function offerorder(Request $request, Order $order,$offer)
+    {
+        $order->update(['is_accept' => Carbon::now(), 'driver_id' => Auth::user()->id]);
+        $order->offerdriver = $offer;
+        TripCreated::dispatch($order);
+        return Resp(new OrderResource($order), 'success');
+    }
 
     public function endorder(Request $request, Order $order)
     {
