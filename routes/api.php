@@ -56,7 +56,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
         Route::get('/old', [OrderApiController::class, 'getorders']);
 
         Route::get('/accept/{order}', [OrderApiController::class, 'acceptorder']);
-        Route::get('/accept/{order}/{offer}', [OrderApiController::class, 'offerorder']);
+        Route::get('/offer/{order}/{offer}', [OrderApiController::class, 'offerorder']);
         Route::get('/start/{order}', [OrderApiController::class, 'startorder']);
         Route::get('/end/{order}', [OrderApiController::class, 'endorder']);
         Route::get('/cancel/{order}', [OrderApiController::class, 'cancelorder']);
