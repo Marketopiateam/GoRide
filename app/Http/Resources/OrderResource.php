@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\MapsProcessing;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderWithDriverResource extends JsonResource
+class OrderResource extends JsonResource
 {
 
 

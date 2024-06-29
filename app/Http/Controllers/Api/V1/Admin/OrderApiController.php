@@ -76,19 +76,19 @@ class OrderApiController extends Controller
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
-    public function offerorder(Request $request, Order $order,$offer)
+    public function offerorder(Request $request, Order $order, $offer)
     {
-        $order->update(['is_accept' => Carbon::now(),'is_accept' => Carbon::now()]);
+        $order->update(['is_accept' => Carbon::now(), 'is_accept' => Carbon::now()]);
         $order->offerdriver = $offer;
 
-           $user = User::with(['profile','profile.driver_cars','profile.driver_cars.brand','profile.driver_cars.model'])->find( Auth::user()->id);
+        $user = User::with(['profile', 'profile.driver_cars', 'profile.driver_cars.brand', 'profile.driver_cars.model'])->find(Auth::user()->id);
         $order->driver_name      = $user->full_name;
         $order->driver_phone     = $user->phone_number ?? '';
         $order->car_color        = $user->profile->driver_cars->color  ?? '';
         $order->car_number       = $user->profile->car_licenses->car_number ?? '';
         $order->car_brand        = $user->profile->driver_cars->brand->title ?? '';
         $order->car_model        = $user->profile->driver_cars->model->title ?? '';
-         TripOffers::dispatch($order);
+        TripOffers::dispatch($order);
         return Resp(new OrderWithDriverResource($order), 'success');
     }
 
