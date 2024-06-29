@@ -4,9 +4,10 @@ namespace App\Events;
 
 use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
-use App\Http\Resources\OrderResource;
+ 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use App\Http\Resources\OrderWithDriverResource;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
@@ -27,7 +28,7 @@ class TripOffers implements ShouldBroadcast
     public function broadcastWith()
     {
         // return  $this->message;
-        return (new OrderResource($this->trip))->toArray(request());
+        return (new OrderWithDriverResource($this->trip))->toArray(request());
     }
     public function broadcastAs()
     {
