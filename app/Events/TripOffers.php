@@ -16,7 +16,7 @@ class TripOffers implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $trip;
-    public function __construct(Model $trip)
+    public function __construct( $trip)
     {
         $this->trip =  $trip;
     }
