@@ -37,10 +37,8 @@ use App\Http\Controllers\Admin\WalletTransactionController;
 Broadcast::routes();
 
 Route::get('test', function () {
-    return view('test');
-});
-Route::get('test', function () {
-    return view('test');
+    return  database_path('migrations');
+
 });
 
 WebSocketsRouter::webSocket('/socket/update-driver', UpdateDriverHandler::class);
@@ -121,7 +119,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
 
     // create Marketopia Browser recourse route
     Route::resource('marketopia-browsers', MarketopiaBrowserController::class);
-    
+
     // Chat
     Route::get('chats', [ChatController::class, 'index'])->name('chats.index');
     Route::get('chats/single/{id}', [ChatController::class, 'single'])->name('chats.single');

@@ -6,14 +6,15 @@ use Gate;
 use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Service;
+use App\Events\TripOffers;
 use App\Events\TripCreated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Resources\OrderResource;
 
 class OrderApiController extends Controller
 {
@@ -75,9 +76,9 @@ class OrderApiController extends Controller
     }
     public function offerorder(Request $request, Order $order,$offer)
     {
-        $order->update(['is_accept' => Carbon::now(), 'driver_id' => Auth::user()->id]);
+        $order->update(['is_accept' => Carbon::now(),'is_accept' => Carbon::now(),  'driver_id' => Auth::user()->id]);
         $order->offerdriver = $offer;
-        TripCreated::dispatch($order);
+        TripOffers::dispatch($order);
         return Resp(new OrderResource($order), 'success');
     }
 
