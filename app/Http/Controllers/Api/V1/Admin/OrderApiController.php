@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderWithDriverResource;
+use App\Models\User;
 
 class OrderApiController extends Controller
 {
@@ -76,10 +78,18 @@ class OrderApiController extends Controller
     }
     public function offerorder(Request $request, Order $order,$offer)
     {
-        $order->update(['is_accept' => Carbon::now(),'is_accept' => Carbon::now(),  'driver_id' => Auth::user()->id]);
+        $order->update(['is_accept' => Carbon::now(),'is_accept' => Carbon::now()]);
         $order->offerdriver = $offer;
-        TripOffers::dispatch($order);
-        return Resp(new OrderResource($order), 'success');
+
+           $user = User::with(['profile','profile.driver_cars','profile.driver_cars.brand','profile.driver_cars.model'])->find( Auth::user()->id);
+        $order->driver_name      = $user->full_name;
+        $order->driver_phone     = $user->phone_number ?? '';
+        $order->car_color        = $user->profile->driver_cars->color  ?? '';
+        $order->car_number       = $user->profile->car_licenses->car_number ?? '';
+        $order->car_brand        = $user->profile->driver_cars->brand->title ?? '';
+        $order->car_model        = $user->profile->driver_cars->model->title ?? '';
+         TripOffers::dispatch($order);
+        return Resp(new OrderWithDriverResource($order), 'success');
     }
 
     public function endorder(Request $request, Order $order)

@@ -157,4 +157,5 @@ class User extends Authenticatable implements HasLocalePreference
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
     }
+     
 }

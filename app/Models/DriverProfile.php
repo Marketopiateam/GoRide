@@ -16,6 +16,15 @@ class DriverProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
-  
+    public function car_licenses()
+    {
+        return $this->hasOne(DriverCarLicense::class,'driver_profile_id');
+    }
+    public function driver_cars()
+    {
+        return $this->hasOne(DriverCar::class,'driver_profile_id');
+    }
+
+
 
 }

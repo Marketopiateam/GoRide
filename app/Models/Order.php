@@ -25,10 +25,14 @@ class Order extends Model
         'deleted_at',
     ];
 
-    
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+    public function driver()
+    {
+        return $this->belongsTo(User::class,'driver_id');
     }
 
     public function user()
