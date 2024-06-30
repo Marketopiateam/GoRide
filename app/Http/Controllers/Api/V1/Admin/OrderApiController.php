@@ -95,9 +95,9 @@ class OrderApiController extends Controller
         $order->car_number       = $user->profile->car_licenses->car_number ?? '';
         $order->car_brand        = $user->profile->driver_cars->brand->title ?? '';
         $order->car_model        = $user->profile->driver_cars->model->title ?? '';
-        
+
         TripOffers::dispatch($order);
-        return Resp(new OrderWithDriverResource($order), 'success');
+        return Resp(new OrderWithDriverResource($order->toarray()), 'success');
     }
 
     public function endorder(Request $request, Order $order)
