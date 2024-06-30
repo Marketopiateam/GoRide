@@ -32,7 +32,7 @@ dd($this->trip);
     public function broadcastWith()
     {
 
-        return new OrderWithDriverResource($this->trip)->toArray(request());
+        // return new OrderWithDriverResource($this->trip)->toArray(request());
         // return (new OrderWithDriverResource($this->trip))->toArray(request());
     }
     public function broadcastAs()
