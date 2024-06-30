@@ -18,8 +18,9 @@ class TripOffers implements ShouldBroadcast
     public $trip;
     public function __construct( $trip)
     {
-        $this->trip =  $trip;
-
+        $trip = $trip->toArray();
+        $this->trip = $trip;
+dd($this->trip);
 
     }
     public function broadcastOn(): array
