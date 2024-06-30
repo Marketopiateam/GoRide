@@ -24,12 +24,12 @@ class OrderWithDriverResource extends JsonResource
             'final_rate'          => $this['final_rate'] ?? '',
             'distance'            => $this['distance'] ?? '',
             'status'              => $this['status'] ?? '',
-            'user_name'           => $this['user']['full_name'] ?? '',
-            'user_image'          => $this['user']['profile_pic'] ?? '',
-            'user_phone'          => $this['user']['phone_number'] ?? '',
-            'offer_rate'          => $this['service']['offer_rate'] ?? '0',
-            'offerdriver'         => $this['offerdriver'] ?? '',
-            'created_at'          => $this['created_at'] ?? '',
+            // 'user_name'           => $this['user']['full_name'] ?? '',
+            // 'user_image'          => $this['user']['profile_pic'] ?? '',
+            // 'user_phone'          => $this['user']['phone_number'] ?? '',
+            // 'offer_rate'          => $this['service']['offer_rate'] ?? '0',
+            // 'offerdriver'         => $this['offerdriver'] ?? '',
+            // 'created_at'          => $this['created_at'] ?? '',
 
         ];
         // $data['driver_name']         = $this['driver_name'] ?? '';
