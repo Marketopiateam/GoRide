@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use Gate;
-use Carbon\Carbon;
-use App\Models\Order;
-use App\Models\Service;
-use App\Events\TripOffers;
+use App\Events\TripCancel;
 use App\Events\TripCreated;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Events\TripOffers;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderResource;
 use App\Http\Resources\OrderWithDriverResource;
+use App\Models\Order;
+use App\Models\Service;
 use App\Models\User;
+use Carbon\Carbon;
+use Gate;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class OrderApiController extends Controller
 {
@@ -36,6 +37,12 @@ class OrderApiController extends Controller
     {
         $order =  Order::where('inter_city', $request->in_city)->get();
         $order =  OrderResource::collection($order);
+        return Resp($order, 'success');
+    }
+    public function cancelorder(Request $request, Order $order)
+    {
+        $order->update(['is_canceled' => Carbon::now(), 'status' => 'canceled', 'canceled_by' => Auth::user()->id]);
+        TripCancel::dispatch($order);
         return Resp($order, 'success');
     }
 
@@ -65,16 +72,16 @@ class OrderApiController extends Controller
 
     public function startorder(Request $request, Order $order)
     {
-        $order->update(['accepted_driver' => Carbon::now()]);
+        $order->update(['accepted_driver' => Carbon::now(), 'status' => 'started']);
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
 
     public function acceptorder(Request $request, Order $order)
     {
-        $order->update(['is_accept' => Carbon::now(), 'driver_id' => Auth::user()->id]);
+        $order->update(['is_accept' => Carbon::now(), 'status' => 'placed', 'driver_id' => Auth::user()->id]);
         TripCreated::dispatch($order);
-        return Resp('', 'success');
+        return Resp($order, 'success');
     }
     public function offerorder(Request $request, Order $order, $offer)
     {

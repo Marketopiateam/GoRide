@@ -3,39 +3,40 @@
 namespace App\Events;
 
 use App\Models\Order;
-use App\Models\Trip;
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
+use App\Http\Resources\OrderResource;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TripAccepted implements ShouldBroadcast
+class TripCancel implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+
     public $trip;
-    private $user;
 
-
-    public function __construct(Order $trip, User $user)
+    public function __construct(Order $trip )
     {
-        $this->trip = $trip;
-        $this->user = $user;
+        $this->trip =  $trip ;
+
     }
 
 
     public function broadcastOn(): array
     {
         return [
-            new Channel('trip-'.$this->trip->id)
+               new Channel('drivers')
         ];
+    }
+    public function broadcastWith()
+    {
+        // return  $this->message;
+        return ( new OrderResource($this->trip))->toArray(request());
     }
     public function broadcastAs()
     {
-        return  'TripAccepted';
+        return  'drivers1';
     }
 }
