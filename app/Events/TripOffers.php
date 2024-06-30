@@ -16,9 +16,10 @@ class TripOffers implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $trip;
-    public function __construct( $trip)
+    public function __construct(Order $trip)
     {
         $this->trip =  $trip;
+         
         dd($this->trip);
     }
     public function broadcastOn(): array
@@ -29,7 +30,7 @@ class TripOffers implements ShouldBroadcast
     }
     public function broadcastWith()
     {
-      
+
         // return  $this->message;
         dd(new OrderWithDriverResource($this->trip));
         return (new OrderWithDriverResource($this->trip))->toArray(request());
