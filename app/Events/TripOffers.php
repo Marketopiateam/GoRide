@@ -26,7 +26,7 @@ class TripOffers implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('trip-'.$this->trip->id)
+            new Channel('trip-'.$this->trip['id'])
         ];
     }
     public function broadcastWith()
