@@ -20,7 +20,7 @@ class TripOffers implements ShouldBroadcast
     {
         $trip = $trip->toArray();
         $this->trip = $trip;
-dd($this->trip);
+
 
     }
     public function broadcastOn(): array
@@ -32,7 +32,7 @@ dd($this->trip);
     public function broadcastWith()
     {
 
-        // return new OrderWithDriverResource($this->trip)->toArray(request());
+        return new OrderWithDriverResource($this->trip);
         // return (new OrderWithDriverResource($this->trip))->toArray(request());
     }
     public function broadcastAs()
