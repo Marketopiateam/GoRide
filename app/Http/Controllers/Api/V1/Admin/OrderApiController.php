@@ -86,9 +86,9 @@ class OrderApiController extends Controller
     public function offerorder(Request $request, Order $order, $offer)
     {
         $order->update(['is_accept' => Carbon::now(), 'is_accept' => Carbon::now()]);
-        $order->offerdriver = $offer;
-
         $user = User::with(['profile', 'profile.driver_cars', 'profile.driver_cars.brand', 'profile.driver_cars.model'])->find(Auth::user()->id);
+
+        $order->offerdriver = $offer;
         $order->driver_name      = $user->full_name;
         $order->driver_phone     = $user->phone_number ?? '';
         $order->car_color        = $user->profile->driver_cars->color  ?? '';

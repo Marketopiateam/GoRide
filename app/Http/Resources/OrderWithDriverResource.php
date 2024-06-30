@@ -8,8 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderWithDriverResource extends JsonResource
 {
-
-
     public function toArray(Request $request): array
     {
         $data =   [
@@ -34,7 +32,8 @@ class OrderWithDriverResource extends JsonResource
         ];
         $data['driver_name']         = $this->driver_name ?? '';
         $data['driver_phone']        = $this->driver_phone ?? '';
-        $data['car_color']           = $this->car_color??'';
+        $data['driver_image']        = $this->user->profile_pic ?? '';
+        $data['car_color']           = $this->car_color ?? '';
         $data['car_number']          = $this->car_number ?? '';
         $data['car_brand']           = $this->car_brand ?? '';
         $data['car_model']           = $this->car_model ?? '';
