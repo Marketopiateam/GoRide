@@ -19,8 +19,8 @@ class TripOffers implements ShouldBroadcast
     public function __construct( $trip)
     {
         $this->trip =  $trip;
-//
-        // dd($this->trip, $trip);
+
+        dd(new OrderWithDriverResource($this->trip), $trip);
     }
     public function broadcastOn(): array
     {
