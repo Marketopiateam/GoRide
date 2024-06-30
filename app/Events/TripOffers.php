@@ -32,7 +32,7 @@ class TripOffers implements ShouldBroadcast
     public function broadcastWith()
     {
 
-        return new OrderWithDriverResource((object )$this->trip);
+        return (new OrderWithDriverResource((object )$this->trip))->toArray(request());
         // return (new OrderWithDriverResource($this->trip))->toArray(request());
     }
     public function broadcastAs()
