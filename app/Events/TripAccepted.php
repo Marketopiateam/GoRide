@@ -17,14 +17,13 @@ class TripAccepted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $trip;
-    private $user,$status;
+    public $trip,$status;
 
 
-    public function __construct(Order $trip, User $user,$status)
+    public function __construct(Order $trip,$status)
     {
         $this->trip = $trip;
-        $this->user = $user;
+
         $this->status = $status;
     }
 
