@@ -44,7 +44,11 @@ class OrderApiController extends Controller
     public function cancelorder(Request $request, Order $order)
     {
         $order->update(['is_canceled' => Carbon::now(), 'status' => 'canceled', 'canceled_by' => Auth::user()->id]);
-        TripCancel::dispatch(['status' => 'canceled']);
+    
+        $data =['status' => 'canceled'];
+
+        TripCancel::dispatch( $order, $data );
+
         return Resp($order, 'success');
     }
 
@@ -75,6 +79,7 @@ class OrderApiController extends Controller
     public function startorder(Request $request, Order $order)
     {
         $order->update(['accepted_driver' => Carbon::now(), 'status' => 'started']);
+
         TripCreated::dispatch($order);
         return Resp('', 'success');
     }
@@ -107,7 +112,9 @@ class OrderApiController extends Controller
     {
         $order->update(['is_end' => Carbon::now(),'status' => 'completed']);
         $data =['status' => 'end'];
-        TripEnded::dispatch( $order,Auth::user()->id,$data);
+
+        TripEnded::dispatch( $order, $data );
+
         return Resp('', 'success');
     }
 
