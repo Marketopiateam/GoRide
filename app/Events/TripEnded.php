@@ -18,26 +18,31 @@ class TripEnded implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $trip;
-    private $user;
+    private $user,$status;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Order $trip, User $user)
+    public function __construct(Order $trip, User $user,$status)
     {
         $this->trip = $trip;
         $this->user = $user;
+        $this->status = $status;
     }
 
-  
+
     public function broadcastOn(): array
     {
         return [
             new Channel('trip_' . $this->trip->id)
         ];
     }
+    public function broadcastWith()
+    {
+        return ($this->status);
+    }
     public function broadcastAs()
     {
-        return  'drivers';
+        return  'end';
     }
 }

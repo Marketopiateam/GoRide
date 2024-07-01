@@ -18,26 +18,31 @@ class TripStarted implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $trip;
-    private $user;
+    private $user,$status;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Order $trip, User $user)
+    public function __construct(Order $trip, User $user,$status)
     {
         $this->trip = $trip;
         $this->user = $user;
+        $this->status = $status;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
+
     public function broadcastOn(): array
     {
         return [
-            new Channel('passenger_' . $this->user->id)
+            new Channel('trip_' . $this->trip->id)
         ];
+    }
+    public function broadcastWith()
+    {
+        return ($this->status);
+    }
+    public function broadcastAs()
+    {
+        return  'start';
     }
 }

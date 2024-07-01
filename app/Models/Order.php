@@ -41,7 +41,7 @@ class Order extends Model
     }
     public function service()
     {
-        return $this->belongsTo(service::class);
+        return $this->belongsTo(\App\Models\Service::class);
     }
 
     public function getCreatedAtAttribute($value)

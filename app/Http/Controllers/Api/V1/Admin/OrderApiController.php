@@ -42,7 +42,7 @@ class OrderApiController extends Controller
     public function cancelorder(Request $request, Order $order)
     {
         $order->update(['is_canceled' => Carbon::now(), 'status' => 'canceled', 'canceled_by' => Auth::user()->id]);
-        TripCancel::dispatch($order);
+        TripCancel::dispatch(['status' => 'canceled']);
         return Resp($order, 'success');
     }
 

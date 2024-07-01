@@ -18,13 +18,14 @@ class TripAccepted implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $trip;
-    private $user;
+    private $user,$status;
 
 
-    public function __construct(Order $trip, User $user)
+    public function __construct(Order $trip, User $user,$status)
     {
         $this->trip = $trip;
         $this->user = $user;
+        $this->status = $status;
     }
 
 
@@ -33,6 +34,10 @@ class TripAccepted implements ShouldBroadcast
         return [
             new Channel('trip-'.$this->trip->id)
         ];
+    }
+    public function broadcastWith()
+    {
+        return ($this->status);
     }
     public function broadcastAs()
     {

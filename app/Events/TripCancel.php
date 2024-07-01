@@ -16,27 +16,26 @@ class TripCancel implements ShouldBroadcast
 
 
     public $trip;
+    public $status;
 
-    public function __construct(Order $trip )
+    public function __construct(Order $trip, $status)
     {
-        $this->trip =  $trip ;
-
+        $this->trip =  $trip;
+        $this->status =  $status;
     }
-
 
     public function broadcastOn(): array
     {
         return [
-               new Channel('trip-'. $this->trip->id) 
+            new Channel('trip-' . $this->trip->id)
         ];
     }
     public function broadcastWith()
     {
-        // return  $this->message;
-        return ( new OrderResource($this->trip))->toArray(request());
+        return ($this->status);
     }
     public function broadcastAs()
     {
-        return  'drivers1';
+        return  'cancel';
     }
 }
