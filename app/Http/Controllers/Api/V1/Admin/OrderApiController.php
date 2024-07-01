@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Events\TripCancel;
-use App\Events\TripCreated;
-use App\Events\TripOffers;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Resources\OrderResource;
-use App\Http\Resources\OrderWithDriverResource;
+use Gate;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Service;
-use App\Models\User;
-use Carbon\Carbon;
-use Gate;
+use App\Events\TripEnded;
+use App\Events\TripCancel;
+use App\Events\TripOffers;
+use App\Events\TripCreated;
+use App\Events\TripAccepted;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\OrderResource;
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderWithDriverResource;
 
 class OrderApiController extends Controller
 {
@@ -80,7 +82,7 @@ class OrderApiController extends Controller
     public function acceptorder(Request $request, Order $order)
     {
         $order->update(['is_accept' => Carbon::now(), 'status' => 'placed', 'driver_id' => Auth::user()->id]);
-        TripCreated::dispatch($order);
+        TripAccepted::dispatch(['status' => 'accept']);
         return Resp($order, 'success');
     }
     public function offerorder(Request $request, Order $order, $offer)
@@ -102,8 +104,8 @@ class OrderApiController extends Controller
 
     public function endorder(Request $request, Order $order)
     {
-        $order->update(['is_end' => Carbon::now()]);
-        TripCreated::dispatch($order);
+        $order->update(['is_end' => Carbon::now(),'status' => 'completed']);
+        TripEnded::dispatch(['status' => 'end']);
         return Resp('', 'success');
     }
 

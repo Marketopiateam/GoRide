@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('room_id');
             $table->foreignId('sender_id');
             $table->foreignId('receiver_id');
+            $table->text('message');
 
             $table->foreign('room_id')->references('id')->on('rooms')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('receiver_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
