@@ -27,7 +27,7 @@ class TripCancel implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-               new Channel('drivers')
+               new Channel('trip-'. $this->trip->id) 
         ];
     }
     public function broadcastWith()

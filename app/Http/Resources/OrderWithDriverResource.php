@@ -20,6 +20,7 @@ class OrderWithDriverResource extends JsonResource
             'source_address'      => $this->source_address ?? '',
             'amount'              => $this->offer_rate ?? '',
             'final_rate'          => $this->final_rate ?? '',
+            'is_offer'            => $this->service->offer_rate ?? '',
             'distance'            => $this->distance ?? '',
             'status'              => $this->status ?? '',
             'user_name'           => $this->user->full_name ?? '',

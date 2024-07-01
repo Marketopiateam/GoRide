@@ -56,7 +56,7 @@ class OrderApiController extends Controller
             'destination_address'  => $request->destination_address ?? '',
             'destination_lat'   => $request->destination_lat ?? '',
             'destination_long'  => $request->destination_long ?? '',
-            'source_address'       => $request->source_address ?? '',
+            'source_address'    => $request->source_address ?? '',
             'source_lat'        => $request->source_lat ?? '',
             'source_long'       => $request->source_long ?? '',
             'offer_rate'        => $request->offer_rate ?? '0',
@@ -85,7 +85,7 @@ class OrderApiController extends Controller
     }
     public function offerorder(Request $request, Order $order, $offer)
     {
-        $order->update(['is_accept' => Carbon::now(), 'is_accept' => Carbon::now()]);
+        // $order->update(['is_accept' => Carbon::now(), 'is_accept' => Carbon::now()]);
         $user = User::with(['profile', 'profile.driver_cars', 'profile.driver_cars.brand', 'profile.driver_cars.model'])->find(Auth::user()->id);
 
         $order->offerdriver = $offer;

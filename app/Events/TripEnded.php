@@ -29,20 +29,15 @@ class TripEnded implements ShouldBroadcast
         $this->user = $user;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
+  
     public function broadcastOn(): array
     {
         return [
-            new Channel('passenger_' . $this->user->id)
+            new Channel('trip_' . $this->trip->id)
         ];
     }
-     public function broadcastAs()
+    public function broadcastAs()
     {
         return  'drivers';
     }
-
 }

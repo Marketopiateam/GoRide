@@ -29,6 +29,7 @@ class OrderResource extends JsonResource
             'user_phone'          => $this->user->phone_number ?? '',
             'offer_rate'          => $this->service->offer_rate ?? '0',
             'offerdriver'         => $this->offerdriver ?? '',
+            'is_offer'            => $this->service->offer_rate ?? '',
             'created_at'          => $this->created_at ?? '',
 
         ];
