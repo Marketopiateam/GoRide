@@ -82,7 +82,8 @@ class OrderApiController extends Controller
     public function acceptorder(Request $request, Order $order)
     {
         $order->update(['is_accept' => Carbon::now(), 'status' => 'placed', 'driver_id' => Auth::user()->id]);
-        TripAccepted::dispatch(['status' => 'accept']);
+        $data =['status' => 'accept'];
+        TripAccepted::dispatch( $order, Auth::user()->id,$data );
         return Resp($order, 'success');
     }
     public function offerorder(Request $request, Order $order, $offer)
@@ -105,7 +106,8 @@ class OrderApiController extends Controller
     public function endorder(Request $request, Order $order)
     {
         $order->update(['is_end' => Carbon::now(),'status' => 'completed']);
-        TripEnded::dispatch(['status' => 'end']);
+        $data =['status' => 'end'];
+        TripEnded::dispatch( $order,Auth::user()->id,$data);
         return Resp('', 'success');
     }
 
