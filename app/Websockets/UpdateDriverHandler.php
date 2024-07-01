@@ -64,7 +64,7 @@ class UpdateDriverHandler extends BaseSocketHandler  implements MessageComponent
             $user =  User::findToken($connection->httpRequest->getHeader('Authorization')[0]);
             if ($user) {
                 $user->update(['latitude' => $payload['lat'], 'longitude' => $payload['long']]);
-                $connection->send(json_encode(['status' => 'success','location'=>['lat'=>$payload['lat'],'long'=>$payload['long']]]));
+                $connection->send(json_encode(['status' => 'success','location'=>['lat'=>$payload['lat'],'long'=>$payload['long']] ]));
             } else {
                 $connection->send(json_encode(['status' => 'error']));
             }

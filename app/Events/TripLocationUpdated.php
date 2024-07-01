@@ -37,7 +37,7 @@ class TripLocationUpdated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('passenger_' . $this->user->id)
+            new Channel('trip-' . $this->user->id)
         ];
     }
     public function broadcastAs()

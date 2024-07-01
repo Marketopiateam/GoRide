@@ -34,7 +34,7 @@ class TripEnded implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('trip_' . $this->trip->id)
+            new Channel('trip-' . $this->trip->id)
         ];
     }
     public function broadcastWith()
