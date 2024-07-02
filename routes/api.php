@@ -57,6 +57,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::prefix('order')->group(function () {
         Route::post('/new', [OrderApiController::class, 'neworder']);
         Route::get('/old', [OrderApiController::class, 'getorders']);
+        Route::get('/current-orders-driver', [OrderApiController::class, 'current_orders_driver']);
 
         Route::get('/accept/{order}', [OrderApiController::class, 'acceptorder']);
         Route::get('/offer/{order}/{offer}', [OrderApiController::class, 'offerorder']);

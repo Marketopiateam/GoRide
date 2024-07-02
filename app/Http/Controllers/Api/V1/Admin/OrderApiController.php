@@ -125,4 +125,12 @@ class OrderApiController extends Controller
     {
         $order = Order::where('user_id', Auth::user()->id)->get();
     }
+    public function current_orders_driver(Request $request)  
+    {
+        $order = Order::where('driver_id', $request->driver_id)->get();
+        $order =  OrderResource::collection($order);
+        return Resp($order, 'success');
+
+        
+    }
 }
