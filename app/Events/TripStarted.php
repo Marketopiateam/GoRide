@@ -42,6 +42,6 @@ class TripStarted implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return  'start';
+        return  'TripStarted';
     }
 }

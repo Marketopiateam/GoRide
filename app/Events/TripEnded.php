@@ -42,6 +42,6 @@ class TripEnded implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return  'end';
+        return  'TripEnded';
     }
 }
