@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Events\TripStarted;
 use Gate;
 use Carbon\Carbon;
 use App\Models\User;
@@ -80,7 +81,7 @@ class OrderApiController extends Controller
     {
         $order->update(['accepted_driver' => Carbon::now(), 'status' => 'started']);
 
-        TripCreated::dispatch($order);
+        TripStarted::dispatch($order, $order->driver, 'started');
         return Resp('', 'success');
     }
 
