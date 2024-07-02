@@ -80,7 +80,10 @@ class OrderApiController extends Controller
     public function startorder(Request $request, Order $order)
     {
         $order->update(['accepted_driver' => Carbon::now(), 'status' => 'started']);
-        TripStarted::dispatch($order, 'started');
+        
+        $data =['status' => 'start'];
+
+        TripStarted::dispatch($order, $data);
         return Resp($order, 'success');
     }
 
