@@ -175,15 +175,31 @@
                 <div>{{ trans('app.vehicle_types') }}</div>
             </a>
         </li>
+
+
+
         
-
-
-
-
-
-
-
-
+        @can('freight_vehicle_access')
+        <li class="menu-item menu-item {{ request()->is('admin/freight-vehicles*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-car"></i>
+                <div data-i18n="Layouts">{{ trans('cruds.freightVehicle.title') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/freight-vehicles') ? 'active' : '' }}">
+                    <a href="{{ route('admin.freight-vehicles.index') }}" class="menu-link">
+                        <div data-i18n="Collapsed menu">{{ __('global.list') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/freight-vehicles/create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.freight-vehicles.create') }}" class="menu-link">
+                        <div data-i18n="Content navbar">{{ __('global.create') }}</div>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+        @endcan
     </ul>
 </aside>
 
@@ -200,15 +216,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('freight_vehicle_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/freight-vehicles*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.freight-vehicles.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.freightVehicle.title') }}
-                        </a>
-                    </li>
-                @endcan
+                
                 @can('chat_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/chats*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.chats.index") }}">

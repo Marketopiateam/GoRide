@@ -27,7 +27,7 @@ class TripCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-               new Channel('drivers')
+            new Channel('trip-'.$this->trip->id)
         ];
     }
     public function broadcastWith()
@@ -37,6 +37,6 @@ class TripCreated implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return  'drivers1';
+        return  'TripStarted';
     }
 }

@@ -2,39 +2,42 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFreightVehicleRequest;
 use App\Models\FreightVehicle;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class FreightVehicleController extends Controller
+class FreightVehicleController extends BaseController
 {
-    public function index()
+    
+    public function __construct(FreightVehicle $model)
     {
-        abort_if(Gate::denies('freight_vehicle_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.freight-vehicle.index');
+        parent::__construct($model);
     }
+    public function dataHandler($request) {
+        return [
+            'name' => $request->name,
+            'km_charge' => $request->km_charge,
+            'enable' => $request->enable != null ? 1 : 0,
+            'description'=>  $request->description,
+            'height'=>  $request->height,
+            'width'=>  $request->width,
 
-    public function create()
+        ];
+    }
+    public function store(StoreFreightVehicleRequest $request) 
     {
         abort_if(Gate::denies('freight_vehicle_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.freight-vehicle.create');
+        $service = $this->model->create($this->dataHandler($request));
+
+        FileUploader::upload($service, $request->images, 'freight_vehicle_images', 'multiple_image');
+
+        return redirect()->route('admin.freight-vehicles.index');
+        
     }
-
-    public function edit(FreightVehicle $freightVehicle)
-    {
-        abort_if(Gate::denies('freight_vehicle_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.freight-vehicle.edit', compact('freightVehicle'));
-    }
-
-    public function show(FreightVehicle $freightVehicle)
-    {
-        abort_if(Gate::denies('freight_vehicle_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.freight-vehicle.show', compact('freightVehicle'));
-    }
-}
+    
+} 

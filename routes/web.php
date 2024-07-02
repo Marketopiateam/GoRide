@@ -94,7 +94,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admi
     Route::resource('faqs', FaqController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Freight Vehicle
-    Route::resource('freight-vehicles', FreightVehicleController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::resource('freight-vehicles', FreightVehicleController::class);
 
     // Orders
     Route::resource('orders', OrderController::class, ['except' => ['store', 'update', 'destroy']]);

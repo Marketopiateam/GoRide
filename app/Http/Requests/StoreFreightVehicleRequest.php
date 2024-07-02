@@ -25,35 +25,32 @@ class StoreFreightVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
+            
+            
+            
             'description' => [
                 'string',
                 'nullable',
             ],
-            'enable' => [
-                'boolean',
-            ],
             'height' => [
-                'string',
+                'numeric',
                 'nullable',
             ],
             'image' => [
-                'string',
+                'image',
                 'nullable',
             ],
             'km_charge' => [
-                'string',
+                'numeric',
                 'nullable',
             ],
-            'length' => [
-                'string',
-                'nullable',
-            ],
+            
             'name' => [
                 'string',
                 'nullable',
             ],
             'width' => [
-                'string',
+                'numeric',
                 'nullable',
             ],
         ];

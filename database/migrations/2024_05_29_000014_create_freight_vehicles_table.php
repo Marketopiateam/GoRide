@@ -10,15 +10,20 @@ class CreateFreightVehiclesTable extends Migration
     {
         Schema::create('freight_vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->longText('description')->nullable();
-            $table->boolean('enable')->default(0)->nullable();
-            $table->string('height')->nullable();
-            $table->string('image')->nullable();
-            $table->string('km_charge')->nullable();
-            $table->string('length')->nullable();
+            
             $table->string('name')->nullable();
-            $table->string('width')->nullable();
+            $table->longText('description')->nullable();
+
+            $table->boolean('enable')->default(0)->nullable();
+            
+            $table->decimal('height')->nullable();
+            $table->decimal('width')->nullable();
+            
+            $table->string('image')->nullable();
+            $table->decimal('km_charge', 13, 4)->nullable();
+            
             $table->timestamps();
+            
             $table->softDeletes();
         });
     }
