@@ -23,10 +23,9 @@ class TripEnded implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(Order $trip, User $user,$status)
+    public function __construct(Order $trip,$status)
     {
         $this->trip = $trip;
-        $this->user = $user;
         $this->status = $status;
     }
 
