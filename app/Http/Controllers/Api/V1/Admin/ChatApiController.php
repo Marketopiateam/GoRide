@@ -20,7 +20,7 @@ class ChatApiController extends Controller
             $room = room::create(['trip_id' =>  $request->trip_id]);
         }
         $conversion = [
-            'sender_id'     => 1,
+            'sender_id'     => auth()->user()->id,
             'message'       => $request->message,
             'receiver_id'   => 2,
             'room_id'       => $room->id,
