@@ -59,7 +59,7 @@ class AuthenticationController extends Controller
 
     public function charge_wallet(Request $request)
     {
-        //$payment        =    PaymentMethod::find($request->id);
+        $payment        =    PaymentMethod::find($request->id);
         $payment        = $this->tap($request->value);
         $redirect_url   = $payment['redirect_url'];
         // $paymentjson =   json_encode($payment);
