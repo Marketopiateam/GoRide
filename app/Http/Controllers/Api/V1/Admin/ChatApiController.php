@@ -8,19 +8,33 @@ use App\Models\room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\ResponseHelper;
+use Laravel\Sanctum\PersonalAccessToken;
 
 
 class ChatApiController extends Controller
 {
     use ResponseHelper;
+   
+        public function getUserIDByToken($hashedToken)
+        {
+            $token = PersonalAccessToken::findToken($hashedToken);
+            if($token != null) {
+                return $token->tokenable_id;
+    
+            } else {
+                return false;
+            }
+    
+        }
     public function send_message(Request $request)
     {
         $room = room::where(['trip_id' =>  $request->trip_id])->first();
         if ($room  == null) {
             $room = room::create(['trip_id' =>  $request->trip_id]);
         }
+        $merchantID = $this->getUserIDByToken(request()->bearerToken());
         $conversion = [
-            'sender_id'     => auth()->user()->id,
+            'sender_id'     => $merchantID,
             'message'       => $request->message,
             'receiver_id'   => 2,
             'room_id'       => $room->id,
