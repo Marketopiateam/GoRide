@@ -32,9 +32,9 @@ class ChatApiController extends Controller
         if ($room  == null) {
             $room = room::create(['trip_id' =>  $request->trip_id]);
         }
-        $merchantID = $this->getUserIDByToken(request()->bearerToken());
+        $userID = $this->getUserIDByToken(request()->bearerToken());
         $conversion = [
-            'sender_id'     => $merchantID,
+            'sender_id'     => $userID,
             'message'       => $request->message,
             'receiver_id'   => 2,
             'room_id'       => $room->id,
