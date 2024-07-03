@@ -3,6 +3,7 @@
 namespace App\Helpers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 use Nafezly\Payments\Classes\PaymobPayment;
 use Nafezly\Payments\Classes\TapPayment;
 
@@ -26,4 +27,16 @@ trait PaymentHelper
 
         return $res;
     }
+    public function getUserIDByToken($hashedToken)
+    {
+        $token = PersonalAccessToken::findToken($hashedToken);
+        if($token != null) {
+            return $token->tokenable_id;
+
+        } else {
+            return false;
+        }
+
+    }
+
 }
