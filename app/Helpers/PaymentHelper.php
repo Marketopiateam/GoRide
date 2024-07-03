@@ -36,7 +36,6 @@ trait PaymentHelper
         } else {
             return false;
         }
-
     }
 
 }
