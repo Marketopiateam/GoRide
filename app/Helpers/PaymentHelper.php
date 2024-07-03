@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Helpers;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Nafezly\Payments\Classes\PaymobPayment;
 use Nafezly\Payments\Classes\TapPayment;
 
 trait PaymentHelper
@@ -10,8 +12,9 @@ trait PaymentHelper
 
     public function tap($amount)
     {
-        $user = Auth::user();
-        $payment = new TapPayment();
+        $userID = $this->getUserIDByToken(request()->bearerToken());
+        $user = User::find($userID);
+        $payment = new PaymobPayment();
         $res = $payment->pay(
             $amount,
             $user_id            = $user->id,
