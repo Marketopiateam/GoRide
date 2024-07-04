@@ -61,6 +61,7 @@ class AuthenticationController extends Controller
     {
         $payment        =    PaymentMethod::find($request->id);
         $payment        = $this->tap($request->value);
+        dd($payment);
         $redirect_url   = $payment['redirect_url'];
         // $paymentjson =   json_encode($payment);
         // $order->payment_gateway_data = $paymentjson;

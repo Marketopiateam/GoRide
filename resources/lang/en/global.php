@@ -323,5 +323,7 @@ return [
     'calendar'                       => 'Calendar',
     'messenger'                      => 'Messenger',
     'settings'                       => 'Settings',
+    'inter_city'                     => 'Inter City',
+    'out_city'                       => 'Out City',
 
 ];

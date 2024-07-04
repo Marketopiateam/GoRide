@@ -55,9 +55,9 @@
                         </td>
                         <td class="text-center">
                             @if ($item->intercity_type)
-                                <i class="ti ti-circle-check text-danger"></i>
+                                {{ __('lang.inter_city') }}
                             @else
-                                <i class="ti ti-circle-check text-success"></i>
+                            {{ __('lang.out_city') }}
                             @endif
                         </td>
                         <td class="text-center">{{ $item->km_charge }}</td>

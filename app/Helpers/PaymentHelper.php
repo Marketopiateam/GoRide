@@ -15,14 +15,14 @@ trait PaymentHelper
     {
         $userID = $this->getUserIDByToken(request()->bearerToken());
         $user = User::find($userID);
-        $payment = new PaymobPayment();
+        $payment = new TapPayment();
         $res = $payment->pay(
             $amount,
             $user_id            = $user->id,
-            $user_first_name    = $user->name,
-            $user_last_name     = $user->name,
+            $user_first_name    = $user->full_name,
+            $user_last_name     = $user->full_name,
             $user_email         = $user->email ,
-            $user_phone         = $user->phone,
+            $user_phone         = $user->phone_number,
         );
 
         return $res;
