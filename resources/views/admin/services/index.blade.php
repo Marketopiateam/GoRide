@@ -47,17 +47,17 @@
                             
                             
                         <td class="text-center">
-                            @if ($item->enable)
+                            @if (!$item->enable)
                                 <i class="ti ti-circle-check text-danger"></i>
                             @else
                                 <i class="ti ti-circle-check text-success"></i>
                             @endif
                         </td>
                         <td class="text-center">
-                            @if ($item->intercity_type)
-                                {{ __('lang.inter_city') }}
+                            @if (!$item->intercity_type)
+                                {{ __('global.inter_city') }}
                             @else
-                            {{ __('lang.out_city') }}
+                            {{ __('global.out_city') }}
                             @endif
                         </td>
                         <td class="text-center">{{ $item->km_charge }}</td>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Events\TripStarted;
+use App\Http\Resources\OutCityOffersResource;
+use App\Models\OrderOffer;
 use Gate;
 use Carbon\Carbon;
 use App\Models\User;
@@ -21,10 +23,33 @@ use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderWithDriverResource;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class OrderApiController extends Controller
 {
+    public function add_out_city_offer(Request $request, $order_id)
+    {
+        $driverID = $this->getUserIDByToken(request()->bearerToken());
+        $driver = User::with(['profile', 'profile.driver_cars', 'profile.driver_cars.brand', 'profile.driver_cars.model'])->find($driverID);
+        $offer = OrderOffer::create([
+            'order_id'      => $order_id,
+            'driver_id'     => $driverID,
+            'car_color'     => $driver->profile->driver_cars->color  ?? '',
+            'car_number'    => $driver->profile->car_licenses->car_number ?? '',
+            'car_brand'     => $driver->profile->driver_cars->brand->title ?? '',
+            'car_model'     => $driver->profile->driver_cars->model->title ?? '',
+            'offer_rate'    => $request->offer_rate,
+        
+        ]);
+        return Resp(new OutCityOffersResource($offer), 'success');
+    }
+    public function get_out_city_offers($order_id)
+    {
+        $order = Order::where('id', $order_id)->firstOrFail();
+        $offers = OrderOffer::with('order', 'driver')->where('order_id', $order_id)->get();
+        return Resp(new OutCityOffersResource($offers), 'success');
 
+    }
     public function getprice(Request $request)
     {
         $Service = Service::find($request->service_id);
@@ -36,11 +61,40 @@ class OrderApiController extends Controller
         return  $result;
     }
 
-    public function getorders(Request $request)
+    public function get_driver_orders(Request $request)
     {
-        $order =  Order::where('inter_city', $request->in_city)->get();
-        $order =  OrderResource::collection($order);
-        return Resp($order, 'success');
+        $driverID = $this->getUserIDByToken(request()->bearerToken());
+
+        $orders =  Order::with('driver', 'user')->where('inter_city', $request->in_city)
+        ->where('driver_id', $driverID)
+        ->groupBy('status')
+        ->get();
+
+        $statusArray = array_fill_keys(['searching', 'placed', 'started', 'completed', 'canceled'], []);
+
+        // Populate status array with orders
+        foreach ($orders as $order) {
+            $statusArray[$order->status][] = new OrderResource($order);
+        }
+    
+        return Resp($statusArray, 'success');
+    }
+    public function get_user_orders(Request $request)
+    {
+        $userID = $this->getUserIDByToken(request()->bearerToken());
+
+        $orders =  Order::where('inter_city', $request->in_city)
+        ->where('user_id', $userID)
+        ->get();
+        $statusArray = array_fill_keys(['searching', 'placed', 'started', 'completed', 'canceled'], []);
+
+        // Populate status array with orders
+        foreach ($orders as $order) {
+            $statusArray[$order->status][] = new OrderResource($order);
+        }
+    
+
+        return Resp($statusArray, 'success');
     }
     public function cancelorder(Request $request, Order $order)
     {
@@ -55,7 +109,8 @@ class OrderApiController extends Controller
 
     public function neworder(StoreOrderRequest $request)
     {
-        $data = [
+        $service = Service::find($request->service_id);
+        $baseData = [
             'service_id'        => $request->service_id ?? '',
             'driver_id'         => null,
             'distance'          => $request->distance ?? '',
@@ -70,8 +125,33 @@ class OrderApiController extends Controller
             'final_rate'        => $request->final_rate ?? '0',
             'status'            => 'searching',
             'user_id'           => Auth::user()->id,
+            'inter_city'        => $request->inter_city,
         ];
-        $order = Order::create($data);
+        if ($service->service_type == 'travel') {
+            $dateTime = Carbon::parse($request->when_date);
+            $formattedDateTime = $dateTime->format('Y-m-d H:i:s');
+            $baseData['number_of_passenger'] = $request->number_of_passenger ?? null;
+            $baseData['when_date'] = $formattedDateTime ?? null;
+        } else if ($service->service_type == 'shipping') {
+            $dateTime = Carbon::parse($request->when_date);
+            $formattedDateTime = $dateTime->format('Y-m-d H:i:s');
+            $baseData['when_date'] = $formattedDateTime ?? null;
+            $baseData['parcel_dimension'] = $request->parcel_dimension ?? null;
+            $baseData['parcel_weight'] = $request->parcel_weight ?? null;
+            $baseData['comment'] = $request->comment ?? null;
+            
+            $imageName = time().'.'.$request->parcel_image->extension();
+            $request->parcel_image->move(public_path('uploads'), $imageName);
+            $imageUrl = url('uploads/'.$imageName); // Generate the full URL
+            
+            $baseData['parcel_weight'] = $imageUrl;
+
+
+            
+        }
+        
+
+        $order = Order::create($baseData);
         $order =  Order::with('user')->find($order->id);
         TripCreated::dispatch($order);
         return Resp(new OrderResource($order), 'success');
@@ -130,7 +210,16 @@ class OrderApiController extends Controller
         $order = Order::where('driver_id', $request->driver_id)->get();
         $order =  OrderResource::collection($order);
         return Resp($order, 'success');
-
-        
     }
+    public function getUserIDByToken($hashedToken)
+        {
+            $token = PersonalAccessToken::findToken($hashedToken);
+            if($token != null) {
+                return $token->tokenable_id;
+    
+            } else {
+                return false;
+            }
+    
+        }
 }

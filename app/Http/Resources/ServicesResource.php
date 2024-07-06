@@ -14,10 +14,11 @@ class ServicesResource extends JsonResource
     {
 
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            'image'       => $this->image,
-            'offer_rate'       => $this->offer_rate
+            'id'            => $this->id,
+            'name'          => $this->title,
+            'image'         => $this->thumbnail[0]['url'],
+            'offer_rate'    => $this->offer_rate,
+            'service_type'  => $this->service_type,
         ];
     }
 }

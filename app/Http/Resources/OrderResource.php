@@ -23,15 +23,13 @@ class OrderResource extends JsonResource
             'amount'              => $this->offer_rate ?? '',
             'final_rate'          => $this->final_rate ?? '',
             'distance'            => $this->distance ?? '',
-            'status'              => $this->status ?? '',
-            'user_name'           => $this->user->full_name ?? '',
-            'user_image'          => $this->user->profile_pic ?? '',
-            'user_phone'          => $this->user->phone_number ?? '',
+            'status'              => $this->status,
             'offer_rate'          => $this->service->offer_rate ?? '0',
             'offerdriver'         => $this->offerdriver ?? '',
             'is_offer'            => $this->service->offer_rate ?? '',
             'created_at'          => $this->created_at ?? '',
-
+            'driver'              => $this->driver ?? '',
+            'user'                => $this->user ?? '',
         ];
 
         return $data;
