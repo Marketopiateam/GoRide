@@ -58,8 +58,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
         Route::post('/new', [OrderApiController::class, 'neworder']);
         Route::get('/old-for-driver', [OrderApiController::class, 'get_driver_orders']);
         Route::get('/old-for-user', [OrderApiController::class, 'get_user_orders']);
+        
         Route::get('/get-out-city-offers/{order_id}', [OrderApiController::class, 'get_out_city_offers']);
-        Route::get('/add-out-city-offer/{order_id}', [OrderApiController::class, 'add_out_city_offer']);
+
+        Route::get('/get-driver-active-ride', [OrderApiController::class, 'get_driver_active_ride']);
+        Route::get('/get-user-active-ride', [OrderApiController::class, 'get_user_active_ride']);
+
+
+        Route::get('/add-out-city-offer/{order_id}/{offer_rate}', [OrderApiController::class, 'add_out_city_offer']);
         Route::get('/current-orders-driver', [OrderApiController::class, 'current_orders_driver']);
 
         Route::get('/accept/{order}', [OrderApiController::class, 'acceptorder']);

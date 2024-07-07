@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Events\TripStarted;
+use App\Http\Resources\OutCityOffersCollection;
 use App\Http\Resources\OutCityOffersResource;
 use App\Models\OrderOffer;
 use Gate;
@@ -27,10 +28,28 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class OrderApiController extends Controller
 {
-    public function add_out_city_offer(Request $request, $order_id)
+    public function get_driver_active_ride(Request $request)
+    {
+        $driverID = $this->getUserIDByToken(request()->bearerToken());
+        $order = Order::where('driver_id', $driverID)->whereIn('status', ['started'])->first();
+        return Resp(new OrderResource($order), 'success');
+    }
+    public function get_user_active_ride(Request $request)
+    {
+        $driverID = $this->getUserIDByToken(request()->bearerToken());
+        if($request->in_city) {
+            $order = Order::where('user_id', $driverID)
+            ->where('inter_city', '=', 1)
+            ->whereIn('status', ['started', 'searching'])->first();
+        }
+        return Resp(new OrderResource($order), 'success');
+    }
+
+    public function add_out_city_offer(Request $request, $order_id, $offer_rate)
     {
         $driverID = $this->getUserIDByToken(request()->bearerToken());
         $driver = User::with(['profile', 'profile.driver_cars', 'profile.driver_cars.brand', 'profile.driver_cars.model'])->find($driverID);
+        $order = Order::find($order_id);
         $offer = OrderOffer::create([
             'order_id'      => $order_id,
             'driver_id'     => $driverID,
@@ -38,16 +57,29 @@ class OrderApiController extends Controller
             'car_number'    => $driver->profile->car_licenses->car_number ?? '',
             'car_brand'     => $driver->profile->driver_cars->brand->title ?? '',
             'car_model'     => $driver->profile->driver_cars->model->title ?? '',
-            'offer_rate'    => $request->offer_rate,
+            'offer_rate'    => $offer_rate,
         
         ]);
-        return Resp(new OutCityOffersResource($offer), 'success');
+
+
+        $order->offerdriver         = $offer_rate;
+        $order->driver_name      = $driver->full_name;
+        $order->driver_phone     = $driver->phone_number ?? '';
+        $order->car_color        = $driver->profile->driver_cars->color  ?? '';
+        $order->car_number       = $driver->profile->car_licenses->car_number ?? '';
+        $order->car_brand        = $driver->profile->driver_cars->brand->title ?? '';
+        $order->car_model        = $driver->profile->driver_cars->model->title ?? '';
+
+        TripOffers::dispatch($order);
+
+
+        return Resp(new OrderWithDriverResource($order), 'success');
     }
     public function get_out_city_offers($order_id)
     {
-        $order = Order::where('id', $order_id)->firstOrFail();
-        $offers = OrderOffer::with('order', 'driver')->where('order_id', $order_id)->get();
-        return Resp(new OutCityOffersResource($offers), 'success');
+
+        $order = Order::with('offers', 'offers.driver')->find($order_id);
+        return Resp(new OrderWithDriverResource($order), 'success');
 
     }
     public function getprice(Request $request)
@@ -212,14 +244,14 @@ class OrderApiController extends Controller
         return Resp($order, 'success');
     }
     public function getUserIDByToken($hashedToken)
-        {
-            $token = PersonalAccessToken::findToken($hashedToken);
-            if($token != null) {
-                return $token->tokenable_id;
-    
-            } else {
-                return false;
-            }
-    
+    {
+        $token = PersonalAccessToken::findToken($hashedToken);
+        if($token != null) {
+            return $token->tokenable_id;
+
+        } else {
+            return false;
         }
+
+    }
 }

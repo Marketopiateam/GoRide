@@ -39,6 +39,10 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function offers()
+    {
+        return $this->hasMany(OrderOffer::class);
+    }
     public function service()
     {
         return $this->belongsTo(\App\Models\Service::class);

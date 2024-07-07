@@ -16,12 +16,14 @@ class OutCityOffersResource extends JsonResource
     {
         return [
             'id'              => $this->id,
-            'offer_rate'      => $this->offer_rate,
+            'driver_offer'      => $this->offer_rate,
             'car_color'       => $this->car_color,
             'car_number'      => $this->car_number,
             'car_brand'       => $this->car_brand,
             'car_model'       => $this->car_model,
-            'driver'          => $this->driver,
+            'driver_name'          => $this->driver->full_name,
+            'driver_image'           => $this->driver->profile_pic,
+            'phone_number'      => $this->driver->phone_number,
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\OrderOffer;
 use Illuminate\Http\Request;
 use App\Traits\MapsProcessing;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -10,6 +11,18 @@ class OrderWithDriverResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        
+        if(isset($this->offers) && count($this->offers) > 0) {
+            $offers = $this->offers->transform(function (OrderOffer $offer) {
+                return (new OutCityOffersResource($offer));
+            });
+        } else {
+            $offers = [];
+        }
+        
+
+
+
         $data =   [
             'id'                  => $this->id,
             'destination_lat'     => $this->destination_lat,
@@ -29,7 +42,7 @@ class OrderWithDriverResource extends JsonResource
             'offer_rate'          => $this->service->offer_rate ?? '0',
             'offerdriver'         => $this->offerdriver ?? '',
             'created_at'          => $this->created_at ?? '',
-
+            'offers'              => (isset($this->offers) && count($this->offers) > 0 ? new OutCityOffersCollection($offers) : []), 
         ];
         $data['driver_name']         = $this->driver_name ?? '';
         $data['driver_phone']        = $this->driver_phone ?? '';
