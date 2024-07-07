@@ -30,6 +30,7 @@ class OrderResource extends JsonResource
             'created_at'          => $this->created_at ?? '',
             'driver'              => $this->driver ?? '',
             'user'                => $this->user ?? '',
+            'when_date'           => $this->when_date ?? '',
         ];
 
         return $data;
