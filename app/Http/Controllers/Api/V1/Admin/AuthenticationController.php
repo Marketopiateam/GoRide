@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Http\Resources\UserDocsResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\SignUp;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\AddAddressRequest;
 use App\Repositoryinterface\UsersRepositoryinterface;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthenticationController extends Controller
 {
@@ -22,6 +24,18 @@ class AuthenticationController extends Controller
     {
         $this->userRepositry = $userRepositry;
     }
+    public function getUserIDByToken($hashedToken)
+    {
+        $token = PersonalAccessToken::findToken($hashedToken);
+        if($token != null) {
+            return $token->tokenable_id;
+
+        } else {
+            return false;
+        }
+
+    }
+
     public function signup()
     {
         return $this->userRepositry->signup();
@@ -69,5 +83,12 @@ class AuthenticationController extends Controller
         // $order->payment_method = $request['formData']['gateway'];
         // $order->save();
         return  $redirect_url;
+    }
+    public function get_docs()  
+    {
+        $driverID = $this->getUserIDByToken(request()->bearerToken());
+        $user  = User::with('profile', 'profile.car_licenses', 'profile.identity', 'profile.driver_licenses')->find($driverID);
+        return Resp(new UserDocsResource($user), 'success');
+
     }
 }

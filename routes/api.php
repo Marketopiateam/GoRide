@@ -43,16 +43,19 @@ Route::get('city/{id}', [AuthenticationController::class, 'city']);
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
 
     Route::post('driver/registration', [DriverApiController::class, 'driver_registration']);
+    Route::post('driver/update-service', [DriverApiController::class, 'change_service']);
 
     Route::prefix('user')->group(function () {
         // Route::get('charge_wallet', [AuthenticationController::class, 'charge_wallet']);
         Route::get('toggle_online/{online?}', [AuthenticationController::class, 'toggle_online']);
         Route::get('profile', [AuthenticationController::class, 'profile']);
         Route::post('profile/update', [AuthenticationController::class, 'profile_update']);
+        Route::get('get-docs', [AuthenticationController::class, 'get_docs']);
     });
     Route::prefix('services')->group(function () {
         Route::get('incity', [ServiceApiController::class, 'incity']);
         Route::get('outcity', [ServiceApiController::class, 'outcity']);
+        Route::get('all', [ServiceApiController::class, 'all']);
     });
     Route::prefix('order')->group(function () {
         Route::post('/new', [OrderApiController::class, 'neworder']);

@@ -22,6 +22,12 @@ class ServiceApiController extends Controller
     {
         return  ServicesResource::Collection(Service::type(1)->get());
     }
+    public function all()
+     
+    {
+        return  ServicesResource::Collection(Service::get());
+
+    }
 
     // public function store(StoreServiceRequest $request)
     // {

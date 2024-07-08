@@ -24,12 +24,11 @@ class OrderResource extends JsonResource
             'final_rate'          => $this->final_rate ?? '',
             'distance'            => $this->distance ?? '',
             'status'              => $this->status,
-            'offer_rate'          => $this->service->offer_rate ?? '0',
             'offerdriver'         => $this->offerdriver ?? '',
             'is_offer'            => $this->service->offer_rate ?? '',
             'created_at'          => $this->created_at ?? '',
-            'driver'              => $this->driver ?? '',
-            'user'                => $this->user ?? '',
+            'driver'                => ($this->driver != null ? new UserResource($this->driver) : ''),
+            'user'                => ($this->user != null ? new UserResource($this->user) : ''),
             'when_date'           => $this->when_date ?? '',
         ];
 

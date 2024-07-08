@@ -97,11 +97,10 @@ class OrderApiController extends Controller
     {
         $driverID = $this->getUserIDByToken(request()->bearerToken());
 
-        $orders =  Order::with('driver', 'user')->where('inter_city', $request->in_city)
-        ->where('driver_id', $driverID)
-        ->groupBy('status')
-        ->get();
-
+        $orders =  Order::with('driver', 'user')->get();//->where('inter_city', $request->in_city)
+        //->where('driver_id', $driverID)
+        //->get();
+        dd($orders);
         $statusArray = array_fill_keys(['searching', 'placed', 'started', 'completed', 'canceled'], []);
 
         // Populate status array with orders
